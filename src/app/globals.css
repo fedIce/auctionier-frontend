@@ -1,26 +1,86 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #141316;
+  --foreground: #313131;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+
+  --color-background: #141316;
+  --color-background-100: #efeef0;
+  --color-background-200: #dbd8df;
+  --color-background-300: #b9b7c2;
+  --color-background-400: #948fa1;
+  --color-background-500: #777285;
+  --color-background-600: #615c6d;
+  --color-background-700: #4f4b59;
+  --color-background-800: #43404c;
+  --color-background-900: #3b3941;
+
+  --color-foreground: #415a77;
+  --color-foreground: #0d1218;
+  --color-foreground: #1a242f;
+  --color-foreground: #273647;
+  --color-foreground: #34485f;
+  --color-foreground: #415a77;
+  --color-foreground: #587aa1;
+  --color-foreground: #819bb9;
+  --color-foreground: #abbcd1;
+  --color-foreground: #d5dee8;
+
+  --color-secondary: #313131;
+  --color-secondary-100: #e7e7e7;
+  --color-secondary-200: #d1d1d1;
+  --color-secondary-300: #b0b0b0;
+  --color-secondary-400: #888888;
+  --color-secondary-500: #6d6d6d;
+  --color-secondary-600: #5d5d5d;
+  --color-secondary-700: #4f4f4f;
+  --color-secondary-800: #454545;
+  --color-secondary-900: #3d3d3d;
+
+  --color-third: #778da9;
+  --color-third-100: #161c23;
+  --color-third-200: #2c3746;
+  --color-third-300: #425369;
+  --color-third-400: #586f8d;
+  --color-third-500: #778da9;
+  --color-third-600: #91a2ba;
+  --color-third-700: #acbacb;
+  --color-third-800: #c8d1dc;
+  --color-third-900: #e3e8ee;
+
+  --color-bright: #e0e1dd;
+  --color-bright-100: #2e2f2a;
+  --color-bright-200: #5b5e53;
+  --color-bright-300: #898c7e;
+  --color-bright-400: #b4b6ad;
+  --color-bright-500: #e0e1dd;
+  --color-bright-600: #e5e6e3;
+  --color-bright-700: #ececea;
+  --color-bright-800: #f2f3f1;
+  --color-bright-900: #f9f9f8;
+  
+
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #141316;
+    --foreground: #e0e1dd;
   }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: Poppins;
+  font-size: 16px;
+}
+
+.ease-transition {
+  transition: top 0.3s ease-in-out;
 }
