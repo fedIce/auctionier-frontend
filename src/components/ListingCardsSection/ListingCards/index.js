@@ -71,7 +71,7 @@ const ListingCards = ({ data = null, user = null }) => {
     return data ? (
         <div className='flex flex-col w-full space-y-2'>
             <div className=" w-full lg:min-w-64 min-h-60 cursor-pointer lg:max-h-80 bg-third-300 overflow-hidden rounded-lg " >
-                <Image src={`http://localhost:3001/${data.thumbnail.url}`} alt={data.thumbnail.alt} className='h-full transition-transform duration-300 hover:scale-125 object-cover' height={data.thumbnail.height} width={data.thumbnail.width} />
+                <Image src={`${process.env.NEXT_PUBLIC_SERVER_URL}/${data.thumbnail.url}`} alt={data.thumbnail.alt} className='h-full transition-transform duration-300 hover:scale-125 object-cover' height={data.thumbnail.height} width={data.thumbnail.width} />
             </div >
             <div>
                 <Link href={`/auctions/${data.slug}`} className='text-xl font-medium'>{data.title}</Link>

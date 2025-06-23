@@ -47,7 +47,7 @@ const CountdownTimer = ({
   return (
     <div>
       {timeLeft.expired ? (
-        <span>Time's up!</span>
+        <span>Bidding Closed!</span>
       ) : (
         <span className=' font-sans'>
           {timeLeft.days}d {timeLeft.hours}h {timeLeft.minutes}m {timeLeft.seconds}s

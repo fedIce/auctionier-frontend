@@ -3,7 +3,7 @@ import { use_post } from ".."
 
 export const login_user = async ({ email, password }) => {
     const user = await use_post({
-        url: 'http://localhost:3001/api/users/login',
+        url: `${process.env.NEXT_PUBLIC_SERVER_URL}/api/users/login`,
         data: { email, password }
     })
 
@@ -15,7 +15,7 @@ export const login_user = async ({ email, password }) => {
 
 export const signout_user = async () => {
     try {
-        return await use_post({ url: 'http://localhost:3001/api/users/logout' })
+        return await use_post({ url: `${process.env.NEXT_PUBLIC_SERVER_URL}/api/users/logout` })
     } catch (e) {
         throw new Error("SIGNOUT ERROR", e)
     }
@@ -23,7 +23,7 @@ export const signout_user = async () => {
 
 export const register_user = async ({ fullname, email, password }) => {
     const user = await use_post({
-        url: 'http://localhost:3001/api/users',
+        url: `${process.env.NEXT_PUBLIC_SERVER_URL}/api/users`,
         data: { fullname, email, password, confirm_password: password }
     })
 
@@ -34,5 +34,5 @@ export const register_user = async ({ fullname, email, password }) => {
 }
 
 export const refresh_user_token = async () => {
-    return await use_post({ url: 'http://localhost:3001/api/users/refresh-token' })
+    return await use_post({ url: `${process.env.NEXT_PUBLIC_SERVER_URL}/api/users/refresh-token` })
 }

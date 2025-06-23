@@ -56,9 +56,39 @@ export const numberWithCommas = (x) => {
 }
 
 export const timeExpired = (time) => {
-    return new Date(time) < new Date()
+    return new Date(time) < new Date(Date.now())
 }
 
 export const closedForBidding = (data) => {
+    if (timeExpired(data.endDate)) return true
+    if (!(data.top_biddder || data.bid_id)) return false
     return data?.top_biddder ? data.top_biddder : data.bid_id?.top_biddder ?? false
+}
+
+
+export const calculate_vat = (amount) => {
+    const VAT = process.env.NEXT_PUBLIC_VAT
+    const buyers_premium = amount * process.env.NEXT_PUBLIC_BUYER_PREMIUM
+    const internet_fee = amount * process.env.NEXT_PUBLIC_INTERNET_FEE
+    const lotting_fee = process.env.NEXT_PUBLIC_LOTTING_FEE
+    const totalPlusVAT = (buyers_premium * VAT) + (internet_fee * VAT) + (lotting_fee * VAT) + (amount * VAT)
+    return totalPlusVAT
+}
+
+export const calculate_total = (amount) => {
+    const auction_fees = amount
+    const buyers_premium = amount * process.env.NEXT_PUBLIC_BUYER_PREMIUM
+    const internet_fee = amount * process.env.NEXT_PUBLIC_INTERNET_FEE
+    const lotting_fee = process.env.NEXT_PUBLIC_LOTTING_FEE * 1
+
+    const total = calculate_vat(amount) + auction_fees + buyers_premium + internet_fee + lotting_fee
+    return total
+}
+
+export const auction_fees = (amount) => {
+    const buyers_premium = amount * process.env.NEXT_PUBLIC_BUYER_PREMIUM
+    const internet_fee = amount * process.env.NEXT_PUBLIC_INTERNET_FEE
+    const lotting_fee = process.env.NEXT_PUBLIC_LOTTING_FEE * 1
+
+    return buyers_premium + internet_fee + lotting_fee
 }

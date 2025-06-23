@@ -35,7 +35,7 @@ const Account = ({ auth }) => {
                             </span>
                         </div>
                         <div className='py-4 hover:bg-background-600 cursor-pointer px-4 flex items-center justify-between'>
-                            <p>Invoices</p>
+                            <p>Orders</p>
                             <span>
                                 <ChevronRightIcon className='w-4 h-4' />
                             </span>

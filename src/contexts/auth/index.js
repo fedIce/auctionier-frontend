@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { createContext } from 'react'
 import { login_user, refresh_user_token, register_user, signout_user } from '../../lib/functions/auth'
 import { usePathname, useRouter } from 'next/navigation'
+import { use_get, use_post } from '@/lib/functions'
 
 
 const init = {
@@ -12,7 +13,11 @@ const init = {
     login: (data) => null,
     register: (data) => null,
     signout: () => null,
-    refresh_user: () => null
+    refresh_user: () => null,
+    saveShippingInfo: async (data) => null,
+    getShippingData: async (user) => null,
+    shippingInfo: null,
+    setShippingInfo: (data) => null
 }
 
 export const APP_STATES = {
@@ -27,6 +32,7 @@ const AuthContext = ({ children }) => {
 
     const [user, setUser] = useState(null)
     const [history, setHistory] = useState([])
+    const [shippingInfo, setShippingInfo] = useState(null)
 
     const isLoggedIn = user?.user ? true : false
     const path = usePathname()
@@ -36,8 +42,8 @@ const AuthContext = ({ children }) => {
         const active_user = localStorage.getItem(APP_STATES.AUTH_STATE)
         if (active_user) {
             const stored_user = JSON.parse(active_user)
-
             const timeDiff = new Date(new Date(stored_user.exp * 1000) - new Date())
+            getShippingData(stored_user.user.id).then((res) => setShippingInfo(res?.docs[0]))
 
             // Refresh user token is time less than 30 minutes, if time passed logout user, else just setUser
             if (timeDiff.getHours() == 0 && (timeDiff.getMinutes() < 30 && timeDiff.getMinutes() > 0)) {
@@ -97,6 +103,15 @@ const AuthContext = ({ children }) => {
         })
     }
 
+    const getShippingData = async (user) => {
+        return await use_get({ url: `${process.env.NEXT_PUBLIC_SERVER_URL}/api/customer-shipping-details?where[user][equals]=${user}` })
+    }
+
+    const saveShippingInfo = async (data) => {
+        return await use_post({ url: `${process.env.NEXT_PUBLIC_SERVER_URL}/api/customer-shipping-details/shipping`, data: data })
+    }
+
+
     const refresh_user = async () => {
         const user = await refresh_user_token()
         localStorage.setItem(APP_STATES.AUTH_STATE, JSON.stringify(user))
@@ -104,7 +119,7 @@ const AuthContext = ({ children }) => {
         return user
     }
 
-    const value = { login, register, refresh_user, user, isLoggedIn, signout, history }
+    const value = { login, register, refresh_user, user, isLoggedIn, signout, saveShippingInfo, getShippingData, shippingInfo, setShippingInfo, history }
 
     return (
         <AuthContextProvider.Provider value={value} className='w-full h-full'>{children}</AuthContextProvider.Provider>

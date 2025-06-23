@@ -51,11 +51,16 @@ const SubCategoryPage = () => {
                 <h4 className='font-bold text-xl text-nowrap my-4'>{favs?.length ?? 0} Item(s)</h4>
                 <section className=' grid gap-4 grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
                     {
-                        (favs ? favs : [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]).map((item, i) => {
-                            return (
-                                <ListingCards key={i} data={item} user={user} />
-                            )
-                        })
+                        favs?.length <= 0 ?
+                            <div>
+                                <span className='text-secondary'>No items found.</span>
+                            </div>
+                            :
+                            favs?.map((item, i) => {
+                                return (
+                                    <ListingCards key={i} data={item} user={user} />
+                                )
+                            })
                     }
                 </section>
             </section>

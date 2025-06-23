@@ -2,6 +2,7 @@ import React from 'react';
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 import Image from 'next/image';
 const loaderBlockPath = '/loader_cube.gif';
+const loaderSpinPath = '/loader_spin.gif';
 
 export const CheckerAnimation = ({ width = 50, height = 50 }) => {
     return (
@@ -25,3 +26,15 @@ export const LoaderBlockAnimation = ({ width = 50, height = 50 }) => {
         />
     );
 };
+
+
+export const LoaderSpinnerAnimation = ({ width = 50, height = 50 }) => {
+    return (
+        <Image
+            src={loaderSpinPath}
+            height={height}
+            width={width}
+            alt='loading image'
+        />
+    );
+}

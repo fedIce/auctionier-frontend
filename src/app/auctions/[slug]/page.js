@@ -24,7 +24,7 @@ async function fetchAuction(slug) {
 
 export default async function AuctionItem({ params }) {
 
-    const auction = await fetchAuction(params.slug)
+    const auction = await fetchAuction(await params.slug)
 
     if (!auction) return null
 
@@ -46,7 +46,7 @@ export default async function AuctionItem({ params }) {
                         </section>
                         <DetailsSection data={auction} />
                     </section>
-                    <section className='flex-1 h-40'>
+                    <section className='flex-1'>
                         <ActionArea data={auction} />
                     </section>
                 </div>

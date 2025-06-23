@@ -16,7 +16,7 @@ const ActionArea = ({ data }) => {
     const [openBiddingModal, setOpenBiddingModal] = useState(false)
     const [bidAmount, setBidAmount] = useState('')
     const [bidAmountError, setBidAmountError] = useState(null)
-    const [bidStatus, setBidStatus] = useState(null)
+    const [bidStatus, setBidStatus] = useState({})
 
     const bidding = useBidding()
 
@@ -40,11 +40,11 @@ const ActionArea = ({ data }) => {
     }, [bids, bidAmountError, bidStatus])
 
     let nextBid = Math.ceil((bids.current_bid * 0.05) + bids.current_bid)
-    nextBid = typeof nextBid == 'number' ? nextBid : 1
+    nextBid = (typeof nextBid == 'number' && nextBid >= 0) ? nextBid : 1
 
-    console.log(bidStatus)
+    console.log(bidStatus, nextBid)
 
-    const isclosedForBidding = bidStatus ? closedForBidding(bidStatus) : false
+    const isclosedForBidding = closedForBidding({ ...bidStatus, endDate: data.endDate })
 
 
     const place_bid = async () => {
@@ -102,19 +102,7 @@ const ActionArea = ({ data }) => {
                 <p className='text-sm'>
                     {data.condition_details}
                 </p>
-                <section className='grid grid-cols-2 gap-4 mt-8 mb-16'>
-                    {
-                        data.item_details?.map((detail, i) => {
-                            return (
-                                <div key={i} className='space-y-1'>
-                                    <h4 className='text-bright-500 uppercase font-mono text-sm font-extralight'>{detail.detail_key}</h4>
-                                    <p className='text-xs font-semibold text-bright-700'>{detail.detail_value} </p>
-                                </div>
-                            )
-                        })
-                    }
-
-                </section>
+                <ShowAuctionDetails data={data.item_details} />
 
                 <section className='border-t space-y-4 border-bright/10 py-8'>
                     <div className='flex items-center space-x-2 text-sm'>
@@ -205,3 +193,22 @@ const ActionArea = ({ data }) => {
 }
 
 export default ActionArea
+
+
+export const ShowAuctionDetails = ({ data }) => {
+    return (
+        <section className='grid grid-cols-2 gap-4 mt-8 mb-16'>
+            {
+                data?.map((detail, i) => {
+                    return (
+                        <div key={i} className='space-y-1'>
+                            <h4 className='text-bright-500 uppercase font-mono text-sm font-extralight'>{detail.detail_key}</h4>
+                            <p className='text-xs font-semibold text-bright-700'>{detail.detail_value} </p>
+                        </div>
+                    )
+                })
+            }
+
+        </section>
+    )
+}
