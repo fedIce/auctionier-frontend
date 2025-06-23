@@ -22,7 +22,7 @@ const BiddingContext = ({ children }) => {
 
 
     const getAuctionBidData = async (id) => {
-        return await use_get({ url: `http://localhost:3001/api/bids/${id}?depth=2` })
+        return await use_get({ url: `${process.env.NEXT_PUBLIC_SERVER_URL}/api/bids/${id}?depth=2` })
     }
 
     const getAuctionBidItemData = async (id, depth = 1) => {
@@ -32,13 +32,13 @@ const BiddingContext = ({ children }) => {
 
     const placeBid = async (data) => {
         return await use_post({
-            url: `http://localhost:3001/api/bids/place_bid?depth=2`, data: {
+            url: `${process.env.NEXT_PUBLIC_SERVER_URL}/api/bids/place_bid?depth=2`, data: {
                 customer_id: user.id,
                 auction_id: data.id,
                 amount: data.amount,
                 auction_type: data.auction_type
             }
-        })
+        }).catch(e => console.log(e))
     }
 
     const value = { getAuctionBidData, placeBid, getAuctionBidItemData }

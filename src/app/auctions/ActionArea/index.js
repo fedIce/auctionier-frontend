@@ -12,6 +12,7 @@ import BidModal from '../bidModal';
 const ActionArea = ({ data }) => {
 
     const [bids, setBids] = useState({})
+    const [allBids, setAllBids] = useState([])
     const [seeAllBids, setSeeAllBids] = useState(false)
     const [openBiddingModal, setOpenBiddingModal] = useState(false)
     const [bidAmount, setBidAmount] = useState('')
@@ -28,7 +29,7 @@ const ActionArea = ({ data }) => {
     }, [])
 
     React.useMemo(() => {
-        setBids(bids.bids?.sort((a, b) => a.createdAt < b.createdAt ? 1 : -1))
+        setAllBids(bids.bids?.sort((a, b) => a.createdAt < b.createdAt ? 1 : -1))
     }, [bids.bids]);
 
     useEffect(() => {
@@ -42,7 +43,7 @@ const ActionArea = ({ data }) => {
         return () => {
             if (timeout) clearTimeout(timeout)
         }
-    }, [bids, bidAmountError, bidStatus])
+    }, [bids, bidAmountError, bidStatus, allBids])
 
 
 
@@ -67,7 +68,7 @@ const ActionArea = ({ data }) => {
                 <p>CURRENT BID</p>
                 <p className='uppercase'>#{data?.lotId?.split("-")[1] ?? ''}</p>
             </div>
-            {isclosedForBidding ?
+            {!isclosedForBidding ?
                 <div className='pt-8 text-xl text-red-400/60'>
                     Closed for Bidding
                 </div>

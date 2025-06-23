@@ -41,7 +41,7 @@ const ImageCarouselSmallScreens = ({ images }) => {
                     images?.map((image, i) => {
                         return (
                             <div key={i} style={{ minWidth: 600, maxHeight: 400 }} className='bg-third w-full h-full' >
-                                <Image className='w-[600px] h-[400px] object-cover' src={`http://localhost:3001/${image.url}`} width={image.width} height={image.height} alt={image.alt} />
+                                <Image className='w-[600px] h-[400px] object-cover' src={`${process.env.NEXT_PUBLIC_SERVER_URL}/${image.url}`} width={image.width} height={image.height} alt={image.alt} />
                             </div>
                         )
                     })
