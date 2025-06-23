@@ -42,7 +42,7 @@ const ActionArea = ({ data }) => {
     let nextBid = Math.ceil((bids.current_bid * 0.05) + bids.current_bid)
     nextBid = (typeof nextBid == 'number' && nextBid >= 0) ? nextBid : 1
 
-    console.log(bidStatus, nextBid)
+    // console.log(bidStatus, nextBid)
 
     const isclosedForBidding = closedForBidding({ ...bidStatus, endDate: data.endDate })
 

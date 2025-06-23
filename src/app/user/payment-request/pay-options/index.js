@@ -1,7 +1,6 @@
 'use client'
-import { CreditCardIcon } from '@heroicons/react/24/solid'
 import React, { useRef, useState } from 'react'
-import { ApplePayIcon, PayPalIcon, RevolutePay } from '../../../../lib/AButton'
+import { RevolutePay } from '../../../../lib/AButton'
 import { MountRevolut } from '../checkout'
 import { useAuth } from '../../../../contexts/auth'
 

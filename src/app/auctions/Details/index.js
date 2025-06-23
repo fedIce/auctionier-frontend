@@ -36,8 +36,8 @@ export const DetailsSection = ({data}) => {
                     <h6 className='font-bold pb-1'>Estimated delivery time</h6>
                     <p>Once you make your payment, the seller is required to ship your order within 3 working days.
                         Shipping to your location (Cyprus) from The Netherlands usually takes 4-25 days.
-                        Can't be shipped with other objects
-                        You're not able to combine shipping if you buy more than one object from the same seller in this auction.</p>
+                        Can&apos;t be shipped with other objects
+                        You&apos;re not able to combine shipping if you buy more than one object from the same seller in this auction.</p>
                 </section>
 
                 <section>
