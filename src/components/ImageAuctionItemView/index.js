@@ -34,7 +34,7 @@ const ImageAuctionItemview = ({ images }) => {
                         images?.map((image, i) => {
                             return (
                                 <div key={i} className='bg-secondary-400 h-full overflow-hidden min-w-[600px] rounded' >
-                                    <Image className='w-full h-full object-cover' src={`http://localhost:3001/${image.url}`} width={image.width} height={image.height} alt={image.alt} />
+                                    <Image className='w-full h-full object-cover' src={`${process.env.NEXT_PUBLIC_SERVER_URL}${image.url}`} width={image.width} height={image.height} alt={image.alt} />
                                 </div>
                             )
                         })
@@ -58,7 +58,7 @@ const ImageAuctionItemview = ({ images }) => {
                             images.map((image, i) => {
                                 return (
                                     <div key={i} className={`min-w-1/6 aspect-square border ${i == Math.floor(scrollAmount / 600) ? 'border-white': 'border-transparent'} overflow-hidden bg-secondary-400 rounded-xl`}>
-                                        <Image className={`w-full h-full object-cover transition-all duration-300 ${i == Math.floor(scrollAmount / 600) ? '': 'blur-lg'} `} src={`http://localhost:3001/${image.url}`} width={image.width} height={image.height} alt={image.alt} />
+                                        <Image className={`w-full h-full object-cover transition-all duration-300 ${i == Math.floor(scrollAmount / 600) ? '': 'blur-lg'} `} src={`${process.env.NEXT_PUBLIC_SERVER_URL}${image.url}`} width={image.width} height={image.height} alt={image.alt} />
                                     </div>
                                 )
                             })
