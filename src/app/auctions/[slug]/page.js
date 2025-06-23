@@ -18,7 +18,7 @@ import { generate_crumbs } from '../../../lib/functions/util'
 // }
 
 async function fetchAuction(slug) {
-    const res = await use_get({ url: `${process.env.NEXT_PUBLIC_SERVER_URL}/api/auction-items?where[slug][equals]=${slug}`, options: { cache: 'force-cache' } })
+    const res = await use_get({ url: `${process.env.NEXT_PUBLIC_SERVER_URL}/api/auction-items?where[slug][equals]=${slug}`, options: { cache: 'no-store' } })
     return res?.docs[0]
 }
 
