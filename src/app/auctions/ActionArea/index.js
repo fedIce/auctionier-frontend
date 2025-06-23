@@ -68,7 +68,7 @@ const ActionArea = ({ data }) => {
                 <p>CURRENT BID</p>
                 <p className='uppercase'>#{data?.lotId?.split("-")[1] ?? ''}</p>
             </div>
-            {!isclosedForBidding ?
+            {isclosedForBidding ?
                 <div className='pt-8 text-xl text-red-400/60'>
                     Closed for Bidding
                 </div>
