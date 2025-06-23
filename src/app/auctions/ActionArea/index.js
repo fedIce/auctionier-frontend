@@ -26,6 +26,7 @@ const ActionArea = ({ data }) => {
         bidding.getAuctionBidData(data.id).then(res => setBids(res))
         bidding.getAuctionBidItemData(data.id).then((res) => setBidStatus(res))
     }, [])
+
     useEffect(() => {
         let timeout = null
         if (bidAmountError !== null) [
@@ -39,16 +40,26 @@ const ActionArea = ({ data }) => {
         }
     }, [bids, bidAmountError, bidStatus])
 
-    let nextBid = Math.ceil((bids.current_bid * 0.05) + bids.current_bid)
+    let nextBid = bids?.current_bid ? Math.ceil((bids.current_bid * 0.05) + bids.current_bid) : 1
     nextBid = (typeof nextBid == 'number' && nextBid >= 0) ? nextBid : 1
 
     // console.log(bidStatus, nextBid)
 
-    const isclosedForBidding = closedForBidding({ ...bidStatus, endDate: data.endDate })
+    const isclosedForBidding = data.endDate ? closedForBidding({ ...bidStatus, endDate: data.endDate }) : false
 
 
     const place_bid = async () => {
-        return bidding.placeBid({ ...data, amount: bidAmount }).then(res => setBids(res.new_bids)).finally(() => setBidAmount(''))
+        try {
+            const allBids = React.useMemo(() => {
+                return bids.bids?.sort((a, b) => a.createdAt < b.createdAt ? 1 : -1);
+            }, [bids.bids]);
+            setBids(allBids);
+        } catch (error) {
+            console.error("Error placing bid:", error);
+            setBidAmountError("Failed to place bid. Please try again.");
+        } finally {
+            setBidAmount('');
+        }
     }
 
     const allBids = bids.bids?.sort((a, b) => a.createdAt < b.createdAt ? 1 : -1)
