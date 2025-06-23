@@ -24,7 +24,9 @@ async function fetchAuction(slug) {
 
 export default async function AuctionItem({ params }) {
 
-    const auction = await fetchAuction(await params.slug)
+    const { slug } = await params
+
+    const auction = await fetchAuction(slug)
 
     if (!auction) return null
 
