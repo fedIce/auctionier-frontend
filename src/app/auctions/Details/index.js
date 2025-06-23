@@ -42,8 +42,8 @@ export const DetailsSection = ({data}) => {
 
                 <section>
                     <h6 className='font-bold pb-1'>Return Policy</h6>
-                    <p>We always recommend inspecting your object when it arrives. If it does not meet your expectations, please inform us within 3 calendar days of delivery and we’ll help find a solution. The delivery day counts as day 1.
-                        If you buy from a professional seller, you can return your object for any reason within 14 calendar days after your object is delivered if you’re an EU, EEA or UK consumer.</p>
+                    <p>We always recommend inspecting your object when it arrives. If it does not meet your expectations, please inform us within 3 calendar days of delivery and we&apos;ll help find a solution. The delivery day counts as day 1.
+                        If you buy from a professional seller, you can return your object for any reason within 14 calendar days after your object is delivered if you&apos;re an EU, EEA or UK consumer.</p>
                     <p className='underline'>Read more about our return policy</p>
 
                 </section>

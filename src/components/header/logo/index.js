@@ -1,6 +1,4 @@
-import Image from 'next/image'
 import React from 'react'
-import LogoImage from '../../../../public/logo.png'
 import { CategoriesDrop } from '../SearchWithCategory'
 
 const Logo = () => {

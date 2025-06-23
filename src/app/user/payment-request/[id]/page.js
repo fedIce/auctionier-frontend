@@ -2,9 +2,8 @@ import React from 'react'
 import BuyersProtection from '../buyers-protection'
 import ShippinTo from '../shipping'
 import PayOptions from '../pay-options'
-import Payment from '../payment'
 import { use_get } from '../../../../lib/functions'
-import { calculate_total, calculate_vat } from '../../../../lib/functions/util'
+import { calculate_total } from '../../../../lib/functions/util'
 import Image from 'next/image'
 
 async function fetchAuction(slug) {

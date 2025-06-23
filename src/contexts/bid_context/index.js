@@ -1,15 +1,15 @@
 'use client'
 import { use_get, use_post } from '@/lib/functions'
-import React, { useContext, createContext, useState } from 'react'
+import React, { useContext, createContext } from 'react'
 import { useAuth } from '../auth'
 
 const init = {
     bidAmount: '',
-    setBidAmount: (value) => null,
-    setOpenBiddingModal: (value) => null,
-    getAuctionBidData: async (id) => null,
-    placeBid: async (data) => null,
-    getAuctionBidItemData: async (id, depth = 1) => null
+    setBidAmount: () => null,
+    setOpenBiddingModal: () => null,
+    getAuctionBidData: async () => null,
+    placeBid: async () => null,
+    getAuctionBidItemData: async () => null
 }
 
 const BiddingProvider = createContext(init)

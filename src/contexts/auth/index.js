@@ -10,14 +10,14 @@ const init = {
     isLoggedIn: false,
     user: null,
     history: [],
-    login: (data) => null,
-    register: (data) => null,
+    login: () => null,
+    register: () => null,
     signout: () => null,
     refresh_user: () => null,
-    saveShippingInfo: async (data) => null,
-    getShippingData: async (user) => null,
+    saveShippingInfo: async () => null,
+    getShippingData: async () => null,
     shippingInfo: null,
-    setShippingInfo: (data) => null
+    setShippingInfo: () => null
 }
 
 export const APP_STATES = {
@@ -99,7 +99,7 @@ const AuthContext = ({ children }) => {
             setUser(user)
             return user
         }).catch((e) => {
-
+            console.log('REGISTER ERROR', e)
         })
     }
 

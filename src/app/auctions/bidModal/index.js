@@ -104,7 +104,7 @@ const DoneBidding = ({ action }) => {
     return (
         <div className='w-full h-auto flex flex-col items-center max-w-xl bg-background  border border-third/10'>
             <div className='py-4 text-2xl font-medium'>Bid Submitted</div>
-            <div className='py-4 text-sm font-light'>Well done!, we'll keep you posted, goodluck!</div>
+            <div className='py-4 text-sm font-light'>Well done!, we&apos;ll keep you posted, goodluck!</div>
             <CheckerAnimation width={150} height={150} />
             <div onClick={() => action(false)} className='flex w-full items-center mt-4 justify-between'>
                 <div className='flex-1 bg-bright text-background text-center py-4 cursor-pointer'>OK</div>

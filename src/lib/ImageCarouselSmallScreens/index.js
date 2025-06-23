@@ -6,7 +6,6 @@ import Image from 'next/image';
 
 const ImageCarouselSmallScreens = ({ images }) => {
 
-    if (!images?.length > 0) return <ImageCarouselSmallScreensLoading />
 
     const scrollRef = createRef()
     const [scrollAmount, setScrollAmount] = useState(1)
@@ -20,6 +19,8 @@ const ImageCarouselSmallScreens = ({ images }) => {
         scrollRef.current.scrollTo({ left: direction, behavior: "smooth" })
         setScrollAmount(direction)
     }
+
+    if (!images?.length > 0) return <ImageCarouselSmallScreensLoading />
 
 
     return (

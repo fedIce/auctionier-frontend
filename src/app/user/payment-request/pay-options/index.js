@@ -49,65 +49,65 @@ const PayOptions = ({ data }) => {
 
 export default PayOptions
 
-const CreditCardOption = ({ selectOption, option }) => {
-    return (
-        <OptionBlock selectOption={selectOption} option={options.creditCard} active={options.creditCard === option}>
-            <div className="flex items-center space-x-2">
-                <CreditCardIcon className="w-7 h-7" />
-                <h4 className="font-semibold">Credit Card Payment</h4>
-            </div>
-            <div className='w-full space-y-2'>
-                <div className="flex flex-col space-y-2 w-full bg-bright text-background p-2 px-4">
-                    <h4>CARD HOLDER&apos;S NAME</h4>
-                    <input placeholder='John Doe SMith' />
-                </div>
-                <div className="flex flex-col w-full space-y-2 bg-bright text-background p-2 px-4">
-                    <h4>CARD DETAILS</h4>
-                    <div className='flex w-full items-center justify-between'>
-                        <input placeholder='Card Number' />
-                        <input placeholder='MM/YY CVV' className='text-end text-sm' />
-                    </div>
-                </div>
-                <div>
-                    <p className='text-sm'>Always ready to bid</p>
-                    <p className='text-xs text-gray-400'>By saving this card, you agree to us charging this card for future payments, bid reservations and auction fees.</p>
-                </div>
-            </div>
-        </OptionBlock>
-    )
-}
+// const CreditCardOption = ({ selectOption, option }) => {
+//     return (
+//         <OptionBlock selectOption={selectOption} option={options.creditCard} active={options.creditCard === option}>
+//             <div className="flex items-center space-x-2">
+//                 <CreditCardIcon className="w-7 h-7" />
+//                 <h4 className="font-semibold">Credit Card Payment</h4>
+//             </div>
+//             <div className='w-full space-y-2'>
+//                 <div className="flex flex-col space-y-2 w-full bg-bright text-background p-2 px-4">
+//                     <h4>CARD HOLDER&apos;S NAME</h4>
+//                     <input placeholder='John Doe SMith' />
+//                 </div>
+//                 <div className="flex flex-col w-full space-y-2 bg-bright text-background p-2 px-4">
+//                     <h4>CARD DETAILS</h4>
+//                     <div className='flex w-full items-center justify-between'>
+//                         <input placeholder='Card Number' />
+//                         <input placeholder='MM/YY CVV' className='text-end text-sm' />
+//                     </div>
+//                 </div>
+//                 <div>
+//                     <p className='text-sm'>Always ready to bid</p>
+//                     <p className='text-xs text-gray-400'>By saving this card, you agree to us charging this card for future payments, bid reservations and auction fees.</p>
+//                 </div>
+//             </div>
+//         </OptionBlock>
+//     )
+// }
 
-const PayPalOption = ({ selectOption, option }) => {
-    return (
-        <OptionBlock selectOption={selectOption} option={options.payPal} active={options.payPal === option}>
-            <div className="flex items-center space-x-2">
-                <PayPalIcon className="w-7 h-7" />
-                <h4 className="font-semibold">PayPal</h4>
-            </div>
-            <div className='w-full space-y-2'>
-                <div>
-                    <p className='text-xs text-gray-400'>You'll be redirected to the PayPal site to complete your payment.</p>
-                </div>
-            </div>
-        </OptionBlock>
-    )
-}
+// const PayPalOption = ({ selectOption, option }) => {
+//     return (
+//         <OptionBlock selectOption={selectOption} option={options.payPal} active={options.payPal === option}>
+//             <div className="flex items-center space-x-2">
+//                 <PayPalIcon className="w-7 h-7" />
+//                 <h4 className="font-semibold">PayPal</h4>
+//             </div>
+//             <div className='w-full space-y-2'>
+//                 <div>
+//                     <p className='text-xs text-gray-400'>You'll be redirected to the PayPal site to complete your payment.</p>
+//                 </div>
+//             </div>
+//         </OptionBlock>
+//     )
+// }
 
-const ApplePayOption = ({ selectOption, option }) => {
-    return (
-        <OptionBlock selectOption={selectOption} option={options.applePay} active={options.applePay === option}>
-            <div className="flex items-center space-x-2">
-                <ApplePayIcon className="w-7 h-7" />
-                <h4 className="font-semibold">Apple Pay</h4>
-            </div>
-            <div className='w-full space-y-2'>
-                <div>
-                    <p className='text-xs text-gray-400'>You'll be redirected to complete your payment.</p>
-                </div>
-            </div>
-        </OptionBlock>
-    )
-}
+// const ApplePayOption = ({ selectOption, option }) => {
+//     return (
+//         <OptionBlock selectOption={selectOption} option={options.applePay} active={options.applePay === option}>
+//             <div className="flex items-center space-x-2">
+//                 <ApplePayIcon className="w-7 h-7" />
+//                 <h4 className="font-semibold">Apple Pay</h4>
+//             </div>
+//             <div className='w-full space-y-2'>
+//                 <div>
+//                     <p className='text-xs text-gray-400'>You'll be redirected to complete your payment.</p>
+//                 </div>
+//             </div>
+//         </OptionBlock>
+//     )
+// }
 
 const RevolutPayOption = ({ selectOption, option }) => {
     return (

@@ -7,7 +7,6 @@ import { NO_SCROLL } from '../../lib/functions/util';
 
 const ImageAuctionItemview = ({ images }) => {
 
-    if (!images?.length > 0) return <ImageAuctionItemviewLoader />
 
     const scrollRef = createRef()
     const miniscrollRef = createRef()
@@ -23,6 +22,9 @@ const ImageAuctionItemview = ({ images }) => {
         miniscrollRef.current.scrollTo({ left: direction/6, behavior: "smooth" })
         setScrollAmount(direction)
     }
+
+    if (!images?.length > 0) return <ImageAuctionItemviewLoader />
+
 
     return (
         <div className='w-full space-y-1 h-auto flex- flex-col'>
