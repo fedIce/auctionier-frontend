@@ -34,11 +34,11 @@ const ActionArea = ({ data }) => {
 
     useEffect(() => {
         let timeout = null
-        if (bidAmountError !== null) [
+        if (bidAmountError !== null) {
             timeout = setTimeout(() => {
                 setBidAmountError(null)
             }, 3000)
-        ]
+        }
 
         return () => {
             if (timeout) clearTimeout(timeout)
@@ -56,7 +56,7 @@ const ActionArea = ({ data }) => {
 
 
     const place_bid = async () => bidding.placeBid({ ...data, amount: bidAmount }).then(res => setBids(res.new_bids))
-                                .catch(e => {
+                                .catch(() => {
                                     setBidAmountError("Something went wrong, try again")
                                 })
                                 .finally(() => setBidAmount(''))
