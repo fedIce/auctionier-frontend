@@ -27,6 +27,10 @@ const ActionArea = ({ data }) => {
         bidding.getAuctionBidItemData(data.id).then((res) => setBidStatus(res))
     }, [])
 
+    React.useMemo(() => {
+        setBids(bids.bids?.sort((a, b) => a.createdAt < b.createdAt ? 1 : -1))
+    }, [bids.bids]);
+
     useEffect(() => {
         let timeout = null
         if (bidAmountError !== null) [
@@ -40,6 +44,8 @@ const ActionArea = ({ data }) => {
         }
     }, [bids, bidAmountError, bidStatus])
 
+
+
     let nextBid = bids?.current_bid ? Math.ceil((bids.current_bid * 0.05) + bids.current_bid) : 1
     nextBid = (typeof nextBid == 'number' && nextBid >= 0) ? nextBid : 1
 
@@ -48,21 +54,12 @@ const ActionArea = ({ data }) => {
     const isclosedForBidding = data.endDate ? closedForBidding({ ...bidStatus, endDate: data.endDate }) : false
 
 
-    const place_bid = async () => {
-        try {
-            const allBids = React.useMemo(() => {
-                return bids.bids?.sort((a, b) => a.createdAt < b.createdAt ? 1 : -1);
-            }, [bids.bids]);
-            setBids(allBids);
-        } catch (error) {
-            console.error("Error placing bid:", error);
-            setBidAmountError("Failed to place bid. Please try again.");
-        } finally {
-            setBidAmount('');
-        }
-    }
+    const place_bid = async () => bidding.placeBid({ ...data, amount: bidAmount }).then(res => setBids(res.new_bids))
+                                .catch(e => {
+                                    setBidAmountError("Something went wrong, try again")
+                                })
+                                .finally(() => setBidAmount(''))
 
-    const allBids = bids.bids?.sort((a, b) => a.createdAt < b.createdAt ? 1 : -1)
 
     return (
         <div className='w-full lg:w-3/4 h-auto border-t lg:border border-secondary-200/10 p-4 text-secondary-400 lg:rounded-2xl'>
@@ -101,7 +98,8 @@ const ActionArea = ({ data }) => {
                                 if (bidAmount < nextBid) {
                                     return setBidAmountError("Value Should be atleast €" + numberWithCommas(nextBid))
                                 }
-                                setOpenBiddingModal(true)
+                                
+                                return setOpenBiddingModal(true)
                             }} text="Place Bid" className="focus:ring-third-200/50 bg-third-200 text-bright-600 hover:bg-third-200/90 rounded-tl-none rounded-tr-none rounded-br-none"></AButton>
                             <AButton text="Set Max Bid" className="focus:ring-secondary/50 bg-secondary hover:bg-secondary/90 text-bright-600 rounded-tr-none rounded-tl-none rounded-bl-none"></AButton>
                         </div>
