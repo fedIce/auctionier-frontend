@@ -13,6 +13,7 @@ export const generate_crumbs = (data) => {
     if (data?.category) {
         crumbs.push({
             title: data.category.category_name,
+            id: data.category.id,
             link: `/category/${data.category.slug}`,
             description: data.category.description
         })

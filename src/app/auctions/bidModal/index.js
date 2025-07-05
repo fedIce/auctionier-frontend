@@ -3,6 +3,8 @@ import { XMarkIcon } from '@heroicons/react/24/outline'
 import React, { useEffect, useState } from 'react'
 import { CheckerAnimation, LoaderBlockAnimation } from '../../../components/util/checker'
 import { calculate_total, calculate_vat, numberWithCommas } from '../../../lib/functions/util'
+import { useAuth } from '../../../contexts/auth'
+import LoginRequired from '../../../contexts/auth/loginRequired'
 
 const BidModal = ({ open, setOpen, amount: a, action = () => null }) => {
 
@@ -10,6 +12,8 @@ const BidModal = ({ open, setOpen, amount: a, action = () => null }) => {
     const [loading, setLoading] = useState(true)
     const [done, setDone] = useState(false)
     const [seeBreakdown, setSeeBreakDown] = useState(false)
+
+    const auth = useAuth()
 
     useEffect(() => {
         let timeout = null
@@ -45,8 +49,10 @@ const BidModal = ({ open, setOpen, amount: a, action = () => null }) => {
 
     if (!open) return null
 
+    if (!auth.user) return <LoginRequired />
+
     return (
-        <div className='fixed z-50 left-0 top-0 w-screen h-screen bg-background/70 flex items-end lg:items-start lg:pt-[25vh] justify-center'>
+        <div className='fixed z-50 left-0 top-0 w-screen h-screen bg-background/70 flex px-2 items-start pt-[25vh] justify-center'>
             {done ?
                 <DoneBidding action={setOpen} />
                 : <div className='max-w-xl relative bg-background w-full  border border-third/10'>

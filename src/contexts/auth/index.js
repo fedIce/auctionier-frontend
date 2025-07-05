@@ -122,7 +122,9 @@ const AuthContext = ({ children }) => {
     const value = { login, register, refresh_user, user, isLoggedIn, signout, saveShippingInfo, getShippingData, shippingInfo, setShippingInfo, history }
 
     return (
-        <AuthContextProvider.Provider value={value} className='w-full h-full'>{children}</AuthContextProvider.Provider>
+        <AuthContextProvider.Provider value={value} className='w-full h-full'>
+            {children}
+        </AuthContextProvider.Provider>
     )
 }
 

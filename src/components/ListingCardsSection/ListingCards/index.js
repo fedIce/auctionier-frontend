@@ -31,12 +31,12 @@ const ListingCards = ({ data = null, user = null }) => {
 
     if (typeof data?.bid_id == 'object') {
         bid_summary = {
-            length: data.bid_id.bids.length,
+            length: data.bid_id.bids?.length || 0,
             top_bid: topBid(data.bid_id.bids),
             winner: data.bid_id.top_biddder
         }
 
-        if (timeExpired(data.endDate) && data.status === 'closed' && data.active == false && data.bid_id.top_biddder) {
+        if (timeExpired(data.endDate) && data.status === 'closed' && data.active == false && data.bid_id?.top_biddder) {
             bid_summary.winner = data.bid_id.top_biddder
         }
 
@@ -44,9 +44,9 @@ const ListingCards = ({ data = null, user = null }) => {
 
 
 
-    const hasBidded = data?.bid_id?.bids.some(i => i.user == user?.id)
+    const hasBidded = data?.bid_id?.bids?.some(i => i.user == user?.id) || false
     const leading_bid = bid_summary?.top_bid?.user == user?.id
-    const statusText = hasBidded ?
+    const statusText = user ? hasBidded ?
         bid_summary?.winner && bid_summary.winner.id === user?.id ?
             {
                 msg: "You Won this Bid!",
@@ -65,19 +65,20 @@ const ListingCards = ({ data = null, user = null }) => {
         {
             msg: "Current Bid",
             status: 'watching'
-        }
+        } : null
 
 
     return data ? (
         <div className='flex flex-col w-full space-y-2'>
             <div className=" w-full lg:min-w-64 min-h-60 cursor-pointer lg:max-h-80 bg-third-300 overflow-hidden rounded-lg " >
-                <Image src={`${process.env.NEXT_PUBLIC_SERVER_URL}${data.thumbnail.url}`} alt={data.thumbnail.alt} className='h-full transition-transform duration-300 hover:scale-125 object-cover' height={data.thumbnail.height} width={data.thumbnail.width} />
+                <Image src={`${process.env.NEXT_PUBLIC_SERVER_URL}${data.thumbnail ? data.thumbnail.url : data.image[0].url}`} alt={data.thumbnail ? data.thumbnail.alt : data.image[0].alt} className='h-full transition-transform duration-300 hover:scale-125 object-cover' height={data.thumbnail ? data.thumbnail.height : data.image[0].height} width={data.thumbnail ? data.thumbnail.width : data.image[0].width} />
             </div >
             <div>
                 <Link href={`/auctions/${data.slug}`} className='text-xl font-medium'>{data.title}</Link>
-                <h6 className='flex flex-col text-xs spa uppercase py-2'><p className={` font-light ${['leading', 'won'].includes(statusText.status) ? 'text-green-400' : statusText.status == 'outbided' ? 'text-third' : 'text-bright'}`}> {statusText.msg} </p><p className='text-xl font-semibold'>€ {numberWithCommas(data.bid_id.current_bid)}</p></h6>
+                <h6 className='flex flex-col text-xs spa uppercase py-2'><p className={` font-light ${['leading', 'won'].includes(statusText?.status) ? 'text-green-400' : statusText?.status == 'outbided' ? 'text-third' : 'text-bright'}`}> {statusText?.msg} </p><p className='text-xl font-semibold'>€ {numberWithCommas(data.bid_id?.current_bid || 0)}</p></h6>
                 {
-                    statusText.status == 'won' ?
+                    user &&
+                        statusText.status == 'won' ?
                         <Link href={`/user/i/${data.slug}`} className='text-sm cursor-pointer justify-center bg-third font-medium text-background py-2.5 flex items-center space-x-4 font-mono hover:bg-third-100 hover:text-bright transition-colors duration-300 underline'>
                             <span>Pay Now</span>
                             <span><ChevronRightIcon className='w-4 h-4 stroke-2' /></span>
