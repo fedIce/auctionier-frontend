@@ -1,5 +1,5 @@
 import React from 'react'
-import FilterBlock, { FilterControls } from '../../lib/FilterBlock'
+import { FilterControls } from '../../lib/FilterBlock'
 import ListingCards from '../../components/ListingCardsSection/ListingCards'
 import Pagination from '../../lib/Pagination'
 import ListingCardsSection from '../../components/ListingCardsSection'
@@ -13,7 +13,7 @@ const searchCall = async (query) => {
     return res
 }
 
-const SearchPage = async ({ params, searchParams }) => {
+const SearchPage = async ({ searchParams }) => {
 
     const { q = '' } = await searchParams
 
