@@ -4,11 +4,11 @@ import { FilterControls, FilterItem } from '../../lib/FilterBlock'
 import ListingCards from '../../components/ListingCardsSection/ListingCards'
 import Pagination from '../../lib/Pagination'
 import ListingCardsSection from '../../components/ListingCardsSection'
-import { AdjustmentsHorizontalIcon, ChevronDownIcon, XMarkIcon } from '@heroicons/react/24/outline'
+import { AdjustmentsHorizontalIcon,  XMarkIcon } from '@heroicons/react/24/outline'
 import { useRouter } from 'next/navigation'
 
 
-const SearchPageCOntent = ({ docs, aggs, q, query,pagination }) => {
+const SearchPageCOntent = ({ docs, aggs, q, pagination }) => {
 
     const [hideFilter, setHideFilter] = useState(false)
     const router = useRouter();

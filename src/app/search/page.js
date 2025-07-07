@@ -22,7 +22,7 @@ const SearchPage = async ({ searchParams }) => {
         let _query = ''
         Object.keys(query).forEach(key => {
             if (Array.isArray(query[key]) && query[key].length > 1) {
-                query[key].forEach((val, i) => {
+                query[key].forEach((val) => {
                     _query += `&${key}=${val}`
                     console.log(`&${key}=${val}`)
                 })
