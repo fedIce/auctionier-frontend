@@ -10,6 +10,7 @@ import { useBidding } from '../../../contexts/bid_context'
 import BidModal from '../bidModal';
 import Image from 'next/image';
 
+
 const ActionArea = ({ data }) => {
 
     const [bids, setBids] = useState({})

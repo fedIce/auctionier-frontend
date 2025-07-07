@@ -1,11 +1,40 @@
 'use client'
-import React, { createRef, useState } from 'react'
+import React, { createRef, useEffect, useState } from 'react'
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 import Image from 'next/image';
 import { NO_SCROLL } from '../../lib/functions/util';
+import ImageViewer from '../ImageViewer';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 
 const ImageAuctionItemview = ({ images }) => {
+
+    const searchParams = useSearchParams();
+    const router = useRouter();
+
+    const [isOpen, setIsOpen] = useState(false);
+    const [openIndex, setOpenIndex] = useState(0);
+
+    const openDialog = (index) => {
+        const params = new URLSearchParams(searchParams.toString());
+        params.set('dialog', 'open');
+        params.set('i', index || 0);
+        // Adds a new history entry
+        router.push(`?${params.toString()}`);
+    };
+
+    useEffect(() => {
+        const isDialogOpen = searchParams.get('dialog') === 'open';
+        setIsOpen(isDialogOpen);
+    }, [searchParams]);
+
+
+
+
+    const closeDialog = () => {
+        // Navigates back in history, removing ?dialog=open
+        router.back();
+    };
 
 
     const scrollRef = createRef()
@@ -19,7 +48,7 @@ const ImageAuctionItemview = ({ images }) => {
         if (direction <= 0) return scrollRef.current.scrollTo({ left: 0, behavior: "smooth" })
         if (direction > (600 * images.length)) return
         scrollRef.current.scrollTo({ left: direction, behavior: "smooth" })
-        miniscrollRef.current.scrollTo({ left: direction/6, behavior: "smooth" })
+        miniscrollRef.current.scrollTo({ left: direction / 6, behavior: "smooth" })
         setScrollAmount(direction)
     }
 
@@ -33,8 +62,8 @@ const ImageAuctionItemview = ({ images }) => {
                     {
                         images?.map((image, i) => {
                             return (
-                                <div key={i} className='bg-secondary-400 h-full overflow-hidden min-w-[600px] rounded' >
-                                    <Image className='w-full h-full object-cover' src={`${process.env.NEXT_PUBLIC_SERVER_URL}${image.url}`} width={image.width} height={image.height} alt={image.alt} />
+                                <div onClick={() => openDialog(i)} key={i} className='bg-secondary-400 cursor-pointer h-full overflow-hidden min-w-[600px] rounded' >
+                                    <Image className='w-full h-full object-cover' src={`${process.env.NEXT_PUBLIC_SERVER_URL}${image.sizes.medium.url}`} width={image.sizes.medium.width} height={image.sizes.medium.height} alt={image.alt} />
                                 </div>
                             )
                         })
@@ -51,14 +80,15 @@ const ImageAuctionItemview = ({ images }) => {
                 </div>
 
             </div>
+
             {
                 images.length > 0 ?
                     <div ref={miniscrollRef} className={`flex w-full items-center overflow-x-auto space-x-1  ${NO_SCROLL}`}>
                         {
                             images.map((image, i) => {
                                 return (
-                                    <div key={i} className={`max-w-1/6 w-full aspect-square border ${i == Math.floor(scrollAmount / 600) ? 'border-white': 'border-transparent'} overflow-hidden bg-secondary-400 rounded-xl`}>
-                                        <Image className={`w-full h-full object-cover transition-all duration-300 ${i == Math.floor(scrollAmount / 600) ? '': 'blur-lg'} `} src={`${process.env.NEXT_PUBLIC_SERVER_URL}${image.url}`} width={image.width} height={image.height} alt={image.alt} />
+                                    <div key={i} className={`max-w-1/6 w-full aspect-square border ${i == Math.floor(scrollAmount / 600) ? 'border-white' : 'border-transparent'} overflow-hidden bg-secondary-400 rounded-xl`}>
+                                        <Image className={`w-full h-full object-cover transition-all duration-300 ${i == Math.floor(scrollAmount / 600) ? '' : 'blur-lg'} `} src={`${process.env.NEXT_PUBLIC_SERVER_URL}${image.sizes.thumbnail.url}`} width={image.sizes.thumbnail.width} height={image.sizes.thumbnail.height} alt={image.alt} />
                                     </div>
                                 )
                             })
@@ -72,6 +102,7 @@ const ImageAuctionItemview = ({ images }) => {
                         <div className='w-1/4 aspect-square bg-secondary-400 rounded-xl'></div>
                     </div>
             }
+            <ImageViewer images={images} open={isOpen} onClose={closeDialog} openIndex={openIndex} />
         </div>
     )
 }

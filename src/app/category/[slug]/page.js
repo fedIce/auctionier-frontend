@@ -8,8 +8,8 @@ import CategoryIcons from '../../../components/Home/CategoryIcons'
 import { BookOpenIcon } from "@heroicons/react/24/outline";
 import { use_get } from '../../../lib/functions'
 
-async function fetchCategoryItems(id) {
-    const res = await use_get({ url: `${process.env.NEXT_PUBLIC_SERVER_URL}/api/auction-items?where[category.slug][equals]=${id}` })
+async function fetchCategoryItems(id, page = 1) {
+    const res = await use_get({ url: `${process.env.NEXT_PUBLIC_SERVER_URL}/api/auction-items?where[category.slug][equals]=${id}`+ page > 1 ? `&page=${page}` : '' })
     return res
 }
 
@@ -28,7 +28,30 @@ const CategoryItemPage = async ({ params }) => {
     const docs = category_auctions?.docs || []
     const sub_catgeories_docs = sub_catgeories?.docs || []
 
-    console.log(id, category_auctions)
+
+    const {
+        hasNextPage,
+        hasPrevPage,
+        limit,
+        nextPage,
+        page,
+        pagingCounter,
+        prevPage,
+        totalDocs,
+        totalPages,
+    } = category_auctions
+
+    const pagination = {
+        hasNextPage,
+        hasPrevPage,
+        limit,
+        nextPage,
+        page,
+        pagingCounter,
+        prevPage,
+        totalDocs,
+        totalPages,
+    }
 
     return (
         <div className='w-full py-8 px-2'>
@@ -88,7 +111,7 @@ const CategoryItemPage = async ({ params }) => {
                 </section>
             </section>
             <section className='my-16'>
-                <Pagination />
+                <Pagination pagination={pagination} />
             </section>
             <section>
                 <ListingCardsSection />

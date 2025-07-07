@@ -16,7 +16,8 @@
     "next": "15.3.3",
     "pouchdb": "^9.0.0",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "react-image-magnify": "^2.7.4"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

@@ -1,4 +1,4 @@
-export const use_post = async ({ url, data = null, include_credentials = true, options ={} }) => {
+export const use_post = async ({ url, data = null, include_credentials = true, options = {} }) => {
 
     return await new Promise(async (resolve, reject) => {
 
@@ -54,11 +54,12 @@ export const use_get = async ({ url, include_credentials = true, options = {} })
 
     return await new Promise(async (resolve, reject) => {
         const result = await fetch(url, body)
-
+        
         if (result.ok) {
             const json = await result.json()
             resolve(json)
         } else {
+
             reject({
                 error: result.status,
                 message: result.statusText

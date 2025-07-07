@@ -1,6 +1,7 @@
-import React from 'react'
+'use client'
+import React, { use } from 'react'
 import { ChevronDownIcon, XMarkIcon } from "@heroicons/react/24/outline";
-import CheckBox from '../../components/CheckBox';
+import { Block } from './Block';
 
 
 const FilterBlock = () => {
@@ -22,10 +23,10 @@ const FilterBlock = () => {
 
 export default FilterBlock
 
-const FilterItem = ({ children, reverse = false }) => {
+export const FilterItem = ({ children, text="Filter", reverse = false, onClick = () => null }) => {
     return (
-        <div className={`flex min-w-24 bg-bright text-background rounded-full py-2 px-4 items-center justify-between ${reverse ? 'flex-row-reverse' : ''}`}>
-            <p>Filter</p>
+        <div onClick={onClick} className={`flex min-w-24 bg-bright text-sm cursor-pointer text-background rounded-full space-x-2 py-2 px-4 items-center justify-between ${reverse ? 'flex-row-reverse' : ''}`}>
+            <p>{text}</p>
             <div>
                 {children}
             </div>
@@ -33,7 +34,7 @@ const FilterItem = ({ children, reverse = false }) => {
     )
 }
 
-export const FilterControls = ({ aggs }) => {
+export const FilterControls = ({ aggs, query }) => {
     console.log(aggs)
 
     if (!aggs) return null;
@@ -43,7 +44,7 @@ export const FilterControls = ({ aggs }) => {
             {
                 Object.keys(aggs).map((key, i) => {
                     return (
-                        <Block key={i} title={key} data={aggs[key]} />
+                        <Block key={i} title={key} data={aggs[key]} query={query} />
                     )
                 })
             }
@@ -59,24 +60,3 @@ export const FilterControls = ({ aggs }) => {
     )
 }
 
-const Block = ({ title, data }) => {
-
-    console.log(title, data)
-    return (
-        <div className='w-full py-4'>
-            <div className='flex items-center my-2 lg:my-4 space-x-2'>
-                <h1 className='font-semibold text-lg capitalize'>{title.split('_').join(" ")}</h1>
-            </div>
-            <div className='flex flex-col space-y-2'>
-                {
-                    data?.map((item, i) => {
-                        return (
-                            <CheckBox key={i} title={`${title == 'reserve_price' ? String(item._id) : item.slug || item.condition} (${item.count})`} />
-
-                        )
-                    })
-                }
-            </div>
-        </div>
-    )
-}

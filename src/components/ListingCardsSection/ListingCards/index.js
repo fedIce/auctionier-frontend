@@ -70,9 +70,9 @@ const ListingCards = ({ data = null, user = null }) => {
 
     return data ? (
         <div className='flex flex-col w-full space-y-2'>
-            <div className=" w-full lg:min-w-64 min-h-60 cursor-pointer lg:max-h-80 bg-third-300 overflow-hidden rounded-lg " >
-                <Image src={`${process.env.NEXT_PUBLIC_SERVER_URL}${data.thumbnail ? data.thumbnail.url : data.image[0].url}`} alt={data.thumbnail ? data.thumbnail.alt : data.image[0].alt} className='h-full transition-transform duration-300 hover:scale-125 object-cover' height={data.thumbnail ? data.thumbnail.height : data.image[0].height} width={data.thumbnail ? data.thumbnail.width : data.image[0].width} />
-            </div >
+            <Link href={`/auctions/${data.slug}`} className=" w-full lg:min-w-64 min-h-60 cursor-pointer lg:max-h-80 bg-third-300 overflow-hidden rounded-lg " >
+                <Image src={`${process.env.NEXT_PUBLIC_SERVER_URL}${data.thumbnail ? data.thumbnail.url : data.image[0].sizes.medium.url}`} alt={data.thumbnail ? data.thumbnail.alt : data.image[0].alt} className='h-full transition-transform duration-300 hover:scale-125 object-cover' height={data.thumbnail ? data.thumbnail.height : data.image[0].sizes.medium.height} width={data.thumbnail ? data.thumbnail.width : data.image[0].sizes.medium.width} />
+            </Link >
             <div>
                 <Link href={`/auctions/${data.slug}`} className='text-xl font-medium'>{data.title}</Link>
                 <h6 className='flex flex-col text-xs spa uppercase py-2'><p className={` font-light ${['leading', 'won'].includes(statusText?.status) ? 'text-green-400' : statusText?.status == 'outbided' ? 'text-third' : 'text-bright'}`}> {statusText?.msg} </p><p className='text-xl font-semibold'>€ {numberWithCommas(data.bid_id?.current_bid || 0)}</p></h6>
