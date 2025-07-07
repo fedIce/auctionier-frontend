@@ -13,7 +13,6 @@ const ImageAuctionItemview = ({ images }) => {
     const router = useRouter();
 
     const [isOpen, setIsOpen] = useState(false);
-    const [openIndex, setOpenIndex] = useState(0);
 
     const openDialog = (index) => {
         const params = new URLSearchParams(searchParams.toString());
@@ -102,7 +101,7 @@ const ImageAuctionItemview = ({ images }) => {
                         <div className='w-1/4 aspect-square bg-secondary-400 rounded-xl'></div>
                     </div>
             }
-            <ImageViewer images={images} open={isOpen} onClose={closeDialog} openIndex={openIndex} />
+            <ImageViewer images={images} open={isOpen} onClose={closeDialog}  />
         </div>
     )
 }

@@ -9,7 +9,6 @@ export default function ImageViewer({ images, open, onClose }) {
 
 
 
-    if (!open) return null; // Don't render if not open)
 
     const [current, setCurrent] = useState(0);
     const touchStartX = useRef(null);
@@ -50,6 +49,7 @@ export default function ImageViewer({ images, open, onClose }) {
     }, []); // Reset current when openIndex changes
 
     // Detect dialog open from query string
+    if (!open) return null; // Don't render if not open)
 
 
     return (

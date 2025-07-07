@@ -11,7 +11,7 @@ const Pagination = ({ pagination }) => {
     if (!pagination || !pagination.totalPages || pagination.totalPages <= 1) {
         return null; // No pagination needed
     }
-    const { hasNextPage, hasPrevPage,  nextPage, page, totalDocs, totalPages } = pagination;
+    const { hasNextPage, hasPrevPage,  nextPage, page, totalPages } = pagination;
     const currentPage = page || 1; // Default to page 1 if not provided
 
     const gotonextPage = (next = false) => {
