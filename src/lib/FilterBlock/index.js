@@ -1,5 +1,5 @@
 'use client'
-import React, { use } from 'react'
+import React from 'react'
 import { ChevronDownIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { Block } from './Block';
 
@@ -34,7 +34,7 @@ export const FilterItem = ({ children, text="Filter", reverse = false, onClick =
     )
 }
 
-export const FilterControls = ({ aggs, query }) => {
+export const FilterControls = ({ aggs }) => {
     console.log(aggs)
 
     if (!aggs) return null;
@@ -44,7 +44,7 @@ export const FilterControls = ({ aggs, query }) => {
             {
                 Object.keys(aggs).map((key, i) => {
                     return (
-                        <Block key={i} title={key} data={aggs[key]} query={query} />
+                        <Block key={i} title={key} data={aggs[key]}  />
                     )
                 })
             }

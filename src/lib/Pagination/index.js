@@ -11,9 +11,8 @@ const Pagination = ({ pagination }) => {
     if (!pagination || !pagination.totalPages || pagination.totalPages <= 1) {
         return null; // No pagination needed
     }
-    const { hasNextPage, hasPrevPage, limit, nextPage, page, totalDocs, totalPages } = pagination;
+    const { hasNextPage, hasPrevPage,  nextPage, page, totalDocs, totalPages } = pagination;
     const currentPage = page || 1; // Default to page 1 if not provided
-    const totalItems = totalDocs || 0; // Default to 0 if not provided
 
     const gotonextPage = (next = false) => {
         if (typeof next == 'number') {
@@ -67,16 +66,16 @@ const Pagination = ({ pagination }) => {
                 {
                     currentPage <= 3 ?
                         Array.from({ length: 3 }, (_, i) => (
-                            <div onClick={() => gotonextPage(i + 1)} className={currentPage == i + 1 ? 'underline font-bold' : 'text-secondary-600 cursor-pointer'}>{i + 1}</div>
+                            <div key={i} onClick={() => gotonextPage(i + 1)} className={currentPage == i + 1 ? 'underline font-bold' : 'text-secondary-600 cursor-pointer'}>{i + 1}</div>
                         ))
                         :
                         currentPage >= totalPages - 2 ?
                             Array.from({ length: 3 }, (_, i) => (
-                                <div onClick={() => gotonextPage(totalPages - (2 - i))} className={currentPage == totalPages - (2 - i) ? 'underline font-bold' : 'text-secondary-600 cursor-pointer'}>{totalPages - (2 - i)}</div>
+                                <div key={i} onClick={() => gotonextPage(totalPages - (2 - i))} className={currentPage == totalPages - (2 - i) ? 'underline font-bold' : 'text-secondary-600 cursor-pointer'}>{totalPages - (2 - i)}</div>
                             ))
                             :
                             Array.from({ length: totalPages }, (_, i) => (
-                                <div onClick={() => gotonextPage(i + 1)} className={currentPage == i + 1 ? 'underline font-bold' : 'text-secondary-600 cursor-pointer'}>{i + 1}</div>
+                                <div key={i} onClick={() => gotonextPage(i + 1)} className={currentPage == i + 1 ? 'underline font-bold' : 'text-secondary-600 cursor-pointer'}>{i + 1}</div>
                             ))
                 }
 

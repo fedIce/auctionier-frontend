@@ -74,7 +74,7 @@ const SearchPageCOntent = ({ docs, aggs, q, query,pagination }) => {
             <section className='lg:my-8 w-full border-t border-bright/10'>
                 <div className='w-full relative flex items-start'>
                     <div className={`${hideFilter ? 'w-0 border-background' : 'w-1/4 border-bright/10'} h-full hidden lg:block transition-all duration-300 ease-in-out border-r `} >
-                        <FilterControls aggs={aggs} query={query} />
+                        <FilterControls aggs={aggs} />
                     </div>
                     <div className={`${hideFilter ? 'w-full' : 'w-3/4'} transition-all duration-300 ease-in-out lg:ml-4`}>
                         <h4 className='font-bold text-xl text-nowrap my-4'>{docs.length} Item(s)</h4>
