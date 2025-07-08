@@ -28,7 +28,7 @@ const Specialcategories = async () => {
                                 <Link key={index} href={`/auctions/p/${i.slug}`} className="w-full">
                                     <SpecialCartegoryCard
 
-                                        src={`${process.env.NEXT_PUBLIC_SERVER_URL}/${i.verticalbannerImage.url}`}
+                                        src={`${process.env.NEXT_PUBLIC_SERVER_URL}/${i.verticalbannerImage?.sizes?.medium?.url}`}
                                         title={i.title}
                                         slug={i.slug}
                                         endDate={i.endDate}

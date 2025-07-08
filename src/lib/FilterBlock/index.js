@@ -23,9 +23,9 @@ const FilterBlock = () => {
 
 export default FilterBlock
 
-export const FilterItem = ({ children, text="Filter", reverse = false, onClick = () => null }) => {
+export const FilterItem = ({ children, className, text = "Filter", reverse = false, onClick = () => null }) => {
     return (
-        <div onClick={onClick} className={`flex min-w-24 bg-bright text-sm cursor-pointer text-background rounded-full space-x-2 py-2 px-4 items-center justify-between ${reverse ? 'flex-row-reverse' : ''}`}>
+        <div onClick={onClick} className={`flex min-w-24 bg-bright text-sm cursor-pointer text-background rounded-full space-x-2 py-2 px-4 items-center justify-between ${reverse ? 'flex-row-reverse' : ''} ` + className}>
             <p>{text}</p>
             <div>
                 {children}
@@ -43,8 +43,10 @@ export const FilterControls = ({ aggs }) => {
             {/* Reserve Price */}
             {
                 Object.keys(aggs).map((key, i) => {
+                    const data = aggs[key].filter(i => i._id !== null || i.slug !== null)
+                    if (data.length <= 0) return null
                     return (
-                        <Block key={i} title={key} data={aggs[key]}  />
+                        <Block key={i} title={key} data={data} />
                     )
                 })
             }

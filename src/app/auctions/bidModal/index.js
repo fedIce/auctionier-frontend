@@ -1,5 +1,5 @@
 'use client'
-import { XMarkIcon } from '@heroicons/react/24/outline'
+import * as Icons from '@heroicons/react/24/outline'
 import React, { useEffect, useState } from 'react'
 import { CheckerAnimation, LoaderBlockAnimation } from '../../../components/util/checker'
 import { calculate_total, calculate_vat, numberWithCommas } from '../../../lib/functions/util'
@@ -14,6 +14,21 @@ const BidModal = ({ open, setOpen, amount: a, action = () => null }) => {
     const [seeBreakdown, setSeeBreakDown] = useState(false)
 
     const auth = useAuth()
+
+    const GenerateIcons = () => {
+        let v = []
+        Object.keys(Icons).forEach((key) => {
+            v.push({
+                label: key.replace('Icon', '').replace(/([a-z])([A-Z])/g, '$1 $2').toLowerCase(),
+                value: key
+            })
+        })
+        return v
+    }
+
+    useEffect(() => {
+        console.log(GenerateIcons())
+    }, [])
 
     useEffect(() => {
         let timeout = null
@@ -51,6 +66,9 @@ const BidModal = ({ open, setOpen, amount: a, action = () => null }) => {
 
     if (!auth.user) return <LoginRequired setOpen={setOpen} />
 
+
+    const XIcon = Icons["XMarkIcon"]
+
     return (
         <div className='fixed z-50 left-0 top-0 w-screen h-screen bg-background/70 flex px-2 items-start pt-[25vh] justify-center'>
             {done ?
@@ -61,7 +79,7 @@ const BidModal = ({ open, setOpen, amount: a, action = () => null }) => {
                             <h4>Place your Bid</h4>
                             <p className='text-[10px] text-bright-300'>Please make sure you check all the details below prior to confirming your bid.</p>
                         </div>
-                        <span onClick={() => setOpen(false)} className='cursor-pointer'><XMarkIcon className='w-7 h-7 text-secondary' /></span>
+                        <span onClick={() => setOpen(false)} className='cursor-pointer'><XIcon className='w-7 h-7 text-secondary' /></span>
                     </div>
                     <div className={`relative flex flex-col ${seeBreakdown && 'h-[40vh]'}  w-full py-4 text-sm px-8 divide-y divide-dashed divide-bright/10  font-light`}>
                         <div className='flex items-center justify-between py-4'>

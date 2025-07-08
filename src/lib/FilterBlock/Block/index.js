@@ -3,7 +3,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import CheckBox from "../../../components/CheckBox";
 
 export const Block = ({ title, data }) => {
-
+    console.log('############### ', data)
     const searchParams = useSearchParams();
     const router = useRouter();
 
@@ -32,7 +32,7 @@ export const Block = ({ title, data }) => {
             </div>
             <div className='flex flex-col space-y-2'>
                 {
-                    data?.map((item, i) => {
+                   data && data?.map((item, i) => {
                         const t = `${title == 'reserve_price' ? String(item._id) : item.slug || item.condition} (${item.count})`
                         return (
                             <CheckBox onSelect={onSelectFilter} legend={title} key={i} title={t} />
