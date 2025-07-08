@@ -46,7 +46,7 @@ export default function ImageViewer({ images, open, onClose }) {
         } else {
             setCurrent(0); // Reset to first slide if index is invalid
         }
-    }, []); // Reset current when openIndex changes
+    }, [open]); // Reset current when openIndex changes
 
     // Detect dialog open from query string
     if (!open) return null; // Don't render if not open)

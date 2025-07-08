@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Jura } from "next/font/google";
+import { Jura, Poppins } from "next/font/google";
 import "./globals.css";
 import Header from '../components/header'
 import Footer from '../components/footer'
@@ -10,6 +10,12 @@ import BiddingContext from '../contexts/bid_context'
 const JuraSans = Jura({
   variable: "--font-jura-sans",
   subsets: ["latin"],
+});
+
+const PoppinsSans = Poppins({
+  variable: "--font-poppins-sans",
+  subsets: ["latin"],
+  weight: "400"
 });
 
 
@@ -33,7 +39,7 @@ export default function RootLayout({
 
   return (
     <html lang="en">
-      <body className={`${JuraSans.variable}  min-h-screen min-w-screen overflow-x-hidden antialiased`}>
+      <body className={`${JuraSans.variable} ${PoppinsSans.variable}  min-h-screen min-w-screen overflow-x-hidden antialiased`}>
         <AuthContext>
           <BiddingContext>
           <div className="items-center justify-center w-full h-[100vh]">

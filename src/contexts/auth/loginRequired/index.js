@@ -2,7 +2,7 @@ import { XMarkIcon } from '@heroicons/react/24/outline'
 import Link from 'next/link'
 import React from 'react'
 
-const LoginRequired = () => {
+const LoginRequired = ({setOpen}) => {
     return (
         <div className='w-full h-screen bg-black/40 flex items-center justify-center fixed top-0 left-0 z-50'>
             <div className='bg-background  border border-third/10 backdrop-blur-md shadow-lg max-w-md w-full text-center'>

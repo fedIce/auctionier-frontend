@@ -49,7 +49,7 @@ const BidModal = ({ open, setOpen, amount: a, action = () => null }) => {
 
     if (!open) return null
 
-    if (!auth.user) return <LoginRequired />
+    if (!auth.user) return <LoginRequired setOpen={setOpen} />
 
     return (
         <div className='fixed z-50 left-0 top-0 w-screen h-screen bg-background/70 flex px-2 items-start pt-[25vh] justify-center'>
