@@ -63,7 +63,7 @@
   --color-bright-700: #ececea;
   --color-bright-800: #f2f3f1;
   --color-bright-900: #f9f9f8;
-  
+
 
 }
 
@@ -76,7 +76,7 @@
 
 body {
   background: var(--background);
-  color: var(--foreground);
+  color: #e0e1dd;
   font-family: Poppins;
   font-size: 16px;
 }
