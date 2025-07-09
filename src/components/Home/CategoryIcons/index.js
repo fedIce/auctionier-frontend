@@ -1,6 +1,6 @@
 'use client'
 import React, { createRef, useEffect, useState } from 'react'
-import { ShoppingBagIcon, ArrowLeftIcon, ArrowRightIcon } from "@heroicons/react/24/outline";
+import {  ArrowLeftIcon, ArrowRightIcon } from "@heroicons/react/24/outline";
 import * as Icons from "@heroicons/react/24/outline";
 import { use_get } from '@/lib/functions';
 import Link from 'next/link';
