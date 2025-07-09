@@ -6,7 +6,7 @@ import { generateQueryParams } from '../../../search/page'
 
 
 
-async function fetchCategoryItems(id, page = 1) {
+async function fetchCategoryItems(id) {
     const res = await use_get({ url: `${process.env.NEXT_PUBLIC_SERVER_URL}/api/categories/t/sub_category?slug=${id}` })
     return res
 }
