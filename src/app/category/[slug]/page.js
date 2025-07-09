@@ -3,7 +3,7 @@ import { use_get } from '../../../lib/functions'
 import { generateQueryParams } from '../../search/page'
 import CategoryPage from './CategoryPage'
 
-async function fetchCategoryItems(id, page = 1) {
+async function fetchCategoryItems(id) {
     const res = await use_get({ url: `${process.env.NEXT_PUBLIC_SERVER_URL}/api/categories/t/category?slug=${id}` }).catch(e => {
         console.error('Error fetching search results:', e)
         return { docs: [], aggs: [] }
@@ -72,7 +72,7 @@ const CategoryItemPage = async ({ params, searchParams }) => {
 
     // const Icon = Icons[]
 
-    return <CategoryPage id={id} category_auctions={category_auctions} sub_catgeories_docs={sub_catgeories_docs} docs={docs} aggs={aggs[0]} crumbs={_} pagination={pagination} />
+    return <CategoryPage id={id} sub_catgeories_docs={sub_catgeories_docs} docs={docs} aggs={aggs[0]} crumbs={_} pagination={pagination} />
 }
 
 export default CategoryItemPage

@@ -1,6 +1,6 @@
 'use client'
 import React, { useState } from 'react'
-import FilterBlock, { FilterControls, FilterItem } from '../../../lib/FilterBlock'
+import  { FilterControls, FilterItem } from '../../../lib/FilterBlock'
 import ListingCards from '../../../components/ListingCardsSection/ListingCards'
 import Pagination from '../../../lib/Pagination'
 import ListingCardsSection from '../../../components/ListingCardsSection'
@@ -12,7 +12,7 @@ import { onSelectFilter } from '../../search/search'
 import { useRouter } from 'next/navigation'
 
 
-const CategoryPage = ({ id, sub_catgeories_docs, category_auctions, docs, aggs, crumbs, pagination }) => {
+const CategoryPage = ({ id, sub_catgeories_docs, docs, aggs, crumbs, pagination }) => {
     const [hideFilter, setHideFilter] = useState(false)
     const [hideMobileFilter, setHideMobileFilter] = useState(true)
     const router = useRouter()

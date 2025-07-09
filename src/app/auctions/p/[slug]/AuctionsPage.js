@@ -1,6 +1,6 @@
 'use client'
 import React, { useState } from 'react'
-import FilterBlock, { FilterControls, FilterItem } from '../../../../lib/FilterBlock'
+import  { FilterControls, FilterItem } from '../../../../lib/FilterBlock'
 import ListingCards from '../../../../components/ListingCardsSection/ListingCards'
 import Pagination from '../../../../lib/Pagination'
 import ListingCardsSection from '../../../../components/ListingCardsSection'
