@@ -31,7 +31,6 @@ export default SearchWithCategory
 
 
 export const CategoriesDrop = ({ className }) => {
-    const router = useRouter()
     const [open, setOpen] = useState(false)
     return (
         <div className='relative'>
