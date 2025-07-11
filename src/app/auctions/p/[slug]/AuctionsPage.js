@@ -1,6 +1,6 @@
 'use client'
 import React, { useState } from 'react'
-import  { FilterControls, FilterItem } from '../../../../lib/FilterBlock'
+import { FilterControls, FilterItem } from '../../../../lib/FilterBlock'
 import ListingCards from '../../../../components/ListingCardsSection/ListingCards'
 import Pagination from '../../../../lib/Pagination'
 import ListingCardsSection from '../../../../components/ListingCardsSection'
@@ -25,14 +25,16 @@ const AuctionsPage = ({ auction, docs, aggs, crumbs, pagination }) => {
             <section>
                 <BreadCrumbs crumbs={crumbs} />
             </section>
-            <section className='w-full py-4'>
-                <div className='w-full h-64 rounded-2xl bg-third' >
+            <section className='w-full my-4'>
+                <div className='w-full h-64 rounded-2xl bg-third relative overflow-hidden' >
                     <Image src={`${process.env.NEXT_PUBLIC_SERVER_URL}/${auction.horizontalbannerImage?.url || ''}`} alt={auction.horizontalbannerImage?.alt || 'Auction Banner'} className='w-full h-full object-cover rounded-2xl' height={auction.horizontalbannerImage?.height || 400} width={auction.horizontalbannerImage?.width || 600} />
+                    <div className='flex flex-col items-start py-4 px-4 bg-gradient-to-t w-full from-background to-transparent absolute -bottom-0 space-y-2 left-0 space-x-2'>
+                        <h1 className='font-semibold text-3xl lg:text-5xl'>{auction.title}</h1>
+                        <p className='text-xs line-clamp-2'>{auction.description}</p>
+                    </div>
                 </div>
             </section>
-            <div className='flex items-center my-2 lg:my-4 space-x-2'>
-                <h1 className='font-semibold text-3xl lg:text-5xl'>{auction.title}</h1>
-            </div>
+
             <section className='flex items-center justify-end'>
                 <div className='flex items-center space-x-2 self-end'>
                     <FilterItem className='lg:flex hidden' onClick={() => setHideFilter(!hideFilter)} text='Hide Filters' >

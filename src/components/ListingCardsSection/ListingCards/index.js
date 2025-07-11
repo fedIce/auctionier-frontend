@@ -90,7 +90,7 @@ const ListingCards = ({ data = null, user = null }) => {
         </div>
     )
         : (
-            <div className=" w-full lg:min-w-64 min-h-60 lg:min-h-80 bg-third-300 rounded-lg " >
+            <div className=" w-full min-w-64 min-h-80 bg-third-300 rounded-lg " >
                 {/* Section Card */}
             </div >
         )

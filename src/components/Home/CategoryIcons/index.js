@@ -55,9 +55,9 @@ const CategoryIcons = () => {
                         categories.map((cat, i) => {
                             const Icon = Icons[cat.icon]
                             return (
-                                <Link href={`/category/${cat.slug}`} key={i} className='flex max-w-44 w-full space-y-2 flex-col items-center text-center justify-center'>
+                                <Link href={`/category/${cat.slug}`} key={i} className='flex max-w-24 min-w-24 space-y-2 flex-col items-center text-center justify-center'>
                                     <Icon className="w-7 h-7" />
-                                    <p className='text-sm max-w-32 overflow-hidden truncate whitespace-nowrap'>{cat.category_name}</p>
+                                    <p className='text-xs max-w-24 overflow-hidden truncate whitespace-nowrap'>{cat.category_name}</p>
                                 </Link>
                             )
                         })
