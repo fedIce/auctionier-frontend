@@ -39,7 +39,7 @@ export const CategoriesDrop = ({ className }) => {
                 <span>Categories</span>
                 <span><ChevronDownIcon className='w-4 h-4' /></span>
             </div>
-            <CategoryModal router={router} setOpen={setOpen} open={open} />
+            <CategoryModal setOpen={setOpen} open={open} />
         </div>
     )
 }
@@ -98,7 +98,7 @@ export const SearchModal = ({ setOpen, open, router }) => {
     )
 }
 
-const CategoryModal = ({ setOpen, open, router }) => {
+const CategoryModal = ({ setOpen, open }) => {
     const [categories, setCategories] = useState(null)
     const get_categories = async () => {
         const res = await use_get({ url: `${process.env.NEXT_PUBLIC_SERVER_URL}/api/categories?depth=1`, options: { cache: 'force-cache', revalidate: 3600 } });
