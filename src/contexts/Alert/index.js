@@ -3,7 +3,7 @@ import React, { useContext, createContext, useState, useEffect } from 'react'
 import { GrayInfoAlertDialog, GreenSuccessAlertDialog, RedDangerAlertDialog } from './components'
 
 const init = {
-    setalert: (type, text) => null,
+    setalert: () => null,
     closealert: () => null
 }
 
