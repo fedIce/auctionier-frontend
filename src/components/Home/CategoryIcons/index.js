@@ -1,13 +1,13 @@
 'use client'
 import React, { createRef, useEffect, useState } from 'react'
-import {  ArrowLeftIcon, ArrowRightIcon } from "@heroicons/react/24/outline";
+import { ArrowLeftIcon, ArrowRightIcon } from "@heroicons/react/24/outline";
 import * as Icons from "@heroicons/react/24/outline";
 import { use_get } from '@/lib/functions';
 import Link from 'next/link';
 
 
 const get_categories = async () => {
-    const res = await use_get({ url: `${process.env.NEXT_PUBLIC_SERVER_URL}/api/categories?depth=1` });
+    const res = await use_get({ url: `${process.env.NEXT_PUBLIC_SERVER_URL}/api/categories?depth=1`, options: { cache: 'force-cache', revalidate: 3600 } });
     return res.docs || []
 }
 
