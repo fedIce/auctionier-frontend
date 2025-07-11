@@ -33,6 +33,6 @@ export const register_user = async ({ fullname, email, password }) => {
     return user
 }
 
-export const refresh_user_token = async () => {
-    return await use_post({ url: `${process.env.NEXT_PUBLIC_SERVER_URL}/api/users/refresh-token` })
+export const refresh_user_token = async (token = null) => {
+    return await use_post({ url: `${process.env.NEXT_PUBLIC_SERVER_URL}/api/users/refresh-token`, token })
 }

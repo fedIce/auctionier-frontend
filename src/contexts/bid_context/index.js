@@ -37,7 +37,8 @@ const BiddingContext = ({ children }) => {
                 auction_id: data.id,
                 amount: data.amount,
                 auction_type: data.auction_type
-            }
+            },
+            token: auth?.user?.token ?? null
         }).catch(e => console.log(e))
     }
 

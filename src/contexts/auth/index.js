@@ -4,13 +4,14 @@ import { createContext } from 'react'
 import { login_user, refresh_user_token, register_user, signout_user } from '../../lib/functions/auth'
 import { usePathname, useRouter } from 'next/navigation'
 import { use_get, use_post } from '@/lib/functions'
+import { useAlert } from '../Alert'
 
 
 const init = {
     isLoggedIn: false,
     user: null,
     history: [],
-    login: () => null,
+    login: async () => null,
     register: () => null,
     signout: () => null,
     refresh_user: () => null,
@@ -37,13 +38,14 @@ const AuthContext = ({ children }) => {
     const isLoggedIn = user?.user ? true : false
     const path = usePathname()
     const router = useRouter()
+    const alert = useAlert()
 
     useEffect(() => {
         const active_user = localStorage.getItem(APP_STATES.AUTH_STATE)
         if (active_user) {
             const stored_user = JSON.parse(active_user)
             const timeDiff = new Date(new Date(stored_user.exp * 1000) - new Date())
-            getShippingData(stored_user.user.id).then((res) => setShippingInfo(res?.docs[0]))
+            getShippingData(stored_user.user.id, user?.token).then((res) => setShippingInfo(res?.docs[0]))
 
             // Refresh user token is time less than 30 minutes, if time passed logout user, else just setUser
             if (timeDiff.getHours() == 0 && (timeDiff.getMinutes() < 30 && timeDiff.getMinutes() > 0)) {
@@ -79,14 +81,21 @@ const AuthContext = ({ children }) => {
 
 
     const login = async ({ email, password }) => {
-        const user = await login_user({ email, password })
-        localStorage.setItem(APP_STATES.AUTH_STATE, JSON.stringify(user))
-        setUser(user)
-        return user
+        const user = await login_user({ email, password }).catch(e => {
+            let error = e?.json?.errors[0] ?? { message: 'Something went wrong, please try again later.' }
+            error = error.data ? error.data.errors[0].message : error.message
+            alert.setalert('error', String(error))
+            return null
+        })
+        if (!user.error) {
+            localStorage.setItem(APP_STATES.AUTH_STATE, JSON.stringify(user))
+            setUser(user)
+            return user
+        }
     }
 
     const signout = async () => {
-        signout_user({ token: user.token }).then(() => {
+        signout_user({ token: user?.token }).then(() => {
             localStorage.removeItem(APP_STATES.AUTH_STATE)
             setUser(null)
         }).catch(e => console.error(e))
@@ -99,24 +108,27 @@ const AuthContext = ({ children }) => {
             setUser(user)
             return user
         }).catch((e) => {
-            console.log('REGISTER ERROR', e)
+            let error = e?.json?.errors[0] ?? { message: 'Something went wrong, please try again later.' }
+            error = error.data ? error.data.errors[0].message : error.message
+            alert.setalert('error', String(error))
+            return null
         })
     }
 
-    const getShippingData = async (user) => {
-        return await use_get({ url: `${process.env.NEXT_PUBLIC_SERVER_URL}/api/customer-shipping-details?where[user][equals]=${user}` })
+    const getShippingData = async (user, token = user?.token) => {
+        return await use_get({ url: `${process.env.NEXT_PUBLIC_SERVER_URL}/api/customer-shipping-details?where[user][equals]=${user}`, token })
     }
 
-    const saveShippingInfo = async (data) => {
-        return await use_post({ url: `${process.env.NEXT_PUBLIC_SERVER_URL}/api/customer-shipping-details/shipping`, data: data })
+    const saveShippingInfo = async (data, token = user?.token) => {
+        return await use_post({ url: `${process.env.NEXT_PUBLIC_SERVER_URL}/api/customer-shipping-details/shipping`, data: data, token })
     }
 
 
     const refresh_user = async () => {
-        const user = await refresh_user_token()
-        localStorage.setItem(APP_STATES.AUTH_STATE, JSON.stringify(user))
-        setUser(user)
-        return user
+        const _user = await refresh_user_token(user?.token)
+        localStorage.setItem(APP_STATES.AUTH_STATE, JSON.stringify(_user))
+        setUser(_user)
+        return _user
     }
 
     const value = { login, register, refresh_user, user, isLoggedIn, signout, saveShippingInfo, getShippingData, shippingInfo, setShippingInfo, history }

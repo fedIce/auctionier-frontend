@@ -28,13 +28,14 @@ export const LoaderBlockAnimation = ({ width = 50, height = 50 }) => {
 };
 
 
-export const LoaderSpinnerAnimation = ({ width = 50, height = 50 }) => {
+export const LoaderSpinnerAnimation = ({ width = 50, height = 50, className='' }) => {
     return (
         <Image
             src={loaderSpinPath}
             height={height}
             width={width}
             alt='loading image'
+            className={`max-w-fit ${className}`}
         />
     );
 }

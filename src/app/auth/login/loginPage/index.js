@@ -9,7 +9,14 @@ const LoginPage = () => {
     const auth = useAuth()
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('')
+    const [loading, setLoading] = useState(false)
 
+    const handleLogin = async () => {
+        setLoading(true)
+        await auth.login({ email, password }).finally(() => {
+            setLoading(false)
+        })
+    }
 
     return (
         <div className='w-full px-4 lg:px-0 lg:max-w-[25vw]'>
@@ -25,11 +32,11 @@ const LoginPage = () => {
                     <p className='text-xs underline text-bright py-2'>Forgot your password?</p>
                 </section>
                 <section>
-                    <AButton text="Login" btn_action={() => auth.login({ email, password })} />
+                    <AButton loading={loading} text="Login" btn_action={() => handleLogin()} />
                 </section>
             </section>
         </div>
     )
-}   
+}
 
 export default LoginPage

@@ -15,20 +15,20 @@ const BidModal = ({ open, setOpen, amount: a, action = () => null }) => {
 
     const auth = useAuth()
 
-    const GenerateIcons = () => {
-        let v = []
-        Object.keys(Icons).forEach((key) => {
-            v.push({
-                label: key.replace('Icon', '').replace(/([a-z])([A-Z])/g, '$1 $2').toLowerCase(),
-                value: key
-            })
-        })
-        return v
-    }
+    // const GenerateIcons = () => {
+    //     let v = []
+    //     Object.keys(Icons).forEach((key) => {
+    //         v.push({
+    //             label: key.replace('Icon', '').replace(/([a-z])([A-Z])/g, '$1 $2').toLowerCase(),
+    //             value: key
+    //         })
+    //     })
+    //     return v
+    // }
 
-    useEffect(() => {
-        console.log(GenerateIcons())
-    }, [])
+    // useEffect(() => {
+        // console.log(GenerateIcons())
+    // }, [])
 
     useEffect(() => {
         let timeout = null

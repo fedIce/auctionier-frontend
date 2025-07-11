@@ -21,6 +21,7 @@ export const use_post = async ({ url, data = null, include_credentials = true, o
             body['body'] = JSON.stringify(data)
         }
 
+        console.log('Headers: ', body.headers)
 
         const result = await fetch(url, body)
 
@@ -28,10 +29,10 @@ export const use_post = async ({ url, data = null, include_credentials = true, o
             const json = await result.json()
             resolve(json)
         } else {
-            console.error(result.status, result.statusText)
             reject({
                 error: result.status,
-                message: result.statusText
+                message: result.statusText,
+                json: await result.json()
             })
         }
 
@@ -55,6 +56,7 @@ export const use_get = async ({ url, include_credentials = true, options = {}, t
     }
 
 
+    console.log({ headers: body.headers, token, url })
 
     return await new Promise(async (resolve, reject) => {
         const result = await fetch(url, body)
