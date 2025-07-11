@@ -1,4 +1,6 @@
-export const use_post = async ({ url, data = null, include_credentials = true, options = {} }) => {
+
+
+export const use_post = async ({ url, data = null, include_credentials = true, options = {}, token = null }) => {
 
     return await new Promise(async (resolve, reject) => {
 
@@ -12,6 +14,7 @@ export const use_post = async ({ url, data = null, include_credentials = true, o
 
         if (include_credentials) {
             body['credentials'] = 'include'
+            if (token) body.headers['Authorization'] = `Bearer ${token}`;
         }
 
         if (data) {
@@ -36,7 +39,7 @@ export const use_post = async ({ url, data = null, include_credentials = true, o
     })
 }
 
-export const use_get = async ({ url, include_credentials = true, options = {} }) => {
+export const use_get = async ({ url, include_credentials = true, options = {}, token = null }) => {
 
     const body = {
         method: 'GET',
@@ -48,13 +51,14 @@ export const use_get = async ({ url, include_credentials = true, options = {} })
 
     if (include_credentials) {
         body['credentials'] = 'include'
+        if (token) body.headers['Authorization'] = `Bearer ${token}`;
     }
 
 
 
     return await new Promise(async (resolve, reject) => {
         const result = await fetch(url, body)
-        
+
         if (result.ok) {
             const json = await result.json()
             resolve(json)

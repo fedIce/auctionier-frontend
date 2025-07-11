@@ -86,7 +86,7 @@ const AuthContext = ({ children }) => {
     }
 
     const signout = async () => {
-        signout_user().then(() => {
+        signout_user({ token: user.token }).then(() => {
             localStorage.removeItem(APP_STATES.AUTH_STATE)
             setUser(null)
         }).catch(e => console.error(e))

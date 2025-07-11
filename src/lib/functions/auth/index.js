@@ -13,9 +13,9 @@ export const login_user = async ({ email, password }) => {
     return user
 }
 
-export const signout_user = async () => {
+export const signout_user = async ({ token = null }) => {
     try {
-        return await use_post({ url: `${process.env.NEXT_PUBLIC_SERVER_URL}/api/users/logout` })
+        return await use_post({ url: `${process.env.NEXT_PUBLIC_SERVER_URL}/api/users/logout`, token })
     } catch (e) {
         throw new Error("SIGNOUT ERROR", e)
     }
