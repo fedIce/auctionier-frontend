@@ -62,7 +62,7 @@ const BidModal = ({ open, setOpen, amount: a, action = () => null }) => {
             .finally(() => setLoading(false))
     }
 
-    const allFees = getAuctionFees(amount)
+    // const allFees = getAuctionFees(amount)
 
     const _auction_fees = auction_fees(amount).toFixed(2)
     const total = calculate_total(amount)
