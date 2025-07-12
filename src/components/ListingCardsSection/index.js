@@ -17,29 +17,29 @@ const ListingCardsSection = ({ data, title="Section Title" }) => {
         return null
     }
 
-    const {
-        hasNextPage,
-        hasPrevPage,
-        limit,
-        nextPage,
-        page,
-        pagingCounter,
-        prevPage,
-        totalDocs,
-        totalPages,
-    } = data
+    // const {
+    //     hasNextPage,
+    //     hasPrevPage,
+    //     limit,
+    //     nextPage,
+    //     page,
+    //     pagingCounter,
+    //     prevPage,
+    //     totalDocs,
+    //     totalPages,
+    // } = data
 
-    const pagination = {
-        hasNextPage,
-        hasPrevPage,
-        limit,
-        nextPage,
-        page,
-        pagingCounter,
-        prevPage,
-        totalDocs,
-        totalPages,
-    }
+    // const pagination = {
+    //     hasNextPage,
+    //     hasPrevPage,
+    //     limit,
+    //     nextPage,
+    //     page,
+    //     pagingCounter,
+    //     prevPage,
+    //     totalDocs,
+    //     totalPages,
+    // }
 
     const scroll = (direction) => {
         const bgDropElement = document.getElementById("list_cards_sroll");
