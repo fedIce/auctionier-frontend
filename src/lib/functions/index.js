@@ -21,10 +21,11 @@ export const use_post = async ({ url, data = null, include_credentials = true, o
             body['body'] = JSON.stringify(data)
         }
 
-        console.log('Headers: ', body.headers)
-
+        
         const result = await fetch(url, body)
-
+        
+        console.log('Headers: ', body.headers, result)
+        
         if (result.ok) {
             const json = await result.json()
             resolve(json)

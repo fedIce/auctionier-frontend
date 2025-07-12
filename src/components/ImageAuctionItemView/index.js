@@ -62,7 +62,7 @@ const ImageAuctionItemview = ({ images }) => {
                         images?.map((image, i) => {
                             return (
                                 <div onClick={() => openDialog(i)} key={i} className='bg-secondary-400 cursor-pointer h-full overflow-hidden min-w-[600px] rounded' >
-                                    <Image className='w-full h-full object-cover' src={`${process.env.NEXT_PUBLIC_SERVER_URL}${image.sizes.medium.url}`} width={image.sizes.medium.width} height={image.sizes.medium.height} alt={image.alt} />
+                                    <Image className='w-full h-full object-cover' src={`${process.env.NEXT_PUBLIC_SERVER_URL}${image.sizes.medium.url || ''}`} width={image.sizes.medium.width || 500} height={image.sizes.medium.height || 500} alt={image.alt || 'auction image'} />
                                 </div>
                             )
                         })
@@ -86,8 +86,8 @@ const ImageAuctionItemview = ({ images }) => {
                         {
                             images.map((image, i) => {
                                 return (
-                                    <div key={i} className={`max-w-1/6 w-full aspect-square border ${i == Math.floor(scrollAmount / 600) ? 'border-white' : 'border-transparent'} overflow-hidden bg-secondary-400 rounded-xl`}>
-                                        <Image className={`w-full h-full object-cover transition-all duration-300 ${i == Math.floor(scrollAmount / 600) ? '' : 'blur-lg'} `} src={`${process.env.NEXT_PUBLIC_SERVER_URL}${image.sizes.thumbnail.url}`} width={image.sizes.thumbnail.width} height={image.sizes.thumbnail.height} alt={image.alt} />
+                                    <div key={i} className={`min-w-1/6 max-w-1/6 w-full aspect-square border ${i == Math.floor(scrollAmount / 600) ? 'border-white' : 'border-transparent'} overflow-hidden bg-secondary-400 rounded-xl`}>
+                                        <Image className={`w-full h-full object-cover transition-all duration-300 ${i == Math.floor(scrollAmount / 600) ? '' : 'blur-lg'} `} src={`${process.env.NEXT_PUBLIC_SERVER_URL}${image.sizes.thumbnail.url || ''}`} width={image.sizes.thumbnail.width || 200} height={image.sizes.thumbnail.height || 200} alt={image.alt || 'auction thumbnail'} />
                                     </div>
                                 )
                             })
@@ -101,7 +101,7 @@ const ImageAuctionItemview = ({ images }) => {
                         <div className='w-1/4 aspect-square bg-secondary-400 rounded-xl'></div>
                     </div>
             }
-            <ImageViewer images={images} open={isOpen} onClose={closeDialog}  />
+            <ImageViewer images={images} open={isOpen} onClose={closeDialog} />
         </div>
     )
 }

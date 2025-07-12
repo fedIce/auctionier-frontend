@@ -1,7 +1,8 @@
 'use client'
 import { use_get, use_post } from '@/lib/functions'
 import React, { useContext, createContext } from 'react'
-import { useAuth } from '../auth'
+import { parseError, useAuth } from '../auth'
+import { useAlert } from '../Alert'
 
 const init = {
     bidAmount: '',
@@ -17,6 +18,7 @@ const BiddingProvider = createContext(init)
 const BiddingContext = ({ children }) => {
 
     const auth = useAuth()
+    const alert = useAlert()
     const user = auth.user?.user ?? {}
 
 
@@ -31,6 +33,18 @@ const BiddingContext = ({ children }) => {
     }
 
     const placeBid = async (data) => {
+        const decimalRegex = /^\d+(\.\d+)?$/;
+
+        if (!decimalRegex.test(data.amount)) {
+            alert.setalert('error', `Invalid bid amount, try again`)
+            return null
+        }
+
+        if (!data.id || !data.auction_type) {
+            alert.setalert('error', 'Something went wrong, refresh the page and try again')
+            return null
+        }
+
         return await use_post({
             url: `${process.env.NEXT_PUBLIC_SERVER_URL}/api/bids/place_bid?depth=2`, data: {
                 customer_id: user.id,
@@ -39,7 +53,16 @@ const BiddingContext = ({ children }) => {
                 auction_type: data.auction_type
             },
             token: auth?.user?.token ?? null
-        }).catch(e => console.log(e))
+        }).catch(async (e) => {
+            console.log(e, '::')
+            if (e) {
+                const error = await parseError(e)
+                alert.setalert('error', error)
+                return null
+            }
+
+        })
+
     }
 
     const value = { getAuctionBidData, placeBid, getAuctionBidItemData }

@@ -3,7 +3,7 @@ import BuyersProtection from '../buyers-protection'
 import ShippinTo from '../shipping'
 import PayOptions from '../pay-options'
 import { use_get } from '../../../../lib/functions'
-import { calculate_total } from '../../../../lib/functions/util'
+import { calculate_total, numberWithCommas } from '../../../../lib/functions/util'
 import Image from 'next/image'
 
 async function fetchAuction(slug) {
@@ -56,7 +56,7 @@ const PaymentRequest = async ({ params }) => {
                         <h4 className='font-medium text-lg lg:text-2xl'>{auction.title}</h4>
                         <h6 className='flex flex-col text-xs spa uppercase py-2'>
                             <p className={` font-light text-xl text-third`}> CLOSING PRICE </p>
-                            <p className='text-xl font-semibold'>€ {bid.current_bid}</p>
+                            <p className='text-xl font-semibold'>€ {numberWithCommas(bid.current_bid)}</p>
                         </h6>
                     </div>
                 </section>

@@ -66,12 +66,12 @@ const AShippinForm = ({ hide, auth }) => {
         auth.setShippingInfo(req)
 
         setLoading(true)
-        auth.saveShippingInfo(req).finally(() => {
+        auth.saveShippingInfo(req).then((e) => {
+            if (e == null) return
             setTimeout(() => {
-                setLoading(false)
                 hide(false)
             }, 1000)
-        })
+        }).finally(() => setLoading(false))
     }
 
 

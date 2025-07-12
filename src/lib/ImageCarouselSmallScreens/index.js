@@ -66,7 +66,7 @@ const ImageCarouselSmallScreens = ({ images }) => {
                     images?.map((image, i) => {
                         return (
                             <div onClick={() => openDialog(i)} key={i} style={{ minWidth: 600, maxHeight: 400 }} className='bg-third w-full h-full' >
-                                <Image className='w-[600px] h-[400px] object-cover' src={`${process.env.NEXT_PUBLIC_SERVER_URL}/${image.url}`} width={image.width} height={image.height} alt={image.alt} />
+                                <Image className='w-[600px] h-[400px] object-cover' src={`${process.env.NEXT_PUBLIC_SERVER_URL}/${image.url || ''}`} width={image.width || 600} height={image.height || 600} alt={image.alt || 'auction image'} />
                             </div>
                         )
                     })

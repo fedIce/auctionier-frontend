@@ -58,7 +58,11 @@ const ActionArea = ({ data }) => {
     const isclosedForBidding = data.endDate ? closedForBidding({ ...bidStatus, endDate: data.endDate }) : false
 
 
-    const place_bid = async () => bidding.placeBid({ ...data, amount: bidAmount }).then(res => setBids(res.new_bids))
+    const place_bid = async () => bidding.placeBid({ ...data, amount: bidAmount })
+        .then(res => {
+            setBids(res.new_bids)
+            return res
+        })
         .catch(() => {
             setBidAmountError("Something went wrong, try again")
         })
@@ -211,7 +215,7 @@ export default ActionArea
 
 
 const MobileBidModal = ({ image, aution, bids, bidAmountError, bidAmount, setBidAmount, nextBid, seeAllBids, allBids, open, handlePlaceBid = () => null, setOpen = () => null }) => {
-    if(!open) return null
+    if (!open) return null
     return (
         <div className='lg:hidden fixed left-0 bottom-0 w-screen h-screen flex items-center justify-center px-2 py-4 bg-background/90 border-t border-third'>
             <div className='px-2 w-screen min-h-[30vh] flex flex-col bg-background border border-third/10'>

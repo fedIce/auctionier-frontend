@@ -3,6 +3,7 @@ import React from 'react'
 import { use_get } from '../../../../lib/functions'
 import { generateQueryParams } from '../../../search/page'
 import AuctionsPage from './AuctionsPage'
+import NoItemsFound from '../../../../components/NoItemsFound'
 
 
 
@@ -20,6 +21,11 @@ const Auctions = async ({ params, searchParams }) => {
 
     const auctions_items = await fetchAuctionItems(id + generateQueryParams('', query))
     const docs = auctions_items?.docs || []
+
+    if(docs.length <= 0){
+        return (<NoItemsFound/>)
+    }
+
     const auction = docs[0].auction || {}
 
     const aggs = auctions_items?.aggs || []

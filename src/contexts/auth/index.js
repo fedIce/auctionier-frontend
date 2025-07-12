@@ -7,12 +7,36 @@ import { use_get, use_post } from '@/lib/functions'
 import { useAlert } from '../Alert'
 
 
+export const parseError = async (e) => {
+    let error = null
+
+    if (e?.json?.error && typeof e?.json?.error == 'string') {
+        return e.json.error
+    }
+    if (e?.json?.message && typeof e?.json?.message == 'string') {
+        return e.json.message
+    }
+    if (Array.isArray(e?.json?.errors)) {
+        error = e?.json?.errors[0] ?? { message: 'Something went wrong, please try again later.' }
+    } else if (typeof e?.json?.error == 'object') {
+        if (e?.json?.error) {
+            error = e?.json?.error?.message ? { message: e?.json?.error.message } : { message: e?.json?.error }
+        }
+    } else if (typeof e?.json?.error == 'string') {
+        error = { message: e?.json?.error }
+    }
+    error = error.data ? error.data.errors[0].message : error.message
+    if (!error) error = e.message
+
+    return String(error)
+}
+
 const init = {
     isLoggedIn: false,
     user: null,
     history: [],
     login: async () => null,
-    register: () => null,
+    register: async () => null,
     signout: () => null,
     refresh_user: () => null,
     saveShippingInfo: async () => null,
@@ -81,10 +105,9 @@ const AuthContext = ({ children }) => {
 
 
     const login = async ({ email, password }) => {
-        const user = await login_user({ email, password }).catch(e => {
-            let error = e?.json?.errors[0] ?? { message: 'Something went wrong, please try again later.' }
-            error = error.data ? error.data.errors[0].message : error.message
-            alert.setalert('error', String(error))
+        const user = await login_user({ email, password }).catch(async e => {
+            const error = await parseError(e)
+            alert.setalert('error', error)
             return null
         })
         if (!user.error) {
@@ -95,7 +118,7 @@ const AuthContext = ({ children }) => {
     }
 
     const signout = async () => {
-        signout_user({ token: user?.token }).then(() => {
+        signout_user({ token: user?.token }).finally(() => {
             localStorage.removeItem(APP_STATES.AUTH_STATE)
             setUser(null)
         }).catch(e => console.error(e))
@@ -107,20 +130,30 @@ const AuthContext = ({ children }) => {
             localStorage.setItem(APP_STATES.AUTH_STATE, JSON.stringify(user))
             setUser(user)
             return user
-        }).catch((e) => {
-            let error = e?.json?.errors[0] ?? { message: 'Something went wrong, please try again later.' }
-            error = error.data ? error.data.errors[0].message : error.message
-            alert.setalert('error', String(error))
+        }).catch(async (e) => {
+            const error = await parseError(e)
+            alert.setalert('error', error)
             return null
         })
     }
 
     const getShippingData = async (user, token = user?.token) => {
-        return await use_get({ url: `${process.env.NEXT_PUBLIC_SERVER_URL}/api/customer-shipping-details?where[user][equals]=${user}`, token })
+        return await use_get({ url: `${process.env.NEXT_PUBLIC_SERVER_URL}/api/customer-shipping-details?where[user][equals]=${user}`, token }).catch(async e => {
+            const error = await parseError(e)
+            alert.setalert('error', error)
+        })
     }
 
     const saveShippingInfo = async (data, token = user?.token) => {
         return await use_post({ url: `${process.env.NEXT_PUBLIC_SERVER_URL}/api/customer-shipping-details/shipping`, data: data, token })
+            .then((e) => {
+                alert.setalert('success', 'Shipping Address Saved!')
+                return e
+            }).catch(async e => {
+                const error = await parseError(e)
+                alert.setalert('error', error)
+                return null
+            })
     }
 
 

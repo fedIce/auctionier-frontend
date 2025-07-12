@@ -35,6 +35,24 @@ export const NO_SCROLL = "[&::-webkit-scrollbar]:hidden [-ms-overflow-style:'non
 
 const BASE62 = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
+function calculatePremium(value) {
+    const A = parseFloat(value)
+    if (A <= 0) return 0;
+
+    // Constants tuned to match your percentages at different A values
+    const k = 0.4; // scale factor
+    const c = 0.05; // shifts the log curve
+
+    // Compute percentage that decreases with A
+    let percentage = k / (Math.log10(A + 10) + c);
+
+    // Minimum percentage floor to avoid going below 0.01%
+    percentage = Math.max(percentage, 0.0001);
+
+    return A * percentage;
+}
+
+
 export function base62Encode(buffer) {
     let num = BigInt('0x' + buffer.toString('hex'));
     let result = '';
@@ -69,7 +87,7 @@ export const closedForBidding = (data) => {
 
 export const calculate_vat = (amount) => {
     const VAT = process.env.NEXT_PUBLIC_VAT
-    const buyers_premium = amount * process.env.NEXT_PUBLIC_BUYER_PREMIUM
+    const buyers_premium = calculatePremium(amount)
     const internet_fee = amount * process.env.NEXT_PUBLIC_INTERNET_FEE
     const lotting_fee = process.env.NEXT_PUBLIC_LOTTING_FEE
     const totalPlusVAT = (buyers_premium * VAT) + (internet_fee * VAT) + (lotting_fee * VAT) + (amount * VAT)
@@ -78,7 +96,7 @@ export const calculate_vat = (amount) => {
 
 export const calculate_total = (amount) => {
     const auction_fees = amount
-    const buyers_premium = amount * process.env.NEXT_PUBLIC_BUYER_PREMIUM
+    const buyers_premium = calculatePremium(amount)
     const internet_fee = amount * process.env.NEXT_PUBLIC_INTERNET_FEE
     const lotting_fee = process.env.NEXT_PUBLIC_LOTTING_FEE * 1
 
@@ -87,9 +105,23 @@ export const calculate_total = (amount) => {
 }
 
 export const auction_fees = (amount) => {
-    const buyers_premium = amount * process.env.NEXT_PUBLIC_BUYER_PREMIUM
+    const buyers_premium = calculatePremium(amount)
     const internet_fee = amount * process.env.NEXT_PUBLIC_INTERNET_FEE
     const lotting_fee = process.env.NEXT_PUBLIC_LOTTING_FEE * 1
 
     return buyers_premium + internet_fee + lotting_fee
 }
+
+export const getAuctionFees = (amount) => {
+    return {
+        bid_amount: parseFloat(amount).toFixed(2),
+        bid_amount_VAT: parseFloat(amount * process.env.NEXT_PUBLIC_VAT).toFixed(2),
+        buyer_premium: parseFloat(calculatePremium(amount)).toFixed(2),
+        buyer_premium_VAT: parseFloat(calculatePremium(amount) * process.env.NEXT_PUBLIC_VAT).toFixed(2),
+        internet_fee: parseFloat((amount * process.env.NEXT_PUBLIC_INTERNET_FEE)).toFixed(2),
+        internet_fee_VAT: parseFloat((amount * process.env.NEXT_PUBLIC_INTERNET_FEE) * process.env.NEXT_PUBLIC_VAT).toFixed(2),
+        lotting_fee: parseFloat((process.env.NEXT_PUBLIC_LOTTING_FEE)).toFixed(2),
+        lotting_fee_VAT: parseFloat((process.env.NEXT_PUBLIC_LOTTING_FEE) * process.env.NEXT_PUBLIC_VAT).toFixed(2),
+    }
+}
+

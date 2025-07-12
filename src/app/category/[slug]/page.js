@@ -1,4 +1,5 @@
 
+import NoItemsFound from '../../../components/NoItemsFound'
 import { use_get } from '../../../lib/functions'
 import { generateQueryParams } from '../../search/page'
 import CategoryPage from './CategoryPage'
@@ -29,6 +30,13 @@ const CategoryItemPage = async ({ params, searchParams }) => {
     const sub_catgeories = await fetchSubCategories(id)
 
     const docs = category_auctions?.docs || []
+
+
+    if (docs.length <= 0) {
+        return (<NoItemsFound/>)
+    }
+
+
     const sub_catgeories_docs = sub_catgeories?.docs || []
     const aggs = category_auctions?.aggs || []
 

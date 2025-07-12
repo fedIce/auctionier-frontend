@@ -53,7 +53,7 @@ const AlertContext = ({ children }) => {
         <AlertProvider.Provider value={value}>
             <div className='w-screen h-screen inset-0 relative'>
                 {children}
-                {_alert && <div className='bg-transparent flex items-center justify-end pr-[5%] fixed w-96 h-44 right-0 bottom-0'>
+                {_alert && <div className='bg-transparent flex items-center justify-end pr-[5%] fixed z-[9999] w-96 h-44 right-0 bottom-0'>
                     {renderAlert()}
                 </div>}
             </div>

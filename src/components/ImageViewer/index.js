@@ -4,6 +4,7 @@ import { XMarkIcon } from '@heroicons/react/24/outline';
 import Image from 'next/image';
 import { useSearchParams } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
+import { NO_SCROLL } from '../../lib/functions/util';
 
 export default function ImageViewer({ images, open, onClose }) {
 
@@ -104,7 +105,7 @@ export default function ImageViewer({ images, open, onClose }) {
                             <div className="pointer-events-none absolute top-0 right-0 h-full w-6 bg-gradient-to-l from-black/40 to-transparent z-10" />
 
                             {/* Scrollable dots */}
-                            <div className="flex overflow-x-auto scrollbar-hide space-x-2 justify-start items-center">
+                            <div className={`flex overflow-x-auto scrollbar-hide space-x-2 justify-start items-center ${NO_SCROLL}`}>
                                 {images.map((_, index) => (
                                     <button
                                         key={index}

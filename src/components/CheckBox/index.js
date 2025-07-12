@@ -22,7 +22,7 @@ const CheckBox = ({ title = "Check me", legend, onSelect }) => {
 
     return (
         <div className='flex items-center space-x-2'>
-            <input checked={isChecked ? true : false} disabled={loading} onChange={() => onSelect(legend.trim(), q)} type="checkbox" className='w-4 h-4 accent-bright rounded-sm hover:bg-background/40' />
+            <input checked={isChecked ? true : false} disabled={loading} onChange={() => onSelect(legend.trim(), q)} type="checkbox" className='w-4 h-4 text-third bg-gray-100 border-background outline-none active:outline-none rounded-sm dark:bg-gray-700 dark:border-gray-600' />
             {loading ?
                 <span className='w-24 h-2 bg-background-900 animate-pulse'></span>
                 :

@@ -39,12 +39,12 @@ const Policy_links = [
         slug: 'terms'
     },
     {
-        title: 'Privacy Ploicy',
+        title: 'Privacy Policy',
         link: '#',
         slug: 'privacy_policy'
     },
     {
-        title: 'Cookie Ploicy',
+        title: 'Cookie Policy',
         link: '#',
         slug: 'cookie_policy'
     }

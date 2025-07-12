@@ -2,7 +2,7 @@
 import * as Icons from '@heroicons/react/24/outline'
 import React, { useEffect, useState } from 'react'
 import { CheckerAnimation, LoaderBlockAnimation } from '../../../components/util/checker'
-import { calculate_total, calculate_vat, numberWithCommas } from '../../../lib/functions/util'
+import { auction_fees, calculate_total, calculate_vat, getAuctionFees, numberWithCommas } from '../../../lib/functions/util'
 import { useAuth } from '../../../contexts/auth'
 import LoginRequired from '../../../contexts/auth/loginRequired'
 
@@ -27,7 +27,7 @@ const BidModal = ({ open, setOpen, amount: a, action = () => null }) => {
     // }
 
     // useEffect(() => {
-        // console.log(GenerateIcons())
+    // console.log(GenerateIcons())
     // }, [])
 
     useEffect(() => {
@@ -49,18 +49,24 @@ const BidModal = ({ open, setOpen, amount: a, action = () => null }) => {
 
     const handleAction = async () => {
         setLoading(true)
-        action().then(() => {
-            setTimeout(() => {
-                setLoading(false)
-                setDone(true)
-            }, 1000)
-        })
+        action().then((e) => {
+            console.log(e)
+            if (e != null) {
+                setTimeout(() => {
+                    setDone(true)
+                }, 1000)
+                return null
+            }
+            setOpen(false)
+        }).catch(e => console.log('OOPES', e))
+            .finally(() => setLoading(false))
     }
 
-    const auction_fees = amount * process.env.NEXT_PUBLIC_BUYER_PREMIUM
+    const allFees = getAuctionFees(amount)
+
+    const _auction_fees = auction_fees(amount).toFixed(2)
     const total = calculate_total(amount)
     const VAT = calculate_vat(amount).toFixed(2)
-    console.log(typeof amount, typeof calculate_vat(amount))
 
     if (!open) return null
 
@@ -88,7 +94,7 @@ const BidModal = ({ open, setOpen, amount: a, action = () => null }) => {
                         </div>
                         <div className='flex items-center justify-between py-4'>
                             <p>Auction Fees</p>
-                            <p>€ {numberWithCommas(auction_fees.toFixed(2))}</p>
+                            <p>€ {numberWithCommas(_auction_fees)}</p>
                         </div>
                         <div className='flex items-center justify-between py-4'>
                             <div className='flex items-center space-x-4'><p>VAT</p> </div>
@@ -140,39 +146,30 @@ const DoneBidding = ({ action }) => {
 
 const VatBreakDown = ({ amount, close }) => {
 
-    const values = {
-        bid_amount: parseFloat(amount).toFixed(2),
-        bid_amount_VAT: parseFloat(amount * process.env.NEXT_PUBLIC_VAT).toFixed(2),
-        buyer_premium: parseFloat((amount * process.env.NEXT_PUBLIC_BUYER_PREMIUM)).toFixed(2),
-        buyer_premium_VAT: parseFloat((amount * process.env.NEXT_PUBLIC_BUYER_PREMIUM) * process.env.NEXT_PUBLIC_VAT).toFixed(2),
-        internet_fee: parseFloat((amount * process.env.NEXT_PUBLIC_INTERNET_FEE)).toFixed(2),
-        internet_fee_VAT: parseFloat((amount * process.env.NEXT_PUBLIC_INTERNET_FEE) * process.env.NEXT_PUBLIC_VAT).toFixed(2),
-        lotting_fee: parseFloat((process.env.NEXT_PUBLIC_LOTTING_FEE)).toFixed(2),
-        lotting_fee_VAT: parseFloat((process.env.NEXT_PUBLIC_LOTTING_FEE) * process.env.NEXT_PUBLIC_VAT).toFixed(2),
-    }
+    const values = getAuctionFees(amount)
     return (
         <div className='absolute bg-background h-full top-0 left-0 flex flex-col  w-full py-1 text-sm px-8 divide-y divide-dashed divide-bright/10  font-light'>
-            <div className='grid grid-cols-[1fr_60px_60px] py-4 items-center text-center'>
+            <div className='grid grid-cols-[1fr_120px_120px] py-4 items-center text-end'>
                 <p className='text-start'>Cost</p>
                 <h4>Value</h4>
                 <h4>VAT</h4>
             </div>
-            <div className='grid grid-cols-[1fr_60px_60px] py-4 items-center text-center'>
+            <div className='grid grid-cols-[1fr_120px_120px] py-4 items-center text-end'>
                 <p className='text-start'>Bid Amount</p>
                 <h4>€ {numberWithCommas(values.bid_amount)}</h4>
                 <h4>€ {numberWithCommas(values.bid_amount_VAT)}</h4>
             </div>
-            <div className='grid grid-cols-[1fr_60px_60px] py-4 items-center text-center'>
+            <div className='grid grid-cols-[1fr_120px_120px] py-4 items-center text-end'>
                 <p className='text-start'>Internet Fee</p>
                 <h4>€ {numberWithCommas(values.internet_fee)}</h4>
                 <h4>€ {numberWithCommas(values.internet_fee_VAT)}</h4>
             </div>
-            <div className='grid grid-cols-[1fr_60px_60px] py-4 items-center text-center'>
+            <div className='grid grid-cols-[1fr_120px_120px] py-4 items-center text-end'>
                 <p className='text-start'>Buyers Premium</p>
                 <h4>€ {numberWithCommas(values.buyer_premium)}</h4>
                 <h4>€ {numberWithCommas(values.buyer_premium_VAT)}</h4>
             </div>
-            <div className='grid grid-cols-[1fr_60px_60px] py-4 items-center text-center'>
+            <div className='grid grid-cols-[1fr_120px_120px] py-4 items-center text-end'>
                 <p className='text-start'>Lotting Fee</p>
                 <h4>€ {numberWithCommas(values.lotting_fee)}</h4>
                 <h4>€ {numberWithCommas(values.lotting_fee_VAT)}</h4>

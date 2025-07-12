@@ -2,6 +2,7 @@ import React from 'react'
 
 import { use_get } from '../../lib/functions'
 import SearchPageCOntent from './search'
+import NoItemsFound from '../../components/NoItemsFound'
 
 export const generateQueryParams = (base = '', query) => {
     let _query = ''
@@ -42,6 +43,11 @@ const SearchPage = async ({ searchParams }) => {
     })
 
     const docs = searchResults?.docs || []
+
+    if (docs.length <= 0) {
+        return (<NoItemsFound/>)
+    }
+
     const aggs = searchResults?.aggs[0] || {}
     console.log('Search Results:', searchResults)
     const {

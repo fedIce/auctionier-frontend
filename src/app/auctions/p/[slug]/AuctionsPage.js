@@ -15,7 +15,6 @@ import { onSelectFilter } from '../../../search/search'
 const AuctionsPage = ({ auction, docs, aggs, crumbs, pagination }) => {
     const [hideFilter, setHideFilter] = useState(false)
     const [hideMobileFilter, setHideMobileFilter] = useState(true)
-
     const router = useRouter()
     return (
         <div className='w-full py-8 px-2 relative'>
