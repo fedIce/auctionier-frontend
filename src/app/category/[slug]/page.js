@@ -9,7 +9,6 @@ async function fetchCategoryItems(id) {
         console.error('Error fetching search results:', e)
         return { docs: [], aggs: [] }
     })
-    console.log(res)
     return res
 }
 
@@ -20,10 +19,10 @@ async function fetchSubCategories(id) {
 
 
 const CategoryItemPage = async ({ params, searchParams }) => {
-    const id = await params?.slug
+    const p = await params
+    const id = await p?.slug
     const query = await searchParams
 
-    console.log('Search Params:', query)
 
 
     const category_auctions = await fetchCategoryItems(id + generateQueryParams('',query))

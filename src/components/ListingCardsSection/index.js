@@ -4,7 +4,7 @@ import ListingCards from './ListingCards'
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 
 
-const ListingCardsSection = ({ data, title="Section Title" }) => {
+const ListingCardsSection = ({ data, title = "Section Title" }) => {
 
 
 
@@ -71,7 +71,9 @@ const ListingCardsSection = ({ data, title="Section Title" }) => {
                     docs?.length > 0 ?
                         docs.map((doc, i) => {
                             return (
-                                <ListingCards data={doc} key={i} />
+                                <div className='min-w-64'>
+                                    <ListingCards data={doc} key={i} />
+                                </div>
                             )
                         })
                         :

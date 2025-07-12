@@ -71,8 +71,8 @@ const ListingCards = ({ data = null, user = null }) => {
 
     return data ? (
         <div className='flex flex-col w-full space-y-2'>
-            <Link href={`/auctions/${data.slug}`} className=" min-w-64 h-fit cursor-pointer max-h-80 bg-third-300 overflow-hidden rounded-lg " >
-                <Image src={`${process.env.NEXT_PUBLIC_SERVER_URL}${data.thumbnail?.url ? data.thumbnail.url : data.image[0].sizes.medium.url || ''}`} alt={data.thumbnail?.url ? data.thumbnail.alt : data.image[0].alt || 'auction image'} className='h-full w-full transition-transform duration-300 hover:scale-125 object-cover' height={data.thumbnail?.url ? data.thumbnail.height : data.image[0].sizes.medium.height || 600} width={data.thumbnail?.url ? data.thumbnail.width : data.image[0].sizes.medium.width || 600}   />
+            <Link href={`/auctions/${data.slug}`} className=" w-full lg:min-w-64 min-h-60 cursor-pointer lg:max-h-80 bg-third-300 overflow-hidden rounded-lg " >
+                <Image src={`${process.env.NEXT_PUBLIC_SERVER_URL}${data.thumbnail?.url ? data.thumbnail.url : data.image[0].sizes.medium.url || ''}`} alt={data.thumbnail?.url ? data.thumbnail.alt : data.image[0].alt || 'auction image'} className='min-h-60 transition-transform duration-300 hover:scale-125 object-cover' height={data.thumbnail?.url ? data.thumbnail.height : data.image[0].sizes.medium.height || 600} width={data.thumbnail?.url ? data.thumbnail.width : data.image[0].sizes.medium.width || 600}   />
             </Link >
             <div>
                 <Link href={`/auctions/${data.slug}`} className='text-xl font-medium'>{data.title}</Link>
