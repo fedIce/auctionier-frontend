@@ -6,7 +6,7 @@ import Pagination from '../../../lib/Pagination'
 import ListingCardsSection from '../../../components/ListingCardsSection'
 import BreadCrumbs from '../../../components/BreadCrumbs'
 import CategoryIcons from '../../../components/Home/CategoryIcons'
-import { AdjustmentsHorizontalIcon, BookOpenIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import { AdjustmentsHorizontalIcon,  XMarkIcon } from "@heroicons/react/24/outline";
 import * as Icons from "@heroicons/react/24/outline";
 import Link from 'next/link'
 import { onSelectFilter } from '../../search/search'
