@@ -68,7 +68,7 @@ const ImageAuctionItemview = ({ images }) => {
                         })
                     }
                 </div>
-                <div className='p-2 bg-black/70 absolute top-5 right-5 text-sm'>{Math.floor(scrollAmount / 600) + 1}/{images.length}</div>
+                <div className='p-2 bg-foreground/70 text-background absolute top-5 right-5 text-sm'>{Math.floor(scrollAmount / 600) + 1}/{images.length}</div>
                 <div className='flex absolute top-[50%] px-2 w-full left-0 items-center justify-between space-x-2'>
                     {scrollAmount > 1 ? <div onClick={() => scroll(scrollAmount - 500)} className='rounded-full p-2 cursor-pointer'>
                         <ChevronLeftIcon className='w-5 h-5 text-primary-300' />

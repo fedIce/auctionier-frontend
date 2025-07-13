@@ -23,7 +23,7 @@ export const DetailsSection = ({ data }) => {
 
             <section  onClick={() => setShowDescAll(!showAllDesc)} className={`space-y-4  py-8 relative w-full transition-[max-height] ${showAllDesc ? 'max-h-max' : 'lg:max-h-[200px] max-h-max'} duration-500 ease-in-out overflow-hidden`}>
                 <p>{data.description}</p>
-                <div className={`w-full lg:flex hidden text-white font-sm h-32 bg-gradient-to-t ${showAllDesc ? 'from-transparent' : 'from-background'} p-2 to-transparent absolute bottom-0 left-0 underline flex justify-start items-end`} >
+                <div className={`w-full lg:flex hidden text-foreground font-sm h-32 bg-gradient-to-t ${showAllDesc ? 'from-transparent' : 'from-background'} p-2 to-transparent absolute bottom-0 left-0 underline flex justify-start items-end`} >
                     {showAllDesc ? "Hide" : " show all"}
                 </div>
             </section>
@@ -79,7 +79,7 @@ export const DetailsSection = ({ data }) => {
                         Ends: {moment(data.endDate).format('llll')}</p>
                 </section>
             </section>
-            <div onClick={() => setShowAll(!showAll)} className={`w-full flex lg:hidden text-white font-sm h-32 bg-gradient-to-t ${showAll ? 'from-transparent' : 'from-background'} p-2 to-transparent absolute bottom-0 left-0 underline flex justify-start items-end`} >
+            <div onClick={() => setShowAll(!showAll)} className={`w-full flex lg:hidden text-foreground font-sm h-32 bg-gradient-to-t ${showAll ? 'from-transparent' : 'from-background'} p-2 to-transparent absolute bottom-0 left-0 underline flex justify-start items-end`} >
                 {showAll ? "Hide" : " show all"}
             </div>
         </section>

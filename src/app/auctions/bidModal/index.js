@@ -76,11 +76,11 @@ const BidModal = ({ open, setOpen, amount: a, action = () => null }) => {
     const XIcon = Icons["XMarkIcon"]
 
     return (
-        <div className='fixed z-50 left-0 top-0 w-screen h-screen bg-background/70 flex px-2 items-start pt-[25vh] justify-center'>
+        <div className='fixed z-50 left-0 top-0 w-screen h-screen bg-background/70 text-foreground flex px-2 items-start pt-[25vh] justify-center'>
             {done ?
                 <DoneBidding action={setOpen} />
-                : <div className='max-w-xl relative bg-background w-full  border border-third/10'>
-                    <div className='flex items-center justify-between p-4 border-b border-bright/10 '>
+                : <div className='max-w-xl relative bg-background w-full  border border-foreground/10'>
+                    <div className='flex items-center justify-between p-4 border-b border-foreground/10 '>
                         <div>
                             <h4>Place your Bid</h4>
                             <p className='text-[10px] text-bright-300'>Please make sure you check all the details below prior to confirming your bid.</p>
@@ -113,12 +113,12 @@ const BidModal = ({ open, setOpen, amount: a, action = () => null }) => {
                         All bids are binding; if your bid is highest you agree to pay for this object. By bidding, you agree to our Terms of Use.
                     </div>
                     <div onClick={() => handleAction()} className='flex items-center mt-4 justify-between'>
-                        <div className='flex-1 bg-bright text-background text-center py-4 cursor-pointer'>Place Bid</div>
+                        <div className='flex-1 bg-foreground text-background text-center py-4 cursor-pointer'>Place Bid</div>
                         {/* <div className='flex-1  text-bright-300 py-4 bg-background-900 text-center cursor-pointer'>Cancel</div> */}
                     </div>
                     {
                         loading &&
-                        <div className=' absolute z-50 top-0 left-0 w-full h-full bg-background/70 flex items-center justify-center'>
+                        <div className=' absolute z-50 top-0 left-0 w-full h-full bg-transparent flex items-center justify-center'>
                             <LoaderBlockAnimation width={50} height={50} />
                         </div>
                     }
@@ -132,12 +132,12 @@ export default BidModal
 
 const DoneBidding = ({ action }) => {
     return (
-        <div className='w-full h-auto flex flex-col items-center max-w-xl bg-background  border border-third/10'>
+        <div className='w-full h-auto flex flex-col items-center max-w-xl bg-background  border border-foreground/10'>
             <div className='py-4 text-2xl font-medium'>Bid Submitted</div>
             <div className='py-4 text-sm font-light'>Well done!, we&apos;ll keep you posted, goodluck!</div>
             <CheckerAnimation width={150} height={150} />
             <div onClick={() => action(false)} className='flex w-full items-center mt-4 justify-between'>
-                <div className='flex-1 bg-bright text-background text-center py-4 cursor-pointer'>OK</div>
+                <div className='flex-1 bg-foreground text-background text-center py-4 cursor-pointer'>OK</div>
             </div>
         </div>
     )

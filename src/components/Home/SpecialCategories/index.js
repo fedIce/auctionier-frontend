@@ -19,7 +19,7 @@ const Specialcategories = async () => {
     return (
 
         <div className="mt-12 lg:mt-18 space-y-4 w-full px-2 lg:px-0">
-            <div className="font-bold text-2xl">Auctions</div>
+            <div className="font-bold text-2xl text-foreground">Auctions</div>
             <div className=" flex space-x-2 overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:'none'] [scrollbar-width:'none'] lg:overflow-y-hidden items-center lg:grid lg:grid-cols-4 lg:gap-4">
                 {
                     auctions?.length > 0 ?

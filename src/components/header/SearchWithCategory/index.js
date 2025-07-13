@@ -63,10 +63,10 @@ export const SearchBar = ({ router, closeModal = null, focus = false }) => {
     }
 
     return (
-        <div className='w-full h-full bg-background flex items-center gap-2 rounded-full px-4 py-2'>
+        <div className='w-full h-full bg-background text-foreground flex items-center gap-2 rounded-full px-4 py-2'>
             <MagnifyingGlassIcon className='w-5 h-5' />
             <input
-                className='w-full ring-0 outline-0'
+                className='w-full ring-0 outline-0 placeholder:text-foreground-700 text-foreground'
                 placeholder='Search...'
                 value={search}
                 autoFocus={focus}
@@ -80,18 +80,20 @@ export const SearchBar = ({ router, closeModal = null, focus = false }) => {
 export const SearchModal = ({ setOpen, open, router }) => {
     if (!open) return null
     return (
-        <div className='w-screen h-screen fixed bg-background left-0 top-0 z-50'>
-            <div className='flex items-center justify-between p-4 border-b border-bright/10 '>
-                <div>
-                    <h4>Search</h4>
-                    <div className='text-[10px] flex items-center space-x-1 text-bright-300'>
-                        <span>Enter search words eg. laptop, phone, camera etc.</span>
+        <div className='w-screen h-screen fixed flex items-start justify-center bg-background left-0 top-0 z-50'>
+            <div className='flex  max-w-3xl w-full items-center flex-col'>
+                <div className='flex w-full text-foreground items-center justify-between p-4 border-b border-foreground/10 '>
+                    <div>
+                        <h4>Search</h4>
+                        <div className='text-[10px] flex items-center space-x-1 text-bright-300'>
+                            <span>Enter search words eg. laptop, phone, camera etc.</span>
+                        </div>
                     </div>
+                    <span onClick={() => setOpen(!open)} className='cursor-pointer'><XMarkIcon className='w-7 h-7 text-secondary' /></span>
                 </div>
-                <span onClick={() => setOpen(!open)} className='cursor-pointer'><XMarkIcon className='w-7 h-7 text-secondary' /></span>
-            </div>
-            <div className='w-full'>
-                <SearchBar router={router} closeModal={setOpen} focus={true} />
+                <div className='w-full'>
+                    <SearchBar router={router} closeModal={setOpen} focus={true} />
+                </div>
             </div>
         </div>
     )
@@ -113,29 +115,31 @@ const CategoryModal = ({ setOpen, open }) => {
 
     if (!open || !categories) return null
     return (
-        <div className='w-screen h-screen fixed bg-background left-0 top-0 z-50'>
-            <div className='flex items-center justify-between p-4 border-b border-bright/10 '>
-                <div>
-                    <h4>Categories</h4>
-                    <div className='text-[10px] flex items-center space-x-1 text-bright-300'>
-                        <span>Select a category.</span>
+        <div className='w-screen h-screen fixed flex items-start justify-center bg-background text-foreground left-0 top-0 z-50'>
+            <div className='flex  max-w-3xl w-full items-center flex-col'>
+                <div className='flex items-center justify-between p-4 border-b w-full border-foreground/10 '>
+                    <div>
+                        <h4>Categories</h4>
+                        <div className='text-[10px] flex items-center space-x-1 text-bright-300'>
+                            <span>Select a category.</span>
+                        </div>
                     </div>
+                    <span onClick={() => setOpen(!open)} className='cursor-pointer'><XMarkIcon className='w-7 h-7 text-secondary' /></span>
                 </div>
-                <span onClick={() => setOpen(!open)} className='cursor-pointer'><XMarkIcon className='w-7 h-7 text-secondary' /></span>
-            </div>
-            <div className=''>
-                {
-                    categories?.length > 0 &&
-                    categories.map((cat, i) => {
-                        const Icon = Icons[cat.icon]
-                        return (
-                            <Link href={`/category/${cat.slug}`} onClick={() => setOpen(false)} key={i} className='flex p-4 hover:bg-bright/10 items-center space-x-2 '>
-                                <Icon className="w-7 h-7" />
-                                <p className='text-xs overflow-hidden truncate whitespace-nowrap'>{cat.category_name}</p>
-                            </Link>
-                        )
-                    })
-                }
+                <div className='w-full'>
+                    {
+                        categories?.length > 0 &&
+                        categories.map((cat, i) => {
+                            const Icon = Icons[cat.icon]
+                            return (
+                                <Link href={`/category/${cat.slug}`} onClick={() => setOpen(false)} key={i} className='flex p-4 hover:bg-foreground hover:text-background items-center space-x-2 '>
+                                    <Icon className="w-7 h-7" />
+                                    <p className='text-xs overflow-hidden truncate whitespace-nowrap'>{cat.category_name}</p>
+                                </Link>
+                            )
+                        })
+                    }
+                </div>
             </div>
         </div>
     )

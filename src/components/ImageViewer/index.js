@@ -54,7 +54,7 @@ export default function ImageViewer({ images, open, onClose }) {
 
 
     return (
-        <div className='flex flex-col items-center justify-center min-h-screen w-screen top-0 left-0 fixed bg-background z-50'>
+        <div className='flex flex-col items-center justify-center min-h-screen w-screen top-0 left-0 fixed bg-foreground text-background z-50'>
             <div className='max-w-4xl w-full h-full'>
                 <div className="relative w-full overflow-hidden h-[100vh]">
                     <div
@@ -76,10 +76,10 @@ export default function ImageViewer({ images, open, onClose }) {
                             </div>
                         ))}
                     </div>
-                    <div className="absolute top-10 left-10 bg-background/80 p-4">
+                    <div className="absolute top-10 left-10 bg-bright-200/80 p-4">
                         {`${current + 1} / ${total}`}
                     </div>
-                    <div className="absolute top-10 right-10 bg-background/80 p-4">
+                    <div className="absolute top-10 right-10 bg-bright-200/80 p-4">
                         <XMarkIcon className='w-5 h-5 text-white cursor-pointer' onClick={() => onClose()} />
                     </div>
 
@@ -101,8 +101,8 @@ export default function ImageViewer({ images, open, onClose }) {
                     <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 w-full max-w-[200px] px-4">
                         <div className="relative">
                             {/* Fade overlays */}
-                            <div className="pointer-events-none absolute top-0 left-0 h-full w-6 bg-gradient-to-r from-black/40 to-transparent z-10" />
-                            <div className="pointer-events-none absolute top-0 right-0 h-full w-6 bg-gradient-to-l from-black/40 to-transparent z-10" />
+                            <div className="pointer-events-none absolute top-0 left-0 h-full w-6 bg-gradient-to-r from-forebround/40 to-transparent z-10" />
+                            <div className="pointer-events-none absolute top-0 right-0 h-full w-6 bg-gradient-to-l from-forebround/40 to-transparent z-10" />
 
                             {/* Scrollable dots */}
                             <div className={`flex overflow-x-auto scrollbar-hide space-x-2 justify-start items-center ${NO_SCROLL}`}>

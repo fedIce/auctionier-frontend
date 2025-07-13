@@ -48,7 +48,7 @@ const CategoryIcons = () => {
 
 
     return (
-        <div className='flex w-full flex-col space-y-2 px-2'>
+        <div className='flex w-full flex-col space-y-2 px-2 text-foreground'>
             <div id="sroll" ref={scrollRef} className="flex px-2 lg:px-0 items-center justify-around overflow-x-auto space-x-4 lg:space-x-8 my-8 w-full  [&::-webkit-scrollbar]:hidden [-ms-overflow-style:'none'] [scrollbar-width:'none']">
                 {
                     categories?.length > 0 ?

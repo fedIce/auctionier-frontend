@@ -72,7 +72,7 @@ const sell_links = [
 
 const Footer = () => {
     return (
-        <footer className="w-screen flex flex-col justify-center items-center pt-8 bg-secondary">
+        <footer className="w-screen flex flex-col justify-center items-center text-background pt-8 bg-secondary">
             <div className='max-w-7xl w-full grid grid-cols-2 justify-start items-start px-2 py-16 lg:grid-cols-4'>
                 <div className='flex w-full items-center gap-2 mb-8'>
                     <div className='bg-background w-[40px] h-[40px] rounded-lg' />

@@ -107,22 +107,22 @@ const ActionArea = ({ data }) => {
                         </div>
                     </section>
                     <section className='lg:flex hidden flex-col space-y-1 py-4 mb-8'>
-                        <div><AInput error={bidAmountError} value={bidAmount} setvalue={setBidAmount} className={`bg-secondary placeholder:text-bright-300 text-bright-500 border-gray-300 ring-0  focus:ring-0 rounded-b-none`} label={null} placeholder={`€ ${numberWithCommas(nextBid)} and above`} /></div>
+                        <div><AInput error={bidAmountError} value={bidAmount} setvalue={setBidAmount} className={`bg-secondary placeholder:text-foreground-600 text-foreground-900 border-gray-300 ring-0  focus:ring-0 rounded-b-none`} label={null} placeholder={`€ ${numberWithCommas(nextBid)} and above`} /></div>
                         <div className='flex items-center space-x-1'>
-                            <AButton btn_action={handlePlaceBid} text="Place Bid" className="focus:ring-third-200/50 bg-third-200 text-bright-600 hover:bg-third-200/90 rounded-tl-none rounded-tr-none rounded-br-none"></AButton>
-                            <AButton text="Set Max Bid" className="focus:ring-secondary/50 bg-secondary hover:bg-secondary/90 text-bright-600 rounded-tr-none rounded-tl-none rounded-bl-none"></AButton>
+                            <AButton btn_action={handlePlaceBid} text="Place Bid" className="focus:ring-third-200/50 bg-bright-200 text-background-600 hover:bg-third-200/90 rounded-tl-none rounded-tr-none rounded-br-none"></AButton>
+                            <AButton text="Set Max Bid" className="focus:ring-secondary/50 bg-secondary hover:bg-secondary/90 text-background-600 rounded-tr-none rounded-tl-none rounded-bl-none"></AButton>
                         </div>
                         <span className='text-xs underline'>Bids exclude auction fees</span>
                     </section>
                 </section>}
             <section className='mt-8 space-y-1'>
-                <h4 className='text-lg text-bright  font-medium'>Condition Report</h4>
+                <h4 className='text-lg text-foreground  font-medium'>Condition Report</h4>
                 <p className='text-sm'>
                     {data.condition_details}
                 </p>
                 <ShowAuctionDetails data={data.item_details} />
 
-                <section className='border-t space-y-4 border-bright/10 py-8'>
+                <section className='border-t space-y-4 border-foreground/10 py-8'>
                     <div className='flex items-center space-x-2 text-sm'>
                         <ShieldCheckIcon className='w-5 h-5 stroke-2' />
                         <p className='font-medium'>Buyers Protection fee: </p>
@@ -134,7 +134,7 @@ const ActionArea = ({ data }) => {
                     </div>
                 </section>
 
-                <section className='border-t space-y-4 border-bright/10 py-8'>
+                <section className='border-t space-y-4 border-foreground/10 py-8'>
 
                     <div className='flex items-center space-x-2 text-sm'>
                         <p className='font-medium text-lg'>Payment Options </p>
@@ -149,8 +149,8 @@ const ActionArea = ({ data }) => {
                     </div>
                 </section>
 
-                <section className='border-t space-y-4 text-sm border-bright/10 py-8'>
-                    <div className='p-2 px-4 text-bright bg-secondary-800 text-center rounded-lg'>
+                <section className='border-t space-y-4 text-sm border-foreground/10 py-8'>
+                    <div className='p-2 px-4 text-foreground bg-secondary-800 text-center rounded-lg'>
                         <p>32 other people are watching this object</p>
                     </div>
                     <div className='py-4 space-y-2'>
@@ -177,11 +177,11 @@ const ActionArea = ({ data }) => {
                             </div>}
                     </div>
                 </section>
-                <section className='border-t space-y-2 border-bright/10 pt-8'>
-                    <AButton text={"BOOK VIEWING"} className={`bg-bright-300 text-background `} />
-                    <AButton text={"ASK QUESTION"} className={`bg-background-900 text-bright `} />
+                <section className='border-t space-y-2 border-foreground/10 pt-8'>
+                    <AButton text={"BOOK VIEWING"} className={`bg-foreground-300 text-background `} />
+                    <AButton text={"ASK QUESTION"} className={`bg-background-900 border-foreground/10 border text-foreground `} />
                     <div className='relative w-full'>
-                        <AInput is_text_area={"yes"} label={null} rows={4} className="placeholder:text-bright-300 text-bright-500" />
+                        <AInput is_text_area={"yes"} label={null} rows={4} className="placeholder:text-foreground-300 text-foreground-500" />
                         <div className='absolute bottom-4 right-4 p-2 rounded-lg hover:bg-background-900/50 border-1 border-background cursor-pointer hover:text-background hover:border-background bg-background flex justify-center items-center'>
                             <ArrowRightIcon className='w-5 h-5 -rotate-45' />
                         </div>
@@ -199,7 +199,7 @@ const ActionArea = ({ data }) => {
                         <span><CountdownTimer targetDate={data.endDate} /></span>
                     </div>
                     <div className='flex-1 px-2'>
-                        <div onClick={() => setOpenMobileBidModal(!openMobileBidModal)} className='px-2 py-4 bg-secondary h-full cursor-pointer flex justify-center items-center'>
+                        <div onClick={() => setOpenMobileBidModal(!openMobileBidModal)} className='px-2 py-4 bg-secondary text-background h-full cursor-pointer flex justify-center items-center'>
                             <p>Bid</p>
                         </div>
                     </div>
@@ -219,10 +219,10 @@ const MobileBidModal = ({ image, aution, bids, bidAmountError, bidAmount, setBid
     return (
         <div className='lg:hidden fixed left-0 bottom-0 w-screen h-screen flex items-center justify-center px-2 py-4 bg-background/90 border-t border-third'>
             <div className='px-2 w-screen min-h-[30vh] flex flex-col bg-background border border-third/10'>
-                <div className='flex items-center justify-between p-4 border-b border-bright/10 '>
+                <div className='flex items-center justify-between p-4 border-b border-foreground/10 '>
                     <div>
                         <h4>Place your Bid</h4>
-                        <div className='text-[10px] flex items-center space-x-1 text-bright-300'>
+                        <div className='text-[10px] flex items-center space-x-1 text-foreground-300'>
                             <p className='font-light '>Closes in </p>
                             <span className='font-medium'><CountdownTimer targetDate={aution.endDate} /></span>
                         </div>
@@ -253,18 +253,18 @@ const MobileBidModal = ({ image, aution, bids, bidAmountError, bidAmount, setBid
                     </div>
                 </section>
                 <section className=' flex-col space-y-1 py-4'>
-                    <div><AInput error={bidAmountError} value={bidAmount} setvalue={setBidAmount} className={`bg-secondary placeholder:text-bright-300 text-bright-500 border-gray-300 ring-0  focus:ring-0 rounded-b-none`} label={null} placeholder={`€ ${numberWithCommas(nextBid)} and above`} /></div>
+                    <div><AInput error={bidAmountError} value={bidAmount} setvalue={setBidAmount} className={`bg-secondary placeholder:text-foreground-600 text-foreground-900 border-gray-300 ring-0  focus:ring-0 rounded-b-none`} label={null} placeholder={`€ ${numberWithCommas(nextBid)} and above`} /></div>
                     <div className='flex items-center space-x-1'>
-                        <AButton btn_action={handlePlaceBid} text="Place Bid" className="focus:ring-third-200/50 bg-third-200 text-bright-600 hover:bg-third-200/90 rounded-tl-none rounded-tr-none rounded-br-none"></AButton>
-                        <AButton text="Set Max Bid" className="focus:ring-secondary/50 bg-secondary hover:bg-secondary/90 text-bright-600 rounded-tr-none rounded-tl-none rounded-bl-none"></AButton>
+                        <AButton btn_action={handlePlaceBid} text="Place Bid" className="focus:ring-third-200/50 bg-bright-200 text-background-600 hover:bg-third-200/90 rounded-tl-none rounded-tr-none rounded-br-none"></AButton>
+                        <AButton text="Set Max Bid" className="focus:ring-secondary/50 bg-secondary hover:bg-secondary/90 text-background-600 rounded-tr-none rounded-tl-none rounded-bl-none"></AButton>
                     </div>
                     <span className='text-xs underline'>Bids exclude auction fees</span>
                 </section>
-                <section className='flex max-h-[50vh] overflow-y-auto flex-col space-y-4 text-sm border-bright/10 py-4'>
-                    <h4 className='font-bold text-bright text-start text-xl'>Bids</h4>
+                <section className='flex max-h-[50vh] overflow-y-auto flex-col space-y-4 text-sm border-foreground/10 py-4'>
+                    <h4 className='font-bold text-foreground text-start text-xl'>Bids</h4>
                     {
                         allBids?.length <= 0 ?
-                            <p className='text-sm text-bright-300'>No Bids Yet</p>
+                            <p className='text-sm text-foreground-300'>No Bids Yet</p>
                             :
                             (!seeAllBids ? allBids?.slice(0, 5) : allBids)?.map((bid, i) => {
                                 const userId = bid.user?.id ? bid.user.id : bid.user
@@ -294,8 +294,8 @@ export const ShowAuctionDetails = ({ data }) => {
                 data?.map((detail, i) => {
                     return (
                         <div key={i} className='space-y-1'>
-                            <h4 className='text-bright-500 uppercase font-mono text-sm font-extralight'>{detail.detail_key}</h4>
-                            <p className='text-xs font-semibold text-bright-700'>{detail.detail_value} </p>
+                            <h4 className='text-foreground-500 uppercase font-mono text-sm font-extralight'>{detail.detail_key}</h4>
+                            <p className='text-xs font-semibold text-foreground-700'>{detail.detail_value} </p>
                         </div>
                     )
                 })

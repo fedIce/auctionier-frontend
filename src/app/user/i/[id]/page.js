@@ -74,7 +74,7 @@ export default async function ViewPayables({ params }) {
                             </div>
                         </div>
                         <div className='flex items-center mt-4 justify-between'>
-                            <Link href={`/user/payment-request/${auction.slug}`}  className='flex-1 bg-bright text-background text-center py-4 cursor-pointer'>Pay</Link>
+                            <Link href={`/user/payment-request/${auction.slug}`}  className='flex-1 bg-foreground text-background hover:bg-background-100 text-center py-4 cursor-pointer'>Pay</Link>
                         </div>
                         <div className='py-2.5 text-xs'>
                             By bidding, you agree to our Terms of Use.

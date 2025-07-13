@@ -25,7 +25,7 @@ export default FilterBlock
 
 export const FilterItem = ({ children, className, text = "Filter", reverse = false, onClick = () => null }) => {
     return (
-        <div onClick={onClick} className={`flex min-w-24 bg-bright text-sm cursor-pointer text-background rounded-full space-x-2 py-2 px-4 items-center justify-between ${reverse ? 'flex-row-reverse' : ''} ` + className}>
+        <div onClick={onClick} className={`flex min-w-24 bg-foreground text-sm cursor-pointer text-background rounded-full space-x-2 py-2 px-4 items-center justify-between ${reverse ? 'flex-row-reverse' : ''} ` + className}>
             <p>{text}</p>
             <div>
                 {children}

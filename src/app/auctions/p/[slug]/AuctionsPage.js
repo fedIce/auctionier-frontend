@@ -27,7 +27,7 @@ const AuctionsPage = ({ auction, docs, aggs, crumbs, pagination }) => {
             <section className='w-full my-4'>
                 <div className='w-full h-64 rounded-2xl bg-third relative overflow-hidden' >
                     <Image src={`${process.env.NEXT_PUBLIC_SERVER_URL}/${auction.horizontalbannerImage?.url || ''}`} alt={auction.horizontalbannerImage?.alt || 'Auction Banner'} className='w-full h-full object-cover rounded-2xl' height={auction.horizontalbannerImage?.height || 400} width={auction.horizontalbannerImage?.width || 600} />
-                    <div className='flex flex-col items-start py-4 px-4 bg-gradient-to-t w-full from-background to-transparent absolute -bottom-0 space-y-2 left-0 space-x-2'>
+                    <div className='flex text-bright flex-col items-start py-4 px-4 bg-gradient-to-t w-full from-black to-transparent absolute -bottom-0 space-y-2 left-0 space-x-2'>
                         <h1 className='font-semibold text-3xl lg:text-5xl'>{auction.title}</h1>
                         <p className='text-xs line-clamp-2'>{auction.description}</p>
                     </div>

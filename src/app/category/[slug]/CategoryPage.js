@@ -7,6 +7,7 @@ import ListingCardsSection from '../../../components/ListingCardsSection'
 import BreadCrumbs from '../../../components/BreadCrumbs'
 import CategoryIcons from '../../../components/Home/CategoryIcons'
 import { AdjustmentsHorizontalIcon, BookOpenIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import * as Icons from "@heroicons/react/24/outline";
 import Link from 'next/link'
 import { onSelectFilter } from '../../search/search'
 import { useRouter } from 'next/navigation'
@@ -16,6 +17,8 @@ const CategoryPage = ({ id, sub_catgeories_docs, docs, aggs, crumbs, pagination 
     const [hideFilter, setHideFilter] = useState(false)
     const [hideMobileFilter, setHideMobileFilter] = useState(true)
     const router = useRouter()
+    const _icon = docs[0].category.icon
+    const Icon = Icons[_icon]
 
     return (
         <div className='w-full py-8 px-2'>
@@ -27,14 +30,14 @@ const CategoryPage = ({ id, sub_catgeories_docs, docs, aggs, crumbs, pagination 
             </section>
             <section className='space-y-4'>
                 <div className='flex items-center my-4 space-x-2'>
-                    <BookOpenIcon className='w-12 h-12' />
+                    <Icon className='w-12 h-12' />
                     <h1 className='font-semibold text-3xl capitalize lg:text-5xl'>{id.split("-").join(" ")}</h1>
                 </div>
                 <div className='grid py-4 grid-cols-3 lg:grid-cols-5 gap-2 lg:gap-4'>
                     {
                         sub_catgeories_docs.length > 0 ? sub_catgeories_docs.map((sub, i) => {
                             return (
-                                <Link href={`/category/${id}/${sub.slug}`} key={i} className='cursor-pointer transition-colors duration-300 border-white/10 hover:bg-bright-400 grid grid-rows-[1fr_50px] bg-bright text-background aspect-video p-2 pb-0 rounded-xl lg:rounded-2xl'>
+                                <Link href={`/category/${id}/${sub.slug}`} key={i} className='cursor-pointer transition-colors duration-300 border-white/10 hover:bg-bright-500  grid grid-rows-[1fr_50px] bg-bright-300 text-foreground aspect-video p-2 pb-0 rounded-xl lg:rounded-2xl'>
                                     <div></div>
                                     <div className='flex items-end py-2 text-start text-xs lg:text-sm px-2 font-medium'>{sub.title}</div>
                                 </Link>
@@ -43,7 +46,7 @@ const CategoryPage = ({ id, sub_catgeories_docs, docs, aggs, crumbs, pagination 
                             :
                             [0, 0, 0, 0, 0, 0, 0].map((_, i) => {
                                 return (
-                                    <div key={i} className='cursor-pointer transition-colors duration-300 border-white/10 hover:bg-bright-400 grid grid-rows-[1fr_30px] bg-bright text-background aspect-video p-2 pb-0 rounded-xl lg:rounded-2xl'>
+                                    <div key={i} className='cursor-pointer transition-colors duration-300 border-white/10 hover:bg-bright-200 grid grid-rows-[1fr_30px] bg-bright-400 text-background aspect-video p-2 pb-0 rounded-xl lg:rounded-2xl'>
                                         <div></div>
                                         <div className='text-end text-xs lg:text-sm text-nowrap px-2 font-medium'>Sub Category {i}</div>
                                     </div>

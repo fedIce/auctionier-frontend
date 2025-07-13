@@ -56,7 +56,7 @@ const ListingCardsSection = ({ data, title = "Section Title" }) => {
     return (
         <div className='flex space-y-4 flex-col w-full justify-start mt-8 lg:mt-16 mb-4 lg:mb-8 items-start px-2'>
             <div className='flex w-full items-center justify-between'>
-                <h4 className='font-bold text-xl text-nowrap'>{title}</h4>
+                <h4 className='font-bold text-xl text-nowrap text-foreground'>{title}</h4>
                 <div className='flex px-2 lg:px-0 w-full left-0 items-center justify-end space-x-2'>
                     {scrollAmount > 1 ? <div onClick={() => scroll(scrollAmount - 500)} className='rounded-full p-2 cursor-pointer'>
                         <ChevronLeftIcon className='w-4 h-4 text-primary-300' />

@@ -70,7 +70,7 @@ const ListingCards = ({ data = null, user = null }) => {
         console.log(data, '%%%%')
 
     return data ? (
-        <div className='flex flex-col w-full space-y-2'>
+        <div className='flex flex-col w-full space-y-2 text-foreground'>
             <Link href={`/auctions/${data.slug}`} className=" w-full lg:min-w-64 min-h-60 cursor-pointer lg:max-h-80 bg-third-300 overflow-hidden rounded-lg " >
                 <Image src={`${process.env.NEXT_PUBLIC_SERVER_URL}${data.thumbnail?.url ? data.thumbnail.url : data.image[0].sizes.medium.url || ''}`} alt={data.thumbnail?.url ? data.thumbnail.alt : data.image[0].alt || 'auction image'} className='min-h-60 transition-transform duration-300 hover:scale-125 object-cover' height={data.thumbnail?.url ? data.thumbnail.height : data.image[0].sizes.medium.height || 600} width={data.thumbnail?.url ? data.thumbnail.width : data.image[0].sizes.medium.width || 600}   />
             </Link >
@@ -80,12 +80,12 @@ const ListingCards = ({ data = null, user = null }) => {
                 {
                     user &&
                         statusText.status == 'won' ?
-                        <Link href={`/user/i/${data.slug}`} className='text-sm cursor-pointer justify-center bg-third font-medium text-background py-2.5 flex items-center space-x-4 font-mono hover:bg-third-100 hover:text-bright transition-colors duration-300 underline'>
+                        <Link href={`/user/i/${data.slug}`} className='text-sm cursor-pointer justify-center bg-third font-medium text-foreground py-2.5 flex items-center space-x-4 font-mono hover:bg-third-100 hover:text-bright transition-colors duration-300 underline'>
                             <span>Pay Now</span>
                             <span><ChevronRightIcon className='w-4 h-4 stroke-2' /></span>
                         </Link>
                         :
-                        <h6 className='text-sm font-mono text-bright/70'>{new Date(data.endDate) > new Date() ? `Ends ${moment(data.endDate).fromNow()}` : `Closed for bidding`}</h6>
+                        <h6 className='text-sm font-mono'>{new Date(data.endDate) > new Date() ? `Ends ${moment(data.endDate).fromNow()}` : `Closed for bidding`}</h6>
                 }
             </div>
         </div>
