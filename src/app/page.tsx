@@ -7,10 +7,11 @@ import { use_get } from '@/lib/functions';
 
 
 
+const newestLots = await use_get({ url: `${process.env.NEXT_PUBLIC_SERVER_URL}/api/auction-items?sort=-createdAt` })
+const ClosingSoonLots = await use_get({ url: `${process.env.NEXT_PUBLIC_SERVER_URL}/api/auction-items?sort=-endDate` })
 
 export default async function Home() {
-  const newestLots = await use_get({ url: `${process.env.NEXT_PUBLIC_SERVER_URL}/api/auction-items?sort=-createdAt` })
-  const ClosingSoonLots = await use_get({ url: `${process.env.NEXT_PUBLIC_SERVER_URL}/api/auction-items?sort=-endDate` })
+  const [newestLotsData, closingSoonLotsData] = await Promise.all([newestLots, ClosingSoonLots])
   return (
     <div className="w-full h-auto flex flex-col text-bright justify-start items-center">
       <main className="w-full h-full max-w-7xl flex flex-col items-center pt-8">
@@ -22,8 +23,8 @@ export default async function Home() {
           <SpecialCategories />
           <CategoryIcons />
         </div>
-        <ListingCardsSection data={newestLots} title='Newest Lots'/>
-        <ListingCardsSection data={ClosingSoonLots} title='Closing soon' />
+        <ListingCardsSection data={newestLotsData} title='Newest Lots' />
+        <ListingCardsSection data={closingSoonLotsData} title='Closing soon' />
         <ListingCardsSection data={null} />
       </main>
 

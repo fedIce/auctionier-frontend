@@ -8,7 +8,11 @@ import NoItemsFound from '../../../../components/NoItemsFound'
 
 
 const fetchAuctionItems = async (id) => {
-    const res = await use_get({ url: `${process.env.NEXT_PUBLIC_SERVER_URL}/api/categories/t/auction?slug=${id}&depth=2` })
+    const res = await use_get({
+        url: `${process.env.NEXT_PUBLIC_SERVER_URL}/api/categories/t/auction?slug=${id}&depth=2`, options: {
+            next: { revalidate: 0 }
+        }
+    })
     return res
 }
 
@@ -22,8 +26,8 @@ const Auctions = async ({ params, searchParams }) => {
     const auctions_items = await fetchAuctionItems(id + generateQueryParams('', query))
     const docs = auctions_items?.docs || []
 
-    if(docs.length <= 0){
-        return (<NoItemsFound/>)
+    if (docs.length <= 0) {
+        return (<NoItemsFound />)
     }
 
     const auction = docs[0].auction || {}
