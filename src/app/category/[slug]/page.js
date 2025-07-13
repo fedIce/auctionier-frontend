@@ -5,7 +5,7 @@ import { generateQueryParams } from '../../search/page'
 import CategoryPage from './CategoryPage'
 
 async function fetchCategoryItems(id) {
-    const res = await use_get({ url: `${process.env.NEXT_PUBLIC_SERVER_URL}/api/categories/t/category?slug=${id}` }).catch(e => {
+    const res = await use_get({ url: `${process.env.NEXT_PUBLIC_SERVER_URL}/api/categories/t/category?queryslug=${id}` }).catch(e => {
         console.error('Error fetching search results:', e)
         return { docs: [], aggs: [] }
     })

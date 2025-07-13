@@ -9,8 +9,8 @@ import NoItemsFound from '../../../../components/NoItemsFound'
 
 const fetchAuctionItems = async (id) => {
     const res = await use_get({
-        url: `${process.env.NEXT_PUBLIC_SERVER_URL}/api/categories/t/auction?slug=${id}&depth=2`, options: {
-            next: { revalidate: 0 }
+        url: `${process.env.NEXT_PUBLIC_SERVER_URL}/api/categories/t/auction?queryslug=${id}&depth=2`, options: {
+            cache: 'no-store',
         }
     })
     return res
