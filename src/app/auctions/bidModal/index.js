@@ -144,7 +144,7 @@ const DoneBidding = ({ action }) => {
 }
 
 
-const VatBreakDown = ({ amount, close }) => {
+export const VatBreakDown = ({ amount, close }) => {
 
     const values = getAuctionFees(amount)
     return (

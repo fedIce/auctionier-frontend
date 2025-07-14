@@ -35,7 +35,7 @@ const SearchPage = async ({ searchParams }) => {
 
 
 
-    const searchResults = await searchCall(q + generateQueryParams(`&q=${q}`, query)).catch(e => {
+    const searchResults = await searchCall(q + generateQueryParams(`&q=${q}`, query)).catch(() => {
         return { docs: [], aggs: [] }
     })
 

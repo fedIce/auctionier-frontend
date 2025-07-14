@@ -1,9 +1,10 @@
 'use client'
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { LoaderBlockAnimation } from "../../../../components/util/checker"
 import { auction_fees, calculate_total, calculate_vat, getAuctionFees, numberWithCommas } from "../../../../lib/functions/util"
 import { useAuth } from "../../../../contexts/auth"
 import Link from 'next/link'
+import { VatBreakDown } from "../../../auctions/bidModal"
 
 
 const Reciept = ({ auction }) => {
@@ -33,12 +34,16 @@ export default Reciept
 const RecieptBlock = ({ amount }) => {
 
     const [seeBreakdown, setSeeBreakDown] = useState(false)
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(true)
 
     const allFees = getAuctionFees(amount) ?? 0
     const auctn_fee = auction_fees(amount) ?? 0
     const VAT = calculate_vat(amount) ?? 0
     const total = calculate_total(amount) ?? 0
+
+    useEffect(() => {
+        setLoading(false)
+    },[])
 
 
     return (
@@ -56,18 +61,18 @@ const RecieptBlock = ({ amount }) => {
                     <div className='flex items-center space-x-4'><p>VAT</p> </div>
                     <p>€ {numberWithCommas(VAT.toFixed(2))} </p>
                 </div>
-                {/* <p onClick={() => null} className='cursor-pointer border-none py-4 hover:underline hover:font-semibold text-xs'>(see fees)</p> */}
+                <p onClick={() => setSeeBreakDown(!seeBreakdown)} className='cursor-pointer border-none py-4 hover:underline hover:font-semibold text-xs'>(see fees)</p>
                 <div className='flex items-center text-base font-medium justify-between py-4'>
                     <p>Total Price</p>
                     <p>€ {numberWithCommas(total.toFixed(2))}</p>
                 </div>
 
-                {/* {seeBreakdown && <VatBreakDown amount={amount} close={setSeeBreakDown} />} */}
+                {seeBreakdown && <VatBreakDown amount={amount} close={setSeeBreakDown} />}
 
             </div>
             {
-                !amount &&
-                <div className=' absolute z-50 top-0 left-0 w-full h-full bg-transparent flex items-center justify-center'>
+                loading &&
+                <div className=' absolute z-50 top-0 left-0 w-full h-full bg-background flex items-center justify-center'>
                     <LoaderBlockAnimation width={50} height={50} />
                 </div>
             }
