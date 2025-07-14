@@ -22,27 +22,30 @@ const PayOptions = ({ data }) => {
 
 
     return (
-        <section ref={myRef} className='w-full flex flex-col lg:flex-row items-start space-x-4 py-8'>
-            <MountRevolut data={{ ...data, shipping: auth.shippingInfo }} />
+        !auth.shippingInfo ?
+            <div className='w-full py-8 text-center text-foreground'>Please provide a valid shipping address to proceed with payment</div>
+            :
+            <section ref={myRef} className='w-full flex flex-col lg:flex-row items-start space-x-4 py-8'>
+                <MountRevolut data={{ ...data, shipping: auth.shippingInfo }} />
 
-            <div className='w-full lg:w-[25%] pb-4 lg:pb-0'>
-                <h4 className='text-2xl font-medium'>Pay With</h4>
+                <div className='w-full lg:w-[25%] pb-4 lg:pb-0'>
+                    <h4 className='text-2xl font-medium'>Pay With</h4>
 
-            </div>
-            <div className='max-w-2xl w-full divide-y divide-bright/10 space-y-8'>
-                {/* <CreditCardOption selectOption={setSelected} option={selected} />
+                </div>
+                <div className='max-w-2xl w-full divide-y divide-bright/10 space-y-8'>
+                    {/* <CreditCardOption selectOption={setSelected} option={selected} />
                 <PayPalOption selectOption={setSelected} option={selected} />
                 <ApplePayOption selectOption={setSelected} option={selected} /> */}
-                <RevolutPayOption selectOption={setSelected} option={selected} />
-            </div>
-            <section className='flex lg:hidden fixed left-0 bottom-0 w-screen items-center justify-start px-2 py-4 bg-background border-t border-third'>
-                <div className='flex-1 px-2 overflow-hidden'>
-                    <p onClick={() => executeScroll()} className='px-2 py-4 overflow-hidden bg-secondary h-full flex justify-center items-center'>
-                        Pay
-                    </p>
+                    <RevolutPayOption selectOption={setSelected} option={selected} />
                 </div>
+                <section className='flex lg:hidden fixed left-0 bottom-0 w-screen items-center justify-start px-2 py-4 bg-background border-t border-third'>
+                    <div className='flex-1 px-2 overflow-hidden'>
+                        <p onClick={() => executeScroll()} className='px-2 py-4 overflow-hidden bg-secondary text-background h-full flex justify-center items-center'>
+                            Pay
+                        </p>
+                    </div>
+                </section>
             </section>
-        </section>
     )
 }
 

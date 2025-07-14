@@ -9,6 +9,7 @@ import { closedForBidding, getShortCode, numberWithCommas } from '../../../lib/f
 import { useBidding } from '../../../contexts/bid_context'
 import BidModal from '../bidModal';
 import Image from 'next/image';
+import { useAuth } from '../../../contexts/auth';
 
 
 const ActionArea = ({ data }) => {
@@ -23,7 +24,8 @@ const ActionArea = ({ data }) => {
     const [openMobileBidModal, setOpenMobileBidModal] = useState(false)
 
     const bidding = useBidding()
-
+    const auth = useAuth()
+    const user = auth?.user?.user || { id: null }
 
 
     useEffect(() => {
@@ -53,7 +55,6 @@ const ActionArea = ({ data }) => {
     let nextBid = bids?.current_bid ? Math.ceil((bids.current_bid * 0.05) + bids.current_bid) : 1
     nextBid = (typeof nextBid == 'number' && nextBid >= 0) ? nextBid : 1
 
-    // console.log(bidStatus, nextBid)
 
     const isclosedForBidding = data.endDate ? closedForBidding({ ...bidStatus, endDate: data.endDate }) : false
 
@@ -157,12 +158,13 @@ const ActionArea = ({ data }) => {
                         {
                             (!seeAllBids ? allBids?.slice(0, 5) : allBids)?.map((bid, i) => {
                                 const userId = bid.user?.id ? bid.user.id : bid.user
+
                                 return bid.user && (
                                     <div key={i} className='grid w-full grid-cols-3'>
                                         {userId &&
                                             <div className='flex items-center space-x-2'>
-                                                <p>Bidder</p>
-                                                <p className='uppercase'>{getShortCode(userId)}</p>
+                                                {bid.user?.id != user.id && <p>Bidder</p>}
+                                                <p className='uppercase'>{bid.user?.id == user.id ? 'You' : getShortCode(userId)}</p>
                                             </div>}
                                         <p>{moment(bid.createdAt).fromNow()}</p>
                                         <p className='text-end'>€ {numberWithCommas(bid.amount)} </p>
@@ -205,7 +207,7 @@ const ActionArea = ({ data }) => {
                     </div>
                 </section>}
             <BidModal open={openBiddingModal} setOpen={setOpenBiddingModal} action={place_bid} amount={bidAmount} />
-            <MobileBidModal image={data.image[0]} open={openMobileBidModal} setOpen={setOpenMobileBidModal} bids={bids} aution={data} bidAmountError={bidAmountError} bidAmount={bidAmount} setBidAmount={setBidAmount} handlePlaceBid={handlePlaceBid} nextBid={nextBid} seeAllBids={seeAllBids} allBids={allBids} />
+            <MobileBidModal image={data.image[0]} user={user} open={openMobileBidModal} setOpen={setOpenMobileBidModal} bids={bids} aution={data} bidAmountError={bidAmountError} bidAmount={bidAmount} setBidAmount={setBidAmount} handlePlaceBid={handlePlaceBid} nextBid={nextBid} seeAllBids={seeAllBids} allBids={allBids} />
 
         </div>
     )
@@ -214,8 +216,9 @@ const ActionArea = ({ data }) => {
 export default ActionArea
 
 
-const MobileBidModal = ({ image, aution, bids, bidAmountError, bidAmount, setBidAmount, nextBid, seeAllBids, allBids, open, handlePlaceBid = () => null, setOpen = () => null }) => {
+const MobileBidModal = ({ image, user, aution, bids, bidAmountError, bidAmount, setBidAmount, nextBid, seeAllBids, allBids, open, handlePlaceBid = () => null, setOpen = () => null }) => {
     if (!open) return null
+
     return (
         <div className='lg:hidden fixed left-0 bottom-0 w-screen h-screen flex items-center justify-center px-2 py-4 bg-background/90 border-t border-third'>
             <div className='px-2 w-screen min-h-[30vh] flex flex-col bg-background border border-third/10'>
@@ -272,8 +275,8 @@ const MobileBidModal = ({ image, aution, bids, bidAmountError, bidAmount, setBid
                                     <div key={i} className='grid w-full grid-cols-3'>
                                         {userId &&
                                             <div className='flex items-center space-x-2'>
-                                                <p>Bidder</p>
-                                                <p className='uppercase'>{getShortCode(userId)}</p>
+                                                {bid.user?.id != user.id && <p>Bidder</p>}
+                                                <p className='uppercase'>{bid.user?.id == user.id ? 'You' : getShortCode(userId)}</p>
                                             </div>}
                                         <p>{moment(bid.createdAt).fromNow()}</p>
                                         <p className='text-end'>€ {numberWithCommas(bid.amount)} </p>

@@ -11,7 +11,6 @@ async function fetchAuctions() {
 const Specialcategories = async () => {
 
     let auctions = await fetchAuctions()
-    console.log(auctions)
     auctions = auctions?.docs
     if (!auctions) return null
     if (auctions?.docs?.length <= 0) return null

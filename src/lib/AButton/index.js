@@ -2,7 +2,7 @@ import React from 'react'
 import { LoaderSpinnerAnimation } from '../../components/util/checker'
 
 const AButton = (props) => {
-    const { text = 'PayPal', loading= false, className = 'focus:ring-third-500/50 bg-third-500 text-secondary-900 hover:bg-third-500/90', btn_action = () => null } = props
+    const { text = 'PayPal', loading= false, className = 'focus:ring-third-500/50 bg-secondary text-secondary-900 hover:bg-secondary-500/90', btn_action = () => null } = props
     return (
         <button onClick={btn_action} {...props} type="button" className={`w-full flex cursor-pointer justify-center focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 ${loading ? 'py-1' : 'py-2.5'} text-center ${className}`}>
             {loading ? <LoaderSpinnerAnimation height={30} width={30} /> : text}

@@ -83,7 +83,7 @@ const BidModal = ({ open, setOpen, amount: a, action = () => null }) => {
                     <div className='flex items-center justify-between p-4 border-b border-foreground/10 '>
                         <div>
                             <h4>Place your Bid</h4>
-                            <p className='text-[10px] text-bright-300'>Please make sure you check all the details below prior to confirming your bid.</p>
+                            <p className='text-[10px] text-bright'>Please make sure you check all the details below prior to confirming your bid.</p>
                         </div>
                         <span onClick={() => setOpen(false)} className='cursor-pointer'><XIcon className='w-7 h-7 text-secondary' /></span>
                     </div>
@@ -103,7 +103,7 @@ const BidModal = ({ open, setOpen, amount: a, action = () => null }) => {
                         <p onClick={() => setSeeBreakDown(!seeBreakdown)} className='cursor-pointer border-none py-4 hover:underline hover:font-semibold text-xs'>(see fees)</p>
                         <div className='flex items-center text-base font-medium justify-between py-4'>
                             <p>Total Price</p>
-                            <p>€ {parseFloat(total).toFixed(2)}</p>
+                            <p>€ {numberWithCommas(parseFloat(total).toFixed(2))}</p>
                         </div>
 
                         {seeBreakdown && <VatBreakDown amount={amount} close={setSeeBreakDown} />}
@@ -113,7 +113,7 @@ const BidModal = ({ open, setOpen, amount: a, action = () => null }) => {
                         All bids are binding; if your bid is highest you agree to pay for this object. By bidding, you agree to our Terms of Use.
                     </div>
                     <div onClick={() => handleAction()} className='flex items-center mt-4 justify-between'>
-                        <div className='flex-1 bg-foreground text-background text-center py-4 cursor-pointer'>Place Bid</div>
+                        <div className='flex-1 bg-secondary text-background text-center py-4 cursor-pointer'>Place Bid</div>
                         {/* <div className='flex-1  text-bright-300 py-4 bg-background-900 text-center cursor-pointer'>Cancel</div> */}
                     </div>
                     {
@@ -137,7 +137,7 @@ const DoneBidding = ({ action }) => {
             <div className='py-4 text-sm font-light'>Well done!, we&apos;ll keep you posted, goodluck!</div>
             <CheckerAnimation width={150} height={150} />
             <div onClick={() => action(false)} className='flex w-full items-center mt-4 justify-between'>
-                <div className='flex-1 bg-foreground text-background text-center py-4 cursor-pointer'>OK</div>
+                <div className='flex-1 bg-secondary text-background text-center py-4 cursor-pointer'>OK</div>
             </div>
         </div>
     )

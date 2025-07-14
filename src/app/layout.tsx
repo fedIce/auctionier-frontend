@@ -47,7 +47,7 @@ export default function RootLayout({
               <div className="items-center justify-center w-full h-[100vh]">
                 <Header />
                 <div className="pt-18 w-full flex flex-col items-center relative">
-                  <div className="w-full h-fit max-w-7xl">
+                  <div className="w-full h-fit max-w-7xl ">
                     {children}
                   </div>
 

@@ -53,11 +53,11 @@ function calculatePremium(value) {
 }
 
 
-export function base62Encode(buffer) {
+export function base62Encode(buffer, length) {
     let num = BigInt('0x' + buffer.toString('hex'));
     let result = '';
 
-    while (result.length < 5) {
+    while (result.length < length) {
         result = BASE62[num % 62n] + result;
         num = num / 62n;
     }
@@ -65,9 +65,9 @@ export function base62Encode(buffer) {
     return result;
 }
 
-export function getShortCode(input) {
+export function getShortCode(input, length = 5) {
     const hash = crypto.createHash('sha256').update(input).digest();
-    return base62Encode(hash);
+    return base62Encode(hash, length);
 }
 
 export const numberWithCommas = (x) => {

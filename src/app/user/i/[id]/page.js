@@ -19,8 +19,6 @@ export default async function ViewPayables({ params }) {
 
     if (!auction) return null
 
-    console.log(auction)
-
     const crumbs = generate_crumbs(auction.sub_category)
 
 
@@ -100,13 +98,13 @@ export default async function ViewPayables({ params }) {
                 <div className='grid w-[60%]  text-xs grid-rows-[30px_1fr_30px]'>
                     <p>YOU WON!</p>
                     <div className='font-medium text-3xl'>
-                        € {numberWithCommas(auction?.current_bid || 0)}
+                        € {numberWithCommas(calculate_total(auction?.bid_id?.current_bid).toFixed(2))}
                     </div>
                     <span><CountdownTimer targetDate={auction.endDate} /></span>
 
                 </div>
                 <div className='flex-1 px-2'>
-                    <Link href={`/user/payment-request/${auction.slug}`} className='px-2 py-4 bg-secondary h-full flex justify-center items-center'>
+                    <Link href={`/user/payment-request/${auction.slug}`} className='px-2 py-4 bg-secondary text-background h-full flex justify-center items-center'>
                         <p>Pay</p>
                     </Link>
                 </div>

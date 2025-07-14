@@ -36,6 +36,7 @@ const PaymentRequest = async ({ params }) => {
             auction: auction.id,
             winning_bid: top_bidder,
             payment_option: 'revolut_pay' ,
+            slug: par.id
         }
     } : {
         totalAmount: calculate_total(bid.current_bid) * 100, // add Shipping, VAT and other costs

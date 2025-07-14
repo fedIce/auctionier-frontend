@@ -1,7 +1,7 @@
 import React from 'react'
 
 const AInput = (props) => {
-    const { label = "Input Label", type = "text", id = "button", placeholder = "Enter text here", disabled=false, required = false, is_text_area = null, value = '', setvalue = () => null, className = "bg-secondary border-gray-300 focus:border-third-500 focus:ring-third-500", error = null } = props
+    const { label = "Input Label", type = "text", id = "button", placeholder = "Enter text here", disabled=false, required = false, is_text_area = null, value = '', setvalue = () => null, className = "bg-third border-gray-300 focus:border-third-500 focus:ring-third-500", error = null } = props
     return (
         <div className="m-0">
             {label && <label className={`block mb-2 text-sm font-medium ${error ? 'text-red-900' : 'text-bright-900'} `}>{label}</label>}

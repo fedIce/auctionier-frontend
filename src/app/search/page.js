@@ -10,7 +10,6 @@ export const generateQueryParams = (base = '', query) => {
         if (Array.isArray(query[key]) && query[key].length > 1) {
             query[key].forEach((val) => {
                 _query += `&${key}=${val}`
-                console.log(`&${key}=${val}`)
             })
         } else {
             _query += `&${key}=${query[key]}`
@@ -35,10 +34,8 @@ const SearchPage = async ({ searchParams }) => {
 
 
 
-    console.log('Search Query:', generateQueryParams(`&q=${q}`, query))
 
     const searchResults = await searchCall(q + generateQueryParams(`&q=${q}`, query)).catch(e => {
-        console.error('Error fetching search results:', e)
         return { docs: [], aggs: [] }
     })
 
@@ -49,7 +46,6 @@ const SearchPage = async ({ searchParams }) => {
     }
 
     const aggs = searchResults?.aggs[0] || {}
-    console.log('Search Results:', searchResults)
     const {
         hasNextPage,
         hasPrevPage,
@@ -74,7 +70,6 @@ const SearchPage = async ({ searchParams }) => {
         totalPages,
     }
 
-    console.log(searchResults)
 
 
     return <SearchPageCOntent docs={docs} aggs={aggs} q={q} query={query} pagination={pagination} />

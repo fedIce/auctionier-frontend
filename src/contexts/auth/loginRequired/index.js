@@ -17,7 +17,7 @@ const LoginRequired = ({setOpen}) => {
                     <b>Kindly Reminder: </b> All bids are binding; if your bid is highest you agree to pay for this object. By bidding, you agree to our Terms of Use.
                 </div>
                 <Link href={`/auth/login`} className='flex items-center mt-4 justify-between'>
-                    <div className='flex-1 bg-bright text-background text-center py-4 cursor-pointer'>Go to Login</div>
+                    <div className='flex-1 bg-secondary text-background text-center py-4 cursor-pointer'>Go to Login</div>
                     {/* <div className='flex-1  text-bright-300 py-4 bg-background-900 text-center cursor-pointer'>Cancel</div> */}
                 </Link>
             </div>

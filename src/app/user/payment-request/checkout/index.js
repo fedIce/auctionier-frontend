@@ -3,6 +3,10 @@ import RevolutCheckout from '@revolut/checkout'
 import { useEffect } from 'react'
 import { use_get, use_post } from '../../../../lib/functions'
 
+export const confirmOrder = async (ref) => {
+    return await use_get({ url: `${process.env.NEXT_PUBLIC_SERVER_URL}/api/users/revolut/comfirm/${ref}` })
+}
+
 export const MountRevolut = ({ data }) => {
     useEffect(() => {
         if (document) {
@@ -14,9 +18,7 @@ export const MountRevolut = ({ data }) => {
         return await use_post({ url: `${process.env.NEXT_PUBLIC_SERVER_URL}/api/users/revolut/create-order`, data })
     }
 
-    const confirmOrder = async (ref) => {
-        return await use_get({ url: `${process.env.NEXT_PUBLIC_SERVER_URL}/api/users/revolut/comfirm/${ref}`})
-    }
+
 
     const init = async () => {
         const { revolutPay } = await RevolutCheckout.payments({
@@ -28,17 +30,20 @@ export const MountRevolut = ({ data }) => {
         const paymentOptions = {
             currency: data.currency,
             totalAmount: data.totalAmount,
-            // redirectUrls: {
-            //     success: 'https://www.example.com/success',
-            //     failure: 'https://www.example.com/failure',
-            //     cancel: 'https://www.example.com/cancel'
-            // },
+            redirectUrls: {
+                success: `${process.env.NEXT_PUBLIC_APP_URL}/user/o/${data.order.slug}`,
+                // failure: 'https://www.example.com/failure',
+                // cancel: 'https://www.example.com/cancel'
+            },
 
             createOrder: async () => {
                 const order = await createOrder({
                     ...data,
                     amount: paymentOptions.totalAmount,
                     currency: paymentOptions.currency,
+                    merchant_order_data: {
+                        reference: data.orderRef
+                    }
                 })
                 return { publicId: order.token }
             },

@@ -19,7 +19,6 @@ const CategoryIcons = () => {
 
     useEffect(() => {
         get_categories().then((categories) => {
-            console.log(categories)
             setCategories(categories)
         }).catch((e) => {
             console.error("Error fetching categories:", e);
@@ -36,7 +35,6 @@ const CategoryIcons = () => {
         const bgDropElement = document.getElementById("sroll");
         const { width } = bgDropElement.getBoundingClientRect();
 
-        console.log(direction, width)
 
 
         if (direction <= 0) return scrollRef.current.scrollTo({ left: 0, behavior: "smooth" })

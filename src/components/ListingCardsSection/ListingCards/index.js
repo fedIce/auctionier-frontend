@@ -47,32 +47,55 @@ const ListingCards = ({ data = null, user = null }) => {
     const hasBidded = data?.bid_id?.bids?.some(i => i.user == user?.id) || false
     const leading_bid = bid_summary?.top_bid?.user == user?.id
     const statusText = user ? hasBidded ?
-        bid_summary?.winner && bid_summary.winner.id === user?.id ?
+        bid_summary?.winner && bid_summary.winner.id === user?.id && !data.order?.id ?
             {
                 msg: "You Won this Bid!",
                 status: 'won'
             } :
-            leading_bid ?
-                {
-                    msg: "You are in the Lead",
-                    status: 'leading'
-                } :
-                {
-                    msg: 'You have Been Out Bided',
-                    status: 'outbided'
-                }
+            user?.id && data.order && data.order.user?.id == user?.id ?
+                data.order.status == 'completed' ?
+                    {
+                        msg: `You Paid!`,
+                        status: 'paid-',
+                    }
+                    :
+                    data.order.status == 'pending' ?
+                        {
+                            msg: `You order is being processed`,
+                            status: 'pending',
+                        }
+                        :
+                        data.order.status == 'shipped' ?
+                            {
+                                msg: `You order has been shipped`,
+                                status: 'shippped',
+                            }
+                            :
+                            {
+                                msg: `You order was Cancelled`,
+                                status: 'cancelled',
+                            }
+                :
+                leading_bid ?
+                    {
+                        msg: "You are in the Lead",
+                        status: 'leading'
+                    } :
+                    {
+                        msg: 'You have Been Out Bided',
+                        status: 'outbided'
+                    }
         :
         {
             msg: "Current Bid",
             status: 'watching'
         } : null
 
-        console.log(data, '%%%%')
 
     return data ? (
         <div className='flex flex-col w-full space-y-2 text-foreground'>
             <Link href={`/auctions/${data.slug}`} className=" w-full lg:min-w-64 min-h-60 cursor-pointer lg:max-h-80 bg-third-300 overflow-hidden rounded-lg " >
-                <Image src={`${process.env.NEXT_PUBLIC_SERVER_URL}${data.thumbnail?.url ? data.thumbnail.url : data.image[0].sizes.medium.url || ''}`} alt={data.thumbnail?.url ? data.thumbnail.alt : data.image[0].alt || 'auction image'} className='min-h-60 transition-transform duration-300 hover:scale-125 object-cover' height={data.thumbnail?.url ? data.thumbnail.height : data.image[0].sizes.medium.height || 600} width={data.thumbnail?.url ? data.thumbnail.width : data.image[0].sizes.medium.width || 600}   />
+                <Image src={`${process.env.NEXT_PUBLIC_SERVER_URL}${data.thumbnail?.url ? data.thumbnail.url : data.image[0].sizes.medium.url || ''}`} alt={data.thumbnail?.url ? data.thumbnail.alt : data.image[0].alt || 'auction image'} className='min-h-60 transition-transform duration-300 hover:scale-125 object-cover' height={data.thumbnail?.url ? data.thumbnail.height : data.image[0].sizes.medium.height || 600} width={data.thumbnail?.url ? data.thumbnail.width : data.image[0].sizes.medium.width || 600} />
             </Link >
             <div>
                 <Link href={`/auctions/${data.slug}`} className='text-xl font-medium'>{data.title}</Link>

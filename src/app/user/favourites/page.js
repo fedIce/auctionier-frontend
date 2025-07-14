@@ -20,7 +20,7 @@ const SubCategoryPage = () => {
     useEffect(() => { }, [favs])
 
     const load = async () => {
-        const bids = await use_get({ url: `${process.env.NEXT_PUBLIC_SERVER_URL}/api/bid_item/watch-list/${user.id}` })
+        const bids = await use_get({ url: `${process.env.NEXT_PUBLIC_SERVER_URL}/api/bid_item/watch-list/${user.id}`, options: { revalidate: 0 } })
         setFavs(bids.docs)
     }
 
