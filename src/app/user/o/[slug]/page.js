@@ -6,7 +6,7 @@ import Link from 'next/link'
 // import Image from 'next/image'
 
 
-export const confirmOrder = async (ref) => {
+const confirmOrder = async (ref) => {
     return await use_get({ url: `${process.env.NEXT_PUBLIC_SERVER_URL}/api/users/revolut/comfirm/${ref}` })
 }
 

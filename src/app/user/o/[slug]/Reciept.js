@@ -18,7 +18,7 @@ const Reciept = ({ auction }) => {
             <p className='text-lg font-medium text-secondary text-center'>Thank you for your order!</p>
             <div className='flex items-center space-x-1 text-xs justify-center'>
                 <p className='text-secondary text-center'>We emailed your recipet to </p>
-                <p className='text-secondary text-center font-bold'>{user?.email }</p>
+                <p className='text-secondary text-center font-bold'>{user?.email}</p>
             </div>
             <div className='relative w-[95%] text-sm lg:w-[70%] my-8 overflow-hidden'>
                 <RecieptBlock amount={auction.bid_id.current_bid} />
@@ -42,8 +42,10 @@ const RecieptBlock = ({ amount }) => {
     const total = calculate_total(amount) ?? 0
 
     useEffect(() => {
-        setLoading(false)
-    },[])
+        setTimeout(() => {
+            setLoading(false)
+        }, 1000)
+    }, [])
 
 
     return (
