@@ -7,14 +7,14 @@ import { use_get } from '@/lib/functions';
 
 
 
-const newestLots = await use_get({ url: `${process.env.NEXT_PUBLIC_SERVER_URL}/api/auction-items?sort=-createdAt` })
-const ClosingSoonLots = await use_get({ url: `${process.env.NEXT_PUBLIC_SERVER_URL}/api/auction-items?sort=-endDate` })
+const newestLots = await use_get({ url: `${process.env.NEXT_PUBLIC_SERVER_URL}/api/auction-items?sort=-createdAt`, options: { revalidate: 0 } })
+const ClosingSoonLots = await use_get({ url: `${process.env.NEXT_PUBLIC_SERVER_URL}/api/auction-items?sort=-endDate`, options: { revalidate: 0 } })
 
 export default async function Home() {
   const [newestLotsData, closingSoonLotsData] = await Promise.all([newestLots, ClosingSoonLots])
   return (
     <div className="w-full h-auto flex flex-col text-bright justify-start items-center">
-      <main className="w-full h-full max-w-7xl flex flex-col items-center pt-8">
+      <main className="w-full h-full max-w-7xl  flex flex-col items-center pt-8">
 
         <div className="w-full flex justify-center max-w-4xl mt-4 lg:mt-20">
           <HomeSearch />

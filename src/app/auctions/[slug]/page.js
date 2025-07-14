@@ -48,7 +48,7 @@ export default async function AuctionItem({ params }) {
                         </section>
                         <DetailsSection data={auction} />
                     </section>
-                    <section className='flex-1 w-full'>
+                    <section className='flex-1'>
                         <ActionArea data={auction} />
                     </section>
                 </div>

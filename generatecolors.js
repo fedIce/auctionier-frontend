@@ -36,3 +36,58 @@ const a =
     
   })
     console.log(colors)
+// CHOICE 1
+    // --color-background-100:#313629; 
+    // --color-background-200:#626c52; 
+    // --color-background-300:#919e7f; 
+    // --color-background-400:#c0c7b5; 
+    // --color-background-500:#eef0eb; 
+    // --color-background-600:#f1f3ef; 
+    // --color-background-700:#f5f6f3; 
+    // --color-background-800:#f8f9f7; 
+    // --color-background-900:#fcfcfb; 
+    // --color-background:#eef0eb;
+     
+    // --color-secondary-100:#040a0d; 
+    // --color-secondary-200:#08141a; 
+    // --color-secondary-300:#0c1e28; 
+    // --color-secondary-400:#112735; 
+    // --color-secondary-500:#153243; 
+    // --color-secondary-600:#296282; 
+    // --color-secondary-700:#3e92c2; 
+    // --color-secondary-800:#7eb6d6; 
+    // --color-secondary-900:#bfdbeb; 
+    // --color-secondary:#153243;
+     
+    // --color-foreground-100:#070d11; 
+    // --color-foreground-200:#0e1b23; 
+    // --color-foreground-300:#162834; 
+    // --color-foreground-400:#1d3645; 
+    // --color-foreground-500:#244356; 
+    // --color-foreground-600:#3b6e8d; 
+    // --color-foreground-700:#5b96ba; 
+    // --color-foreground-800:#92b9d1; 
+    // --color-foreground-900:#c8dce8; 
+    // --color-foreground:#244356;
+     
+    // --color-third-100:#252721; 
+    // --color-third-200:#4a4d42; 
+    // --color-third-300:#6f7463; 
+    // --color-third-400:#929886; 
+    // --color-third-500:#b4b8ab; 
+    // --color-third-600:#c4c7bd; 
+    // --color-third-700:#d3d5cd; 
+    // --color-third-800:#e1e3de; 
+    // --color-third-900:#f0f1ee; 
+    // --color-third:#b4b8ab;
+     
+    // --color-bright-100:#3b4e14; 
+    // --color-bright-200:#769d27; 
+    // --color-bright-300:#a9d452; 
+    // --color-bright-400:#d0e7a0; 
+    // --color-bright-500:#f7fbef; 
+    // --color-bright-600:#f8fcf2; 
+    // --color-bright-700:#fafdf5; 
+    // --color-bright-800:#fcfdf8; 
+    // --color-bright-900:#fdfefc; 
+    // --color-bright:#f7fbef;

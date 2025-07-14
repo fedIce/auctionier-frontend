@@ -13,8 +13,8 @@ const SpecialCategoryCard = ({ src, title, alt, endDate }) => {
                 alt={alt}
             />
             <div className='absolute bg-gradient-to-t flex p-4 space-y-1 flex-col justify-end from-40% from-black/70 to-transparent inset-0 rounded-xl outline-1 -outline-offset-1 outline-gray-950/10 dark:outline-white/10 ' >
-                <div className='flex items-center space-x-1'><p className='border-b text-sm lg:text-base border-white w-fit'>Ends in </p><span className='font-bold'>{endDate && <CountdownTimer targetDate={endDate} />}</span></div>
-                <h3 className='font-semibold line-clamp-3 text-lg lg:text-3xl lg:line-clamp-4'>{title}</h3>
+                <div className='flex items-center space-x-1 whitespace-nowrap '><p className='border-b text-sm lg:text-base border-white w-fit'>Ends in </p><span className='font-bold text-xs md:text-sm lg:text-base'>{endDate && <CountdownTimer targetDate={endDate} />}</span></div>
+                <h3 className='font-semibold line-clamp-3 text-base md:text-lg lg:text-3xl  lg:line-clamp-4'>{title}</h3>
                 <p className='text-sm lg:text-base font-light underline hover:font-bold duration-300 transition-all'>Explore Now</p>
             </div>
         </div>
