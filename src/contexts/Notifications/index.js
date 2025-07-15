@@ -38,10 +38,12 @@ const NotificationsContext = ({ children }) => {
 
     useEffect(() => {
 
-        user && use_get({ url: `${process.env.NEXT_PUBLIC_SERVER_URL}/api/notifications?where[user]=${user.id}&limit=0` }).then((res) => {
-            setNotifications(res.docs)
-            setNotificationsCount(res.docs.filter(i => i.read == false).length)
-        })
+        if (user) {
+            use_get({ url: `${process.env.NEXT_PUBLIC_SERVER_URL}/api/notifications?where[user]=${user.id}&limit=0` }).then((res) => {
+                setNotifications(res.docs)
+                setNotificationsCount(res.docs.filter(i => i.read == false).length)
+            })
+        }
     }, [user])
 
     useEffect(() => {
