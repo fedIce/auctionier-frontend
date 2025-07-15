@@ -1,6 +1,6 @@
 'use client'
 import React, { createContext, useContext } from 'react'
-// import Pusher from 'pusher-js';
+import Pusher from 'pusher-js';
 
 
 const init = {}
@@ -12,10 +12,10 @@ const NotificationsContext = ({ children }) => {
         cluster: process.env.NEXT_PUBLIC_PUSHER_CLUSTER
     });
 
-    // var channel = pusher.subscribe('gavel-app');
-    // channel.bind('app-events', function (data) {
-    //     console.log(JSON.stringify(data));
-    // });
+    var channel = pusher.subscribe('gavel-app');
+    channel.bind('app-events', function (data) {
+        console.log(JSON.stringify(data));
+    });
 
     const value = {}
     return (
