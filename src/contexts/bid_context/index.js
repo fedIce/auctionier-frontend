@@ -45,7 +45,7 @@ const BiddingContext = ({ children }) => {
             return null
         }
 
-        return await use_post({
+        const result = await use_post({
             url: `${process.env.NEXT_PUBLIC_SERVER_URL}/api/bids/place_bid?depth=2`, data: {
                 customer_id: user.id,
                 auction_id: data.id,
@@ -54,7 +54,6 @@ const BiddingContext = ({ children }) => {
             },
             token: auth?.user?.token ?? null
         }).catch(async (e) => {
-            console.log(e, '::')
             if (e) {
                 const error = await parseError(e)
                 alert.setalert('error', error)
@@ -62,6 +61,11 @@ const BiddingContext = ({ children }) => {
             }
 
         })
+        console.log(result, '::')
+
+        if (!result.validBid) {
+            alert.setalert('warning', 'Sorry, Your bid does not meet the reserve price, try again!')
+        }
 
     }
 

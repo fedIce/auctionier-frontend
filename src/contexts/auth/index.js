@@ -5,7 +5,7 @@ import { login_user, refresh_user_token, register_user, signout_user } from '../
 import { usePathname, useRouter } from 'next/navigation'
 import { use_get, use_post } from '@/lib/functions'
 import { useAlert } from '../Alert'
-
+import LoginRequired from './loginRequired'
 
 export const parseError = async (e) => {
     let error = null
@@ -42,7 +42,8 @@ const init = {
     saveShippingInfo: async () => null,
     getShippingData: async () => null,
     shippingInfo: null,
-    setShippingInfo: () => null
+    setShippingInfo: () => null,
+    userLoggedIn: () => null
 }
 
 export const APP_STATES = {
@@ -58,6 +59,7 @@ const AuthContext = ({ children }) => {
     const [user, setUser] = useState(null)
     const [history, setHistory] = useState([])
     const [shippingInfo, setShippingInfo] = useState(null)
+    const [loginRequired, setOpenLoginRequired] = useState(false)
 
     const isLoggedIn = user?.user ? true : false
     const path = usePathname()
@@ -156,6 +158,14 @@ const AuthContext = ({ children }) => {
             })
     }
 
+    const userLoggedIn = () => {
+        if (!user) {
+            setOpenLoginRequired(true)
+            return false
+        }
+        return true
+    }
+
 
     const refresh_user = async () => {
         const _user = await refresh_user_token(user?.token)
@@ -164,11 +174,12 @@ const AuthContext = ({ children }) => {
         return _user
     }
 
-    const value = { login, register, refresh_user, user, isLoggedIn, signout, saveShippingInfo, getShippingData, shippingInfo, setShippingInfo, history }
+    const value = { login, register, refresh_user, user, isLoggedIn, signout, saveShippingInfo, getShippingData, shippingInfo, setShippingInfo, history, userLoggedIn }
 
     return (
         <AuthContextProvider.Provider value={value} className='w-full h-full'>
             {children}
+            {loginRequired && <LoginRequired setOpen={setOpenLoginRequired} />}
         </AuthContextProvider.Provider>
     )
 }

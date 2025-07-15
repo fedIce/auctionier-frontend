@@ -1,16 +1,16 @@
 'use client'
 import React, { useEffect, useState } from 'react'
-import { FilterControls, FilterItem } from '../../../lib/FilterBlock'
-import ListingCards from '../../../components/ListingCardsSection/ListingCards'
-import Pagination from '../../../lib/Pagination'
-import ListingCardsSection from '../../../components/ListingCardsSection'
-import CategoryIcons from '../../../components/Home/CategoryIcons'
-import BreadCrumbs from '../../../components/BreadCrumbs'
+import { FilterControls, FilterItem } from '../../../../lib/FilterBlock'
+import ListingCards from '../../../../components/ListingCardsSection/ListingCards'
+import Pagination from '../../../../lib/Pagination'
+import ListingCardsSection from '../../../../components/ListingCardsSection'
+import CategoryIcons from '../../../../components/Home/CategoryIcons'
+import BreadCrumbs from '../../../../components/BreadCrumbs'
 import { AdjustmentsHorizontalIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { useRouter } from 'next/navigation'
-import { useAuth } from '../../../contexts/auth'
-import { fetchWatches } from './CategoryPage'
-import NoItemsFound from '../../../components/NoItemsFound'
+import { useAuth } from '../../../../contexts/auth'
+import { fetchWatches } from '../CategoryPage'
+import NoItemsFound from '../../../../components/NoItemsFound'
 
 const SubCategoryPage = ({ id, category, docs, crumbs, aggs }) => {
     const [hideFilter, setHideFilter] = useState(false)
@@ -33,12 +33,12 @@ const SubCategoryPage = ({ id, category, docs, crumbs, aggs }) => {
 
 
 
-    const userWatches = new Set(watches.map(i => _user.id == i.user && i.auction_item))
+    const userWatches = new Set(watches.map(i => _user?.id == i.user && i.auction_item))
 
     return (
         (
-            <div className='w-full py-8 px-2 relative'>
-                <section className='space-y-2 lg:my-8'>
+            <div className='w-full p-2 relative'>
+                <section className='space-y-2 lg:my-2'>
                     <CategoryIcons />
                 </section>
                 <section>
@@ -89,7 +89,7 @@ const SubCategoryPage = ({ id, category, docs, crumbs, aggs }) => {
 
                                                 docs.length > 0 ? docs.map((doc, i) => {
                                                     return (
-                                                        <ListingCards watches={userWatches} key={i} data={doc} user={doc.user} auction={doc} />
+                                                        <ListingCards watches={userWatches} watchCount={watches} key={i} data={doc} user={doc.user} auction={doc} />
                                                     )
                                                 })
                                                     :

@@ -97,7 +97,7 @@ const SubCategoryPage = () => {
                                             :
                                             favs?.map((item, i) => {
                                                 return (
-                                                    <ListingCards watches={userWatches} key={i} data={item} user={user} />
+                                                    <ListingCards watches={userWatches} watchCount={watches} key={i} data={item} user={user} />
                                                 )
                                             })
                                     }
@@ -112,7 +112,7 @@ const SubCategoryPage = () => {
                                                 :
                                                 watched?.map((item, i) => {
                                                     return (
-                                                        <ListingCards watches={userWatches} key={i} data={item} user={user} />
+                                                        <ListingCards watches={userWatches} watchCount={watches} key={i} data={item} user={user} />
                                                     )
                                                 })
                                         }

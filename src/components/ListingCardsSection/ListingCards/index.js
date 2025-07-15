@@ -26,15 +26,21 @@ const topBid = (bids) => {
 }
 
 
-const ListingCards = ({ data = null, user = null, watches = null, pulse = false }) => {
+const ListingCards = ({ data = null, user = null, watches = null, pulse = false, watchCount = null }) => {
 
     const auth = useAuth()
     const _user = auth.user?.user ?? null
     const [watching, setWatching] = useState([])
+    const [count, setCount] = useState(0)
 
     useEffect(() => {
-        if (watches) { setWatching(Array.from(watches)) }
-    }, [watches])
+        if (watches) {
+            setWatching(Array.from(watches))
+        }
+        if (watchCount) {
+            setCount(watchCount.filter(i => i.auction_item == data?.id)?.length || 0)
+        }
+    }, [watches, watchCount])
 
     useEffect(() => {
     }, [watching])
@@ -107,17 +113,19 @@ const ListingCards = ({ data = null, user = null, watches = null, pulse = false 
     const SolidHeart = SolidIcons.HeartIcon
 
     const onAddToFavourites = async () => {
+        if (!auth.userLoggedIn()) return
         return await use_post({
-            url: `${process.env.NEXT_PUBLIC_SERVER_URL}/api/watchers/watch?depth=0`, data: {
+            url: `${process.env.NEXT_PUBLIC_SERVER_URL}/api/watchers/watch?depth=0`, token: auth?.user?.token, data: {
                 user: _user?.id,
                 auction_item: data?.id
             }
         }).then((res) => {
             if (res.action == 'create') {
                 setWatching(w => [...w, res.auction_item])
+                setCount(c => c + 1)
             } else {
                 setWatching(w => w.filter(l => l !== res.auction_item))
-
+                setCount(c => c - 1)
             }
         })
     }
@@ -145,18 +153,19 @@ const ListingCards = ({ data = null, user = null, watches = null, pulse = false 
                 }
             </div>
             {watches &&
-                <div className='absolute top-3 text-bright-500 right-3'>
+                <div className='absolute bg-foreground pl-1 pr-2 rounded-full flex items-center space-x-2 top-3 text-background right-3'>
                     {
                         isWatched ?
                             <SolidHeart onClick={() => onAddToFavourites()} className='w-7 h-7 cursor-pointer ' />
                             :
                             <HeartIcon onClick={() => onAddToFavourites()} className='w-7 h-7 cursor-pointer ' />
                     }
+                    <p className='font-medium text-background'>{count}</p>
                 </div>}
         </div>
     )
         : (
-            <div className={`w-full lg:min-w-64 min-h-80 bg-third-300 rounded-lg ${pulse && 'animate-pulse'}`} >
+            <div className={`w-full lg:min-w-64 min-h-80 bg-foreground rounded-lg ${pulse && 'animate-pulse'}`} >
                 {/* Section Card */}
             </div >
         )

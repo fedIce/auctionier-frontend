@@ -1,16 +1,8 @@
-import React from 'react'
+import React, { Suspense } from 'react'
+import ListingCardsSection from '../../components/ListingCardsSection'
+import SearchEntryPage from './searchEntry.js'
+import SearchPageloading from '../../components/SearchPageLoading/index.js'
 
-import { use_get } from '../../lib/functions'
-import SearchPageCOntent from './search'
-import { generateQueryParams } from './func.js'
-
-const searchCall = async (query) => {
-    const res = await use_get({ url: `${process.env.NEXT_PUBLIC_SERVER_URL}/api/auction-items/search?search=${query}` })
-    if (!res) {
-        throw new Error('Failed to fetch data')
-    }
-    return res
-}
 
 const SearchPage = async ({ searchParams }) => {
 
@@ -18,44 +10,21 @@ const SearchPage = async ({ searchParams }) => {
     const query = await searchParams
 
 
+    return (
+        <div className='w-full py-8 px-2'>
+            <section className='space-y-2 mb-4 lg:my-8'>
+                <h1 className='font-medium text-5xl'>Results for: {q}</h1>
+            </section>
+            <Suspense fallback={<SearchPageloading />}>
+                <SearchEntryPage searchParams={searchParams} />
+                <section>
+                    <ListingCardsSection />
+                </section>
+            </Suspense>
+            
+        </div>
 
-
-
-    const searchResults = await searchCall(q + generateQueryParams(`&q=${q}`, query)).catch(() => {
-        return { docs: [], aggs: [] }
-    })
-
-    const docs = searchResults?.docs || []
-
-
-    const aggs = searchResults?.aggs[0] || {}
-    const {
-        hasNextPage,
-        hasPrevPage,
-        limit,
-        nextPage,
-        page,
-        pagingCounter,
-        prevPage,
-        totalDocs,
-        totalPages,
-    } = searchResults
-
-    const pagination = {
-        hasNextPage,
-        hasPrevPage,
-        limit,
-        nextPage,
-        page,
-        pagingCounter,
-        prevPage,
-        totalDocs,
-        totalPages,
-    }
-
-
-
-    return <SearchPageCOntent docs={docs} aggs={aggs} q={q} query={query} pagination={pagination} />
+    )
 }
 
 export default SearchPage

@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import AInput from '../../../lib/AInput'
 import AButton, { ApplePayIcon, GooglePayIcon, MasterCardPayIcon, PayPalIcon, USDTIcon, VisaPayIcon } from '../../../lib/AButton'
-import { ShieldCheckIcon, TruckIcon, ArrowRightIcon, ChevronDownIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import { ShieldCheckIcon, TruckIcon, ArrowRightIcon, ChevronDownIcon, XMarkIcon, HeartIcon } from "@heroicons/react/24/outline";
 import moment from 'moment';
 import CountdownTimer from '../../../components/Counter';
 import { closedForBidding, getShortCode, numberWithCommas } from '../../../lib/functions/util';
@@ -10,6 +10,11 @@ import { useBidding } from '../../../contexts/bid_context'
 import BidModal from '../bidModal';
 import Image from 'next/image';
 import { useAuth } from '../../../contexts/auth';
+import { fetchWatches } from '../../category/[slug]/CategoryPage';
+import * as SolidIcons from '@heroicons/react/24/solid'
+import { use_post } from '../../../lib/functions';
+
+const SolidHeart = SolidIcons.HeartIcon
 
 
 const ActionArea = ({ data }) => {
@@ -22,6 +27,8 @@ const ActionArea = ({ data }) => {
     const [bidAmountError, setBidAmountError] = useState(null)
     const [bidStatus, setBidStatus] = useState({})
     const [openMobileBidModal, setOpenMobileBidModal] = useState(false)
+    const [watching, setWatching] = useState(false)
+    const [count, setCount] = useState(0)
 
     const bidding = useBidding()
     const auth = useAuth()
@@ -32,6 +39,16 @@ const ActionArea = ({ data }) => {
         bidding.getAuctionBidData(data.id).then(res => setBids(res))
         bidding.getAuctionBidItemData(data.id).then((res) => setBidStatus(res))
     }, [])
+
+    useEffect(() => {
+        fetchWatches([data.id]).then(res => {
+            const userWatches = new Set(res.map(i => user?.id == i.user && i.auction_item))
+            setWatching(userWatches.has(data?.id))
+            setCount(res.filter(i => i.auction_item == data?.id)?.length || 0)
+        })
+    }, [data, user])
+
+    useEffect(() => { }, [watching, count])
 
     React.useMemo(() => {
         setAllBids(bids.bids?.sort((a, b) => a.createdAt < b.createdAt ? 1 : -1))
@@ -69,7 +86,28 @@ const ActionArea = ({ data }) => {
         })
         .finally(() => setBidAmount(''))
 
+
+    const onAddToFavourites = async () => {
+        if (!auth.userLoggedIn()) return
+        return await use_post({
+            url: `${process.env.NEXT_PUBLIC_SERVER_URL}/api/watchers/watch?depth=0`, token: auth?.user?.token, data: {
+                user: user?.id,
+                auction_item: data?.id
+            }
+        }).then((res) => {
+            if (res.action == 'create') {
+                setWatching(w => !w)
+                setCount(c => c + 1)
+            } else {
+                setWatching(w => !w)
+                setCount(c => c - 1)
+            }
+        })
+    }
+
+
     const handlePlaceBid = () => {
+        if (!auth.userLoggedIn()) return
         if (bidAmount < nextBid) {
             return setBidAmountError("Value Should be atleast €" + numberWithCommas(nextBid))
         }
@@ -77,8 +115,14 @@ const ActionArea = ({ data }) => {
         return setOpenBiddingModal(true)
     }
 
+
     return (
         <div className='w-full lg:w-3/4 h-auto border-t lg:border border-secondary-200/10 p-4 text-secondary-400 lg:rounded-2xl'>
+            <div onClick={() => onAddToFavourites()} className='absolute lg:relative lg:top-0 lg:right-0 top-[4%] right-5 z-[999999] rounded-full bg-background lg:bg-transparent px-2 py-1 flex items-center space-x-2 pb-2 justify-end text-secondary'>
+                {watching ? <SolidHeart className='w-7 h-7' /> : <HeartIcon className='w-7 h-7' />}
+                <p>{count}</p>
+            </div>
+
             <div className='text-lg text-secondary-100/40 font-extralight flex items-center justify-between'>
                 <p>CURRENT BID</p>
                 <p className='uppercase'>#{data?.lotId?.split("-")[1] ?? ''}</p>
@@ -151,16 +195,17 @@ const ActionArea = ({ data }) => {
                 </section>
 
                 <section className='border-t space-y-4 text-sm border-foreground/10 py-8'>
-                    <div className='p-2 px-4 text-foreground bg-secondary-800 text-center rounded-lg'>
-                        <p>32 other people are watching this object</p>
-                    </div>
+                    {count &&
+                        <div className='p-2 px-4 text-foreground bg-secondary-800 text-center rounded-lg'>
+                            <p className=' text-secondary'>{count} other people are watching this object</p>
+                        </div>}
                     <div className='py-4 space-y-2'>
                         {
                             (!seeAllBids ? allBids?.slice(0, 5) : allBids)?.map((bid, i) => {
                                 const userId = bid.user?.id ? bid.user.id : bid.user
 
                                 return bid.user && (
-                                    <div key={i} className='grid w-full grid-cols-3'>
+                                    <div key={i} className={`grid w-full grid-cols-3 ${!bid.valid_bid && 'text-amber-500'}`}>
                                         {userId &&
                                             <div className='flex items-center space-x-2'>
                                                 {bid.user?.id != user.id && <p>Bidder</p>}
@@ -172,9 +217,9 @@ const ActionArea = ({ data }) => {
                                 )
                             })
                         }
-                        {bids.bids &&
+                        {(bids.bids && allBids?.length > 5) &&
                             <div onClick={() => setSeeAllBids(!seeAllBids)} className=' pt-8 cursor-pointer flex items-center text-sm font-medium space-x-2'>
-                                <span>{seeAllBids ? `Hide ${bids.bids?.length ?? 0 - 5} Bids` : `See all Bids (+${bids.bids?.length ?? 0 - 5})`} </span>
+                                <span>{seeAllBids ? `Hide ${bids.bids?.length ?? 0 - 5} Bids` : `See all Bids (+${bids.bids?.length - 5 ?? 0 - 5})`} </span>
                                 <span><ChevronDownIcon className='w-4 h-4' /></span>
                             </div>}
                     </div>
@@ -272,7 +317,7 @@ const MobileBidModal = ({ image, user, aution, bids, bidAmountError, bidAmount, 
                             (!seeAllBids ? allBids?.slice(0, 5) : allBids)?.map((bid, i) => {
                                 const userId = bid.user?.id ? bid.user.id : bid.user
                                 return bid.user && (
-                                    <div key={i} className='grid w-full grid-cols-3'>
+                                    <div key={i} className={`grid w-full grid-cols-3 ${!bid.valid_bid && 'text-amber-500'}`}>
                                         {userId &&
                                             <div className='flex items-center space-x-2'>
                                                 {bid.user?.id != user.id && <p>Bidder</p>}

@@ -4,7 +4,6 @@ import React, { useEffect, useState } from 'react'
 import { CheckerAnimation, LoaderBlockAnimation } from '../../../components/util/checker'
 import { auction_fees, calculate_total, calculate_vat, getAuctionFees, numberWithCommas } from '../../../lib/functions/util'
 import { useAuth } from '../../../contexts/auth'
-import LoginRequired from '../../../contexts/auth/loginRequired'
 
 const BidModal = ({ open, setOpen, amount: a, action = () => null }) => {
 
@@ -69,9 +68,6 @@ const BidModal = ({ open, setOpen, amount: a, action = () => null }) => {
     const VAT = calculate_vat(amount).toFixed(2)
 
     if (!open) return null
-
-    if (!auth.user) return <LoginRequired setOpen={setOpen} />
-
 
     const XIcon = Icons["XMarkIcon"]
 

@@ -17,8 +17,8 @@ import NoItemsFound from '../../../components/NoItemsFound'
 
 
 
-export const fetchWatches = async (ids) => {
-    const res = await use_get({ url: `${process.env.NEXT_PUBLIC_SERVER_URL}/api/watchers?where[auction_item][in]=${ids}&depth=0` })
+export const fetchWatches = async (ids, token = null) => {
+    const res = await use_get({ url: `${process.env.NEXT_PUBLIC_SERVER_URL}/api/watchers?where[auction_item][in]=${ids}&depth=0`, token })
     console.log('RES___>>', res)
     return res.docs
 }
@@ -46,10 +46,10 @@ const CategoryPage = ({ id, sub_catgeories_docs, docs, aggs, crumbs, pagination 
 
 
 
-    const userWatches = new Set(watches.map(i => _user.id == i.user && i.auction_item))
+    const userWatches = new Set(watches.map(i => _user?.id == i.user && i.auction_item))
     return (
-        <div className='w-full py-8 px-2'>
-            <section className='space-y-2 lg:my-8'>
+        <div className='w-full p-2'>
+            <section className='space-y-2 lg:my-2'>
                 <CategoryIcons />
             </section>
             <section>
@@ -124,7 +124,7 @@ const CategoryPage = ({ id, sub_catgeories_docs, docs, aggs, crumbs, pagination 
 
                                             docs.length > 0 ? docs.map((doc, i) => {
                                                 return (
-                                                    <ListingCards watches={userWatches} key={i} data={doc} user={doc.user} auction={doc} />
+                                                    <ListingCards watches={userWatches} watchCount={watches} key={i} data={doc} user={doc.user} auction={doc} />
                                                 )
                                             })
                                                 :

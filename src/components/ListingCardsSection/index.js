@@ -54,15 +54,15 @@ const ListingCardsSection = ({ data, title = "Section Title" }) => {
     const scroll = (direction) => {
         const bgDropElement = document.getElementById("list_cards_sroll");
         const { width } = bgDropElement.getBoundingClientRect();
-
+        
 
         if (direction <= 0) return scrollRef.current.scrollTo({ left: 0, behavior: "smooth" })
-        if (direction > width) return
+        if (direction > (width + 500)) return
         scrollRef.current.scrollTo({ left: direction, behavior: "smooth" })
         setScrollAmount(direction)
     }
 
-    const userWatches = new Set(watches.map(i => _user.id == i.user && i.auction_item))
+    const userWatches = new Set(watches.map(i => _user?.id == i.user && i.auction_item))
 
     return (
         <div className='flex space-y-4 flex-col w-full justify-start mt-8 lg:mt-16 mb-4 lg:mb-8 items-start px-2'>
@@ -77,13 +77,13 @@ const ListingCardsSection = ({ data, title = "Section Title" }) => {
                     </div>
                 </div>
             </div>
-            <div id="list_cards_sroll" ref={scrollRef} className="max-w-[100%] flex items-start space-x-2 overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:'none'] [scrollbar-width:'none']">
+            <div id="list_cards_sroll" ref={scrollRef} className="w-full flex items-start space-x-2 overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:'none'] [scrollbar-width:'none']">
                 {
                     docs?.length > 0 ?
                         docs.map((doc, i) => {
                             return (
                                 <div className='min-w-64' key={i}>
-                                    <ListingCards watches={userWatches} data={doc} />
+                                    <ListingCards watches={userWatches} watchCount={watches} data={doc} />
                                 </div>
                             )
                         })

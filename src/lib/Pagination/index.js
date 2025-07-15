@@ -65,12 +65,12 @@ const Pagination = ({ pagination }) => {
                     </div>)}
                 {
                     currentPage <= 3 ?
-                        Array.from({ length: 3 }, (_, i) => (
+                        Array.from({ length: totalPages }, (_, i) => (
                             <div key={i} onClick={() => gotonextPage(i + 1)} className={currentPage == i + 1 ? 'underline font-bold' : 'text-secondary-600 cursor-pointer'}>{i + 1}</div>
                         ))
                         :
                         currentPage >= totalPages - 2 ?
-                            Array.from({ length: 3 }, (_, i) => (
+                            Array.from({ length: totalPages }, (_, i) => (
                                 <div key={i} onClick={() => gotonextPage(totalPages - (2 - i))} className={currentPage == totalPages - (2 - i) ? 'underline font-bold' : 'text-secondary-600 cursor-pointer'}>{totalPages - (2 - i)}</div>
                             ))
                             :

@@ -1,6 +1,6 @@
 'use client'
 import React, { useContext, createContext, useState, useEffect } from 'react'
-import { GrayInfoAlertDialog, GreenSuccessAlertDialog, RedDangerAlertDialog } from './components'
+import { GrayInfoAlertDialog, GreenSuccessAlertDialog, RedDangerAlertDialog, YellowInfoAlertDialog } from './components'
 
 const init = {
     setalert: () => null,
@@ -30,6 +30,8 @@ const AlertContext = ({ children }) => {
                 return <RedDangerAlertDialog text={_alert.text} close={closealert} />
             case 'info':
                 return <GrayInfoAlertDialog text={_alert.text} close={closealert} />
+            case 'warning':
+                return <YellowInfoAlertDialog text={_alert.text} close={closealert} />
             default:
                 return null
 

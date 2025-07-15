@@ -23,7 +23,7 @@ const AuctionsPage = ({ auction, docs, aggs, crumbs, pagination }) => {
 
     const router = useRouter()
     const auth = useAuth()
-    const _user = auth?.user?.user || null
+    const _user = auth?.user?.user || {}
 
     useEffect(() => {
         fetchWatches(docs.map(i => i.id)).then(res => {
@@ -35,8 +35,8 @@ const AuctionsPage = ({ auction, docs, aggs, crumbs, pagination }) => {
 
 
     return (
-        <div className='w-full py-8 px-2 relative'>
-            <section className='space-y-2 lg:my-8'>
+        <div className='w-full p-2 relative'>
+            <section className='space-y-2 lg:my-2'>
                 <CategoryIcons />
             </section>
             <section>
@@ -93,7 +93,7 @@ const AuctionsPage = ({ auction, docs, aggs, crumbs, pagination }) => {
 
                                         docs.length > 0 ? docs.map((doc, i) => {
                                             return (
-                                                <ListingCards watches={userWatches} key={i} data={doc} user={doc.user} auction={doc} />
+                                                <ListingCards watches={userWatches} watchCount={watches} key={i} data={doc} user={doc.user} auction={doc} />
                                             )
                                         })
                                             :
