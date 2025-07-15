@@ -118,7 +118,7 @@ const ActionArea = ({ data }) => {
 
     return (
         <div className='w-full lg:w-3/4 h-auto border-t lg:border border-secondary-200/10 p-4 text-secondary-400 lg:rounded-2xl'>
-            <div onClick={() => onAddToFavourites()} className='absolute lg:relative lg:top-0 lg:right-0 top-[4%] right-5 z-[999999] rounded-full bg-background lg:bg-transparent px-2 py-1 flex items-center space-x-2 pb-2 justify-end text-secondary'>
+            <div onClick={() => onAddToFavourites()} className='absolute lg:relative lg:top-0 lg:right-0 top-[4%] right-5 lg:z-0 rounded-full bg-background lg:bg-transparent px-2 py-1 flex items-center space-x-2 pb-2 justify-end text-secondary'>
                 {watching ? <SolidHeart className='w-7 h-7' /> : <HeartIcon className='w-7 h-7' />}
                 <p>{count}</p>
             </div>
