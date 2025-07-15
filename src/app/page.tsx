@@ -25,7 +25,6 @@ export default async function Home() {
         </div>
         <ListingCardsSection data={newestLotsData} title='Newest Lots' />
         <ListingCardsSection data={closingSoonLotsData} title='Closing soon' />
-        <ListingCardsSection data={null} />
       </main>
 
     </div>

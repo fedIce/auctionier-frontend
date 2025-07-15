@@ -1,5 +1,5 @@
 
-import NoItemsFound from '../../../components/NoItemsFound'
+import { Suspense } from 'react'
 import { use_get } from '../../../lib/functions'
 import { generateQueryParams } from '../../search/page'
 import CategoryPage from './CategoryPage'
@@ -18,6 +18,8 @@ async function fetchSubCategories(id) {
 }
 
 
+
+
 const CategoryItemPage = async ({ params, searchParams }) => {
     const p = await params
     const id = await p?.slug
@@ -25,15 +27,10 @@ const CategoryItemPage = async ({ params, searchParams }) => {
 
 
 
-    const category_auctions = await fetchCategoryItems(id + generateQueryParams('',query))
+    const category_auctions = await fetchCategoryItems(id + generateQueryParams('', query))
     const sub_catgeories = await fetchSubCategories(id)
 
     const docs = category_auctions?.docs || []
-
-
-    if (docs.length <= 0) {
-        return (<NoItemsFound/>)
-    }
 
 
     const sub_catgeories_docs = sub_catgeories?.docs || []
@@ -79,7 +76,23 @@ const CategoryItemPage = async ({ params, searchParams }) => {
 
     // const Icon = Icons[]
 
-    return <CategoryPage id={id} sub_catgeories_docs={sub_catgeories_docs} docs={docs} aggs={aggs[0]} crumbs={_} pagination={pagination} />
+    return (
+        <Suspense fallback={
+            <section className=' grid gap-4 grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
+
+                {[0, 0, 0, 0].map((_, i) => {
+                    return (
+                        <div key={i} className={`w-full min-w-64 min-h-80 bg-third-300 rounded-lg animate-pulse`} >
+                            {/* Section Card */}
+                        </div >
+                    )
+                })}
+
+            </section>
+        }>
+            <CategoryPage id={id} sub_catgeories_docs={sub_catgeories_docs} docs={docs} aggs={aggs[0]} crumbs={_} pagination={pagination} />
+        </Suspense>
+    )
 }
 
 export default CategoryItemPage

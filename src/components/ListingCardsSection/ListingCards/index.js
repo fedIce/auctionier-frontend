@@ -1,9 +1,12 @@
 import Image from 'next/image'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { numberWithCommas, timeExpired } from '../../../lib/functions/util'
 import moment from 'moment';
 import Link from 'next/link';
-import { ChevronRightIcon } from '@heroicons/react/24/outline';
+import { ChevronRightIcon, HeartIcon } from '@heroicons/react/24/outline';
+import * as SolidIcons from '@heroicons/react/24/solid';
+import { use_post } from '@/lib/functions';
+import { useAuth } from '@/contexts/auth';
 
 
 const topBid = (bids) => {
@@ -23,8 +26,18 @@ const topBid = (bids) => {
 }
 
 
-const ListingCards = ({ data = null, user = null }) => {
+const ListingCards = ({ data = null, user = null, watches = null, pulse = false }) => {
 
+    const auth = useAuth()
+    const _user = auth.user?.user ?? null
+    const [watching, setWatching] = useState([])
+
+    useEffect(() => {
+        watches && setWatching(Array.from(watches))
+    }, [watches])
+
+    useEffect(() => {
+    }, [watching])
 
     let bid_summary = null
 
@@ -91,9 +104,29 @@ const ListingCards = ({ data = null, user = null }) => {
             status: 'watching'
         } : null
 
+    const SolidHeart = SolidIcons.HeartIcon
+
+    const onAddToFavourites = async () => {
+        return await use_post({
+            url: `${process.env.NEXT_PUBLIC_SERVER_URL}/api/watchers/watch?depth=0`, data: {
+                user: _user?.id,
+                auction_item: data?.id
+            }
+        }).then((res) => {
+            if (res.action == 'create') {
+                setWatching(w => [...w, res.auction_item])
+            } else {
+                setWatching(w => w.filter(l => l !== res.auction_item))
+
+            }
+        })
+    }
+
+
+    const isWatched = data && new Set(watching).has(data?.id) || false;
 
     return data ? (
-        <div className='flex flex-col w-full space-y-2 text-foreground'>
+        <div className='flex flex-col w-full relative space-y-2 text-foreground'>
             <Link href={`/auctions/${data.slug}`} className=" w-full lg:min-w-64 min-h-60 cursor-pointer lg:max-h-80 bg-third-300 overflow-hidden rounded-lg " >
                 <Image src={`${process.env.NEXT_PUBLIC_SERVER_URL}${data.thumbnail?.url ? data.thumbnail.url : data.image[0].sizes.medium.url || ''}`} alt={data.thumbnail?.url ? data.thumbnail.alt : data.image[0].alt || 'auction image'} className='min-h-60 transition-transform duration-300 hover:scale-125 object-cover' height={data.thumbnail?.url ? data.thumbnail.height : data.image[0].sizes.medium.height || 600} width={data.thumbnail?.url ? data.thumbnail.width : data.image[0].sizes.medium.width || 600} />
             </Link >
@@ -111,10 +144,19 @@ const ListingCards = ({ data = null, user = null }) => {
                         <h6 className='text-sm font-mono'>{new Date(data.endDate) > new Date() ? `Ends ${moment(data.endDate).fromNow()}` : `Closed for bidding`}</h6>
                 }
             </div>
+            {watches &&
+                <div className='absolute top-3 text-bright-500 right-3'>
+                    {
+                        isWatched ?
+                            <SolidHeart onClick={() => onAddToFavourites()} className='w-7 h-7 cursor-pointer ' />
+                            :
+                            <HeartIcon onClick={() => onAddToFavourites()} className='w-7 h-7 cursor-pointer ' />
+                    }
+                </div>}
         </div>
     )
         : (
-            <div className=" w-full min-w-64 min-h-80 bg-third-300 rounded-lg " >
+            <div className={`w-full lg:min-w-64 min-h-80 bg-third-300 rounded-lg ${pulse && 'animate-pulse'}`} >
                 {/* Section Card */}
             </div >
         )

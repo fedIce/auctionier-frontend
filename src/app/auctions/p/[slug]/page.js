@@ -16,6 +16,15 @@ const fetchAuctionItems = async (id) => {
     return res
 }
 
+const fetchAuction = async (id) => {
+    const res = await use_get({
+        url: `${process.env.NEXT_PUBLIC_SERVER_URL}/api/auctions?where[slug][equals]=${id}&depth=2`, options: {
+            revalidate: 3600,
+        }
+    })
+    return res.docs[0]
+}
+
 
 
 
@@ -26,11 +35,8 @@ const Auctions = async ({ params, searchParams }) => {
     const auctions_items = await fetchAuctionItems(id + generateQueryParams('', query))
     const docs = auctions_items?.docs || []
 
-    if (docs.length <= 0) {
-        return (<NoItemsFound />)
-    }
 
-    const auction = docs[0].auction || {}
+    const auction = await fetchAuction(id)//docs[0]?.auction || {}
 
     const aggs = auctions_items?.aggs || []
     const {

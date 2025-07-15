@@ -1,14 +1,24 @@
 'use client'
-import React, { createRef, useState } from 'react'
+import React, { createRef, useEffect, useState } from 'react'
 import ListingCards from './ListingCards'
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
-
+import { fetchWatches } from './../../app/category/[slug]/CategoryPage'
+import { useAuth } from '@/contexts/auth';
 
 const ListingCardsSection = ({ data, title = "Section Title" }) => {
+    const [watches, setWatches] = useState([])
 
+
+    useEffect(() => {
+        fetchWatches(docs.map(i => i.id)).then(res => {
+            setWatches(res)
+        })
+    }, [])
 
 
     const scrollRef = createRef()
+    const auth = useAuth()
+    const _user = auth?.user?.user || null
     const [scrollAmount, setScrollAmount] = useState(1)
 
     const docs = data?.docs || []
@@ -52,6 +62,7 @@ const ListingCardsSection = ({ data, title = "Section Title" }) => {
         setScrollAmount(direction)
     }
 
+    const userWatches = new Set(watches.map(i => _user.id == i.user && i.auction_item))
 
     return (
         <div className='flex space-y-4 flex-col w-full justify-start mt-8 lg:mt-16 mb-4 lg:mb-8 items-start px-2'>
@@ -72,7 +83,7 @@ const ListingCardsSection = ({ data, title = "Section Title" }) => {
                         docs.map((doc, i) => {
                             return (
                                 <div className='min-w-64' key={i}>
-                                    <ListingCards data={doc}  />
+                                    <ListingCards watches={userWatches} data={doc} />
                                 </div>
                             )
                         })

@@ -3,7 +3,6 @@ import { useRouter, useSearchParams } from "next/navigation";
 import CheckBox from "../../../components/CheckBox";
 
 export const Block = ({ title, data }) => {
-    console.log('############### ', data)
     const searchParams = useSearchParams();
     const router = useRouter();
 

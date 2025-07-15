@@ -1,25 +1,52 @@
 'use client'
-import React, { useState } from 'react'
-import  { FilterControls, FilterItem } from '../../../lib/FilterBlock'
+import React, { useEffect, useState } from 'react'
+import { FilterControls, FilterItem } from '../../../lib/FilterBlock'
 import ListingCards from '../../../components/ListingCardsSection/ListingCards'
 import Pagination from '../../../lib/Pagination'
 import ListingCardsSection from '../../../components/ListingCardsSection'
 import BreadCrumbs from '../../../components/BreadCrumbs'
 import CategoryIcons from '../../../components/Home/CategoryIcons'
-import { AdjustmentsHorizontalIcon,  XMarkIcon } from "@heroicons/react/24/outline";
+import { AdjustmentsHorizontalIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import * as Icons from "@heroicons/react/24/outline";
 import Link from 'next/link'
 import { onSelectFilter } from '../../search/search'
 import { useRouter } from 'next/navigation'
+import { useAuth } from '../../../contexts/auth'
+import { use_get } from '../../../lib/functions'
+import NoItemsFound from '../../../components/NoItemsFound'
+
+
+
+export const fetchWatches = async (ids) => {
+    const res = await use_get({ url: `${process.env.NEXT_PUBLIC_SERVER_URL}/api/watchers?where[auction_item][in]=${ids}&depth=0` })
+    console.log('RES___>>', res)
+    return res.docs
+}
+
 
 
 const CategoryPage = ({ id, sub_catgeories_docs, docs, aggs, crumbs, pagination }) => {
     const [hideFilter, setHideFilter] = useState(false)
     const [hideMobileFilter, setHideMobileFilter] = useState(true)
+    const [watches, setWatches] = useState([])
+
     const router = useRouter()
-    const _icon = docs[0].category.icon
+    const _icon = docs[0]?.category.icon ?? "QuestionMarkCircleIcon"
     const Icon = Icons[_icon]
 
+    const auth = useAuth()
+    const _user = auth?.user?.user || null
+
+    useEffect(() => {
+        fetchWatches(docs.map(i => i.id)).then(res => {
+            setWatches(res)
+        })
+    }, [docs])
+
+
+
+
+    const userWatches = new Set(watches.map(i => _user.id == i.user && i.auction_item))
     return (
         <div className='w-full py-8 px-2'>
             <section className='space-y-2 lg:my-8'>
@@ -81,30 +108,34 @@ const CategoryPage = ({ id, sub_catgeories_docs, docs, aggs, crumbs, pagination 
             <section className='my-8 w-full'>
                 <section className='lg:my-8 w-full border-t border-bright/10'>
                     <div className='w-full relative flex items-start'>
-                        <div className={`${hideFilter ? 'w-0 border-background' : 'w-1/4 border-bright/10'} h-full hidden lg:block transition-all duration-300 ease-in-out border-r `} >
+                        <div className={`${hideFilter ? 'w-0 border-background' : 'w-full lg:w-1/4 border-bright/10'} h-full hidden lg:block transition-all duration-300 ease-in-out border-r `} >
                             <FilterControls aggs={aggs} />
                         </div>
-                        <div className={`${hideFilter ? 'w-full' : 'lg:w-3/4'} transition-all duration-300 ease-in-out lg:ml-4`}>
-                            <h4 className='font-bold text-xl text-nowrap my-4'>{docs.length} Item(s)</h4>
+                        {
+                            docs.length <= 0 ?
+                                <NoItemsFound />
+                                :
+                                <div className={`${hideFilter ? 'w-full' : 'w-full lg:w-3/4'} transition-all duration-300 ease-in-out lg:ml-4`}>
+                                    <h4 className='font-bold text-xl text-nowrap my-4'>{docs.length} Item(s)</h4>
 
-                            <section className={`w-full grid gap-4 grid-cols-2 ${hideFilter ? 'md:grid-cols-3 lg:grid-cols-4' : 'md:grid-cols-2 lg:grid-cols-3'}`}>
+                                    <section className={`w-full grid gap-4 grid-cols-2 ${hideFilter ? 'md:grid-cols-3 lg:grid-cols-4' : 'md:grid-cols-2 lg:grid-cols-3'}`}>
 
-                                {
+                                        {
 
-                                    docs.length > 0 ? docs.map((doc, i) => {
-                                        return (
-                                            <ListingCards key={i} data={doc} user={doc.user} auction={doc} />
-                                        )
-                                    })
-                                        :
-                                        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0].map((_, i) => {
-                                            return (
-                                                <ListingCards key={i} />
-                                            )
-                                        })
-                                }
-                            </section>
-                        </div>
+                                            docs.length > 0 ? docs.map((doc, i) => {
+                                                return (
+                                                    <ListingCards watches={userWatches} key={i} data={doc} user={doc.user} auction={doc} />
+                                                )
+                                            })
+                                                :
+                                                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0].map((_, i) => {
+                                                    return (
+                                                        <ListingCards key={i} />
+                                                    )
+                                                })
+                                        }
+                                    </section>
+                                </div>}
                     </div>
                 </section>
             </section>

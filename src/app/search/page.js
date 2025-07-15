@@ -41,9 +41,6 @@ const SearchPage = async ({ searchParams }) => {
 
     const docs = searchResults?.docs || []
 
-    if (docs.length <= 0) {
-        return (<NoItemsFound/>)
-    }
 
     const aggs = searchResults?.aggs[0] || {}
     const {
