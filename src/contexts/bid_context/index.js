@@ -61,11 +61,12 @@ const BiddingContext = ({ children }) => {
             }
 
         })
-        console.log(result, '::')
 
         if (!result.validBid) {
             alert.setalert('warning', 'Sorry, Your bid does not meet the reserve price, try again!')
         }
+
+        return result
 
     }
 
