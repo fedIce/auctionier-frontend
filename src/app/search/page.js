@@ -2,6 +2,7 @@ import React from 'react'
 
 import { use_get } from '../../lib/functions'
 import SearchPageCOntent from './search'
+import { generateQueryParams } from './func.js'
 
 const searchCall = async (query) => {
     const res = await use_get({ url: `${process.env.NEXT_PUBLIC_SERVER_URL}/api/auction-items/search?search=${query}` })
