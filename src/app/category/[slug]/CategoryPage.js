@@ -64,7 +64,7 @@ const CategoryPage = ({ id, sub_catgeories_docs, docs, aggs, crumbs, pagination 
                     {
                         sub_catgeories_docs.length > 0 ? sub_catgeories_docs.map((sub, i) => {
                             return (
-                                <Link href={`/category/${id}/${sub.slug}`} key={i} className='cursor-pointer transition-colors duration-300 border-white/10 hover:bg-bright-500  grid grid-rows-[1fr_50px] bg-bright-300 text-foreground aspect-video p-2 pb-0 rounded-xl lg:rounded-2xl'>
+                                <Link href={`/category/${id}/${sub.slug}`} key={i} className='cursor-pointer transition-colors duration-300 border-white/10 hover:bg-bright-600 grid grid-rows-[1fr_50px] bg-bright-700 text-secondary aspect-video p-2 pb-0 rounded-xl lg:rounded-2xl'>
                                     <div></div>
                                     <div className='flex items-end py-2 text-start text-xs lg:text-sm px-2 font-medium'>{sub.title}</div>
                                 </Link>
@@ -73,7 +73,7 @@ const CategoryPage = ({ id, sub_catgeories_docs, docs, aggs, crumbs, pagination 
                             :
                             [0, 0, 0, 0, 0, 0, 0].map((_, i) => {
                                 return (
-                                    <div key={i} className='cursor-pointer transition-colors duration-300 border-white/10 hover:bg-bright-200 grid grid-rows-[1fr_30px] bg-bright-400 text-background aspect-video p-2 pb-0 rounded-xl lg:rounded-2xl'>
+                                    <div key={i} className='cursor-pointer transition-colors duration-300 border-white/10 hover:bg-bright-200 grid grid-rows-[1fr_30px] bg-bright text-background aspect-video p-2 pb-0 rounded-xl lg:rounded-2xl'>
                                         <div></div>
                                         <div className='text-end text-xs lg:text-sm text-nowrap px-2 font-medium'>Sub Category {i}</div>
                                     </div>

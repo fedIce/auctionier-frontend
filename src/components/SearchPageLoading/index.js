@@ -32,8 +32,8 @@ const SearchPageloading = ({ category = false, subcategory = false, auction = fa
             <section className='space-y-4'>
                 {(category && !auction) &&
                     <div className='flex items-center my-4 space-x-2'>
-                        <div className='w-12 h-12 bg-foreground rounded' />
-                        <div className='w-52 h-10 bg-foreground rounded' />
+                        <div className='w-12 h-12 animate-pulse bg-foreground rounded' />
+                        <div className='w-52 h-10 animate-pulse bg-foreground rounded' />
                     </div>}
                 {subcategory &&
                     <div className='grid py-4 grid-cols-3 lg:grid-cols-5 gap-2 lg:gap-4'>
@@ -41,7 +41,7 @@ const SearchPageloading = ({ category = false, subcategory = false, auction = fa
                         {
                             [0, 0].map((_, i) => {
                                 return (
-                                    <div key={i} className='cursor-pointer transition-colors duration-300 border-white/10 hover:bg-bright-200 grid grid-rows-[1fr_30px] bg-bright-400 text-background aspect-video p-2 pb-0 rounded-xl lg:rounded-2xl'>
+                                    <div key={i} className='cursor-pointer transition-colors duration-300 border-white/10 hover:bg-bright-200 grid grid-rows-[1fr_30px] bg-foreground animate-pulse text-background aspect-video p-2 pb-0 rounded-xl lg:rounded-2xl'>
                                         <div></div>
                                         <div className='text-end text-xs lg:text-sm text-nowrap px-2 font-medium'></div>
                                     </div>

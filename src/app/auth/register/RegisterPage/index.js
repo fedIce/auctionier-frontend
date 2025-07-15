@@ -46,16 +46,16 @@ const RegisterPage = () => {
             </section>
             <section className='space-y-4'>
                 <section>
-                    <AInput setvalue={setFullName} value={fullName} label="Full Name" type="email" />
+                    <AInput setvalue={setFullName} value={fullName} label="Full Name" placeholder="John Smith" type="email" />
                 </section>
                 <section>
-                    <AInput setvalue={setEmail} value={email} label="Email" type="email" />
+                    <AInput setvalue={setEmail} value={email} label="Email" placeholder="mail@mail.com" type="email" />
                 </section>
                 <section>
-                    <AInput setvalue={setPassword} value={password} label="Password" type="password" />
+                    <AInput setvalue={setPassword} value={password} label="Password" placeholder="************" type="password" />
                 </section>
                 <section>
-                    <AInput setvalue={setRePassword} value={repassword} label="Re-Password" type="password" />
+                    <AInput setvalue={setRePassword} value={repassword} label="Re-Password" placeholder="************" type="password" />
                     <p className={`text-xs underline transition-transform duration-150 text-red-400 py-2 ${error ? 'translate-y-0 h-0' : 'h-full -translate-y-full'}`}>{error}</p>
                 </section>
                 <section>

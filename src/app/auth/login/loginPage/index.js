@@ -25,10 +25,10 @@ const LoginPage = () => {
             </section>
             <section className='space-y-4'>
                 <section>
-                    <AInput setvalue={setEmail} value={email} label="email" type="email" />
+                    <AInput setvalue={setEmail} value={email} label="email" placeholder="mail@mail.com" type="email" />
                 </section>
                 <section>
-                    <AInput setvalue={setPassword} value={password} label="Password" type="password" />
+                    <AInput setvalue={setPassword} value={password} label="Password" placeholder="********" type="password" />
                     <p className='text-xs underline text-bright py-2'>Forgot your password?</p>
                 </section>
                 <section>

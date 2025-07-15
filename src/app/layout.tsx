@@ -6,6 +6,7 @@ import Footer from '../components/footer'
 import AuthContext from '../contexts/auth'
 import BiddingContext from '../contexts/bid_context'
 import AlertContext from '../contexts/Alert'
+import NotificationContext from '../contexts/Notifications'
 // import prisma from '../lib'
 
 const JuraSans = Jura({
@@ -43,20 +44,22 @@ export default function RootLayout({
       <body className={`${JuraSans.variable} ${PoppinsSans.variable}  min-h-screen min-w-screen overflow-x-hidden antialiased`}>
         <AlertContext>
           <AuthContext>
-            <BiddingContext>
-              <div className="items-center justify-center w-full h-[100vh]">
-                <Header />
-                <div className="pt-18 w-full flex flex-col items-center relative">
-                  <div className="w-full h-fit max-w-7xl ">
-                    {children}
-                  </div>
+            <NotificationContext>
+              <BiddingContext>
+                <div className="items-center justify-center w-full h-[100vh]">
+                  <Header />
+                  <div className="pt-18 w-full flex flex-col items-center relative">
+                    <div className="w-full h-fit max-w-7xl ">
+                      {children}
+                    </div>
 
-                  <div className="w-full">
-                    <Footer />
+                    <div className="w-full">
+                      <Footer />
+                    </div>
                   </div>
                 </div>
-              </div>
-            </BiddingContext>
+              </BiddingContext>
+            </NotificationContext>
           </AuthContext>
         </AlertContext>
       </body>
