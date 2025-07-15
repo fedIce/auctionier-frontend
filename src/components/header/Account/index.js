@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { EyeIcon, BellIcon, ChevronRightIcon } from '@heroicons/react/24/outline'
 import Link from 'next/link'
-import NotificationComponent from './NotificationComponent'
+import NotificationComponent from './NotificationComponent/index.js'
 
 
 const Account = ({ auth }) => {
