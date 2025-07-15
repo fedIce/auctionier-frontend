@@ -3,7 +3,6 @@ import * as Icons from '@heroicons/react/24/outline'
 import React, { useEffect, useState } from 'react'
 import { CheckerAnimation, LoaderBlockAnimation } from '../../../components/util/checker'
 import { auction_fees, calculate_total, calculate_vat, getAuctionFees, numberWithCommas } from '../../../lib/functions/util'
-import { useAuth } from '../../../contexts/auth'
 
 const BidModal = ({ open, setOpen, amount: a, action = () => null }) => {
 
@@ -11,8 +10,6 @@ const BidModal = ({ open, setOpen, amount: a, action = () => null }) => {
     const [loading, setLoading] = useState(true)
     const [done, setDone] = useState(false)
     const [seeBreakdown, setSeeBreakDown] = useState(false)
-
-    const auth = useAuth()
 
     // const GenerateIcons = () => {
     //     let v = []

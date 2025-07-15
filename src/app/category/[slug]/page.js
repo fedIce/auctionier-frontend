@@ -1,8 +1,5 @@
 
 import { Suspense } from 'react'
-import { use_get } from '../../../lib/functions'
-import CategoryPage from './CategoryPage'
-import { generateQueryParams } from '../../search/func'
 import SearchPageloading from '../../../components/SearchPageLoading'
 import CategoryEntryItemPage from './CategoryEntryPage'
 

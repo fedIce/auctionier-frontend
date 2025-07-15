@@ -7,8 +7,6 @@ import SearchPageloading from '../../components/SearchPageLoading/index.js'
 const SearchPage = async ({ searchParams }) => {
 
     const { q = '' } = await searchParams
-    const query = await searchParams
-
 
     return (
         <div className='w-full py-8 px-2'>
