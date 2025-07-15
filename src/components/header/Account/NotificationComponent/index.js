@@ -1,6 +1,6 @@
 'use client'
 import { use_del, use_patch } from '@/lib/functions'
-import { BellSlashIcon, ChevronRightIcon, LinkIcon, TrashIcon } from '@heroicons/react/24/outline'
+import { BellSlashIcon, LinkIcon, TrashIcon } from '@heroicons/react/24/outline'
 import { useRouter } from 'next/navigation'
 import React from 'react'
 
