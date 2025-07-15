@@ -39,7 +39,7 @@ const NotificationsContext = ({ children }) => {
     useEffect(() => {
 
         if (user) {
-            use_get({ url: `${process.env.NEXT_PUBLIC_SERVER_URL}/api/notifications?where[user]=${user.id}&limit=0` }).then((res) => {
+            use_get({ url: `${process.env.NEXT_PUBLIC_SERVER_URL}/api/notifications?where[user][equals]=${user.id}&limit=0` }).then((res) => {
                 setNotifications(res.docs)
                 setNotificationsCount(res.docs.filter(i => i.read == false).length)
             })
@@ -51,8 +51,11 @@ const NotificationsContext = ({ children }) => {
     }, [notifications])
 
     const addNotifications = async (data) => {
+
+        const _user = await auth.getLoggedInUser()
+
         const exists = notifications.find(i => i.id == data.id)
-        if (exists) {
+        if (exists || (data.user?.id != _user?.user?.id)) {
             return
         }
         setNotifications(n => [...n, data])

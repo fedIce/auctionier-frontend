@@ -43,7 +43,8 @@ const init = {
     getShippingData: async () => null,
     shippingInfo: null,
     setShippingInfo: () => null,
-    userLoggedIn: () => null
+    userLoggedIn: () => null,
+    getLoggedInUser: async () => null
 }
 
 export const APP_STATES = {
@@ -67,6 +68,12 @@ const AuthContext = ({ children }) => {
     const alert = useAlert()
 
     useEffect(() => {
+        getLoggedInUser().then(res => {
+            setUser(res)
+        })
+    }, [])
+
+    const getLoggedInUser = async () => {
         const active_user = localStorage.getItem(APP_STATES.AUTH_STATE)
         if (active_user) {
             const stored_user = JSON.parse(active_user)
@@ -75,15 +82,16 @@ const AuthContext = ({ children }) => {
 
             // Refresh user token is time less than 30 minutes, if time passed logout user, else just setUser
             if (timeDiff.getHours() == 0 && (timeDiff.getMinutes() < 30 && timeDiff.getMinutes() > 0)) {
-                refresh_user()
+                return refresh_user()
             } else if (new Date() > new Date(stored_user.exp * 1000)) {
                 signout()
+                return null
             } else {
-                setUser(stored_user)
+                return stored_user
             }
 
         }
-    }, [])
+    }
 
     useEffect(() => {
         if (path.includes('auth') && user) {
@@ -174,7 +182,7 @@ const AuthContext = ({ children }) => {
         return _user
     }
 
-    const value = { login, register, refresh_user, user, isLoggedIn, signout, saveShippingInfo, getShippingData, shippingInfo, setShippingInfo, history, userLoggedIn }
+    const value = { login, register, refresh_user, user, isLoggedIn, signout, saveShippingInfo, getShippingData, shippingInfo, setShippingInfo, history, userLoggedIn, getLoggedInUser }
 
     return (
         <AuthContextProvider.Provider value={value} className='w-full h-full'>
