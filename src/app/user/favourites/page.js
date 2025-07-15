@@ -7,7 +7,6 @@ import { use_get } from '../../../lib/functions'
 import { useAuth } from '../../../contexts/auth'
 import { fetchWatches } from '../../category/[slug]/CategoryPage'
 import { FilterItem } from '../../../lib/FilterBlock'
-import { LoaderBlockAnimation } from '../../../components/util/checker'
 
 
 const SubCategoryPage = () => {

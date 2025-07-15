@@ -33,7 +33,7 @@ const ListingCards = ({ data = null, user = null, watches = null, pulse = false 
     const [watching, setWatching] = useState([])
 
     useEffect(() => {
-        watches && setWatching(Array.from(watches))
+        if (watches) { setWatching(Array.from(watches)) }
     }, [watches])
 
     useEffect(() => {

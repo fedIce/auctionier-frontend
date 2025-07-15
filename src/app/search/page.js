@@ -2,7 +2,6 @@ import React from 'react'
 
 import { use_get } from '../../lib/functions'
 import SearchPageCOntent from './search'
-import NoItemsFound from '../../components/NoItemsFound'
 
 export const generateQueryParams = (base = '', query) => {
     let _query = ''

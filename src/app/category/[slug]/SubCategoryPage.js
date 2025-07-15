@@ -19,7 +19,7 @@ const SubCategoryPage = ({ id, category, docs, crumbs, aggs }) => {
 
     const router = useRouter()
 
-    const _icon = docs[0]?.category.icon || "QuestionMarkCircleIcon"
+    // const _icon = docs[0]?.category.icon || "QuestionMarkCircleIcon"
 
     const auth = useAuth()
     const _user = auth?.user?.user || null
