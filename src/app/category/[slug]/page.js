@@ -1,8 +1,8 @@
 
 import { Suspense } from 'react'
 import { use_get } from '../../../lib/functions'
-import { generateQueryParams } from '../../search/page'
 import CategoryPage from './CategoryPage'
+import { generateQueryParams } from '../../search/func'
 
 async function fetchCategoryItems(id) {
     const res = await use_get({ url: `${process.env.NEXT_PUBLIC_SERVER_URL}/api/categories/t/category?queryslug=${id}` }).catch(e => {

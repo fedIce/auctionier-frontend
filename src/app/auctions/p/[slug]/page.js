@@ -1,8 +1,8 @@
 import React from 'react'
 
 import { use_get } from '../../../../lib/functions'
-import { generateQueryParams } from '../../../search/page'
 import AuctionsPage from './AuctionsPage'
+import { generateQueryParams } from '../../../search/func'
 
 
 

@@ -2,7 +2,7 @@ import React from 'react'
 
 import { use_get } from '../../../../lib/functions'
 import SubCategoryPage from '../SubCategoryPage'
-import { generateQueryParams } from '../../../search/page'
+import { generateQueryParams } from '../../../search/func'
 
 
 
