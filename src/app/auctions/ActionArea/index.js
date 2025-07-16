@@ -204,8 +204,8 @@ const ActionArea = ({ data }) => {
                             (!seeAllBids ? allBids?.slice(0, 5) : allBids)?.map((bid, i) => {
                                 const userId = bid.user?.id ? bid.user.id : bid.user
 
-                                return bid.user && (
-                                    <div key={i} className={`grid w-full grid-cols-3 ${!bid.valid_bid && 'text-amber-500'}`}>
+                                return bid?.user && (
+                                    <div key={i} className={`grid w-full grid-cols-3 ${(!bid?.valid_bid && bid.user?.id == user?.id) && 'text-amber-500'}`}>
                                         {userId &&
                                             <div className='flex items-center space-x-2'>
                                                 {bid.user?.id != user.id && <p>Bidder</p>}

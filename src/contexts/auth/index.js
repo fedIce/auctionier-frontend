@@ -44,7 +44,9 @@ const init = {
     shippingInfo: null,
     setShippingInfo: () => null,
     userLoggedIn: () => null,
-    getLoggedInUser: async () => null
+    getLoggedInUser: async () => null,
+    save_search_strings: async () => null,
+    get_search_strings: async () => null,
 }
 
 export const APP_STATES = {
@@ -127,6 +129,22 @@ const AuthContext = ({ children }) => {
         }
     }
 
+    const save_search_strings = async (s) => {
+        if (s.trim() == '') return null
+        return await use_get({ url: `${process.env.NEXT_PUBLIC_SERVER_URL}/api/globals/search/save/${s}` }).catch(async e => {
+            const error = await parseError(e)
+            alert.setalert('error', error)
+        })
+    }
+
+    const get_search_strings = async (s) => {
+        if (s.trim() == '') return null
+        return await use_get({ url: `${process.env.NEXT_PUBLIC_SERVER_URL}/api/globals/search/get/${s}` }).catch(async e => {
+            const error = await parseError(e)
+            alert.setalert('error', error)
+        })
+    }
+
     const signout = async () => {
         signout_user({ token: user?.token }).finally(() => {
             localStorage.removeItem(APP_STATES.AUTH_STATE)
@@ -182,7 +200,7 @@ const AuthContext = ({ children }) => {
         return _user
     }
 
-    const value = { login, register, refresh_user, user, isLoggedIn, signout, saveShippingInfo, getShippingData, shippingInfo, setShippingInfo, history, userLoggedIn, getLoggedInUser }
+    const value = { login, register, refresh_user, user, isLoggedIn, signout, saveShippingInfo, getShippingData, shippingInfo, setShippingInfo, history, userLoggedIn, getLoggedInUser, save_search_strings, get_search_strings }
 
     return (
         <AuthContextProvider.Provider value={value} className='w-full h-full'>

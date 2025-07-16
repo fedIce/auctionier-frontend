@@ -53,12 +53,13 @@ const NotificationsContext = ({ children }) => {
     const addNotifications = async (data) => {
 
         const _user = await auth.getLoggedInUser()
+        const notification_reciever = typeof data.user == 'string' ? data.user : data.user?.id ?? null
 
         const exists = notifications.find(i => i.id == data.id)
-        if (exists || (data.user?.id != _user?.user?.id)) {
+        if (exists || (notification_reciever != _user?.user?.id)) {
             return
         }
-        setNotifications(n => [...n, data])
+        setNotifications(n => [data, ...n])
         setNotificationsCount(i => i + 1)
 
         return

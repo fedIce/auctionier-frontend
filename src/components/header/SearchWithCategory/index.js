@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation'
 import { use_get } from '@/lib/functions'
 import * as Icons from "@heroicons/react/24/outline";
 import Link from 'next/link';
+import { useAuth } from '@/contexts/auth';
 
 
 
@@ -11,16 +12,18 @@ const SearchWithCategory = () => {
 
     const router = useRouter()
     const [open, setOpen] = useState(false)
+    const [searchStrings, setSearchStrings] = useState([])
+
 
     return (
         <div>
             <div className='hidden lg:flex h-full items-center space-x-5 py-2 w-full'>
                 <CategoriesDrop />
-                <SearchBar router={router} />
+                <SearchBar closeModal={setOpen} router={router} searchStrings={searchStrings} setSearchStrings={setSearchStrings} />
             </div>
             <span className='lg:hidden'>
                 <MagnifyingGlassIcon onClick={() => setOpen(!open)} className='w-5 h-5 text-bright' />
-                <SearchModal router={router} setOpen={setOpen} open={open} />
+                <SearchModal router={router} setOpen={setOpen} open={open} setSearchStrings={setSearchStrings} searchStrings={searchStrings} />
             </span>
 
         </div>
@@ -43,27 +46,49 @@ export const CategoriesDrop = ({ className }) => {
     )
 }
 
-export const SearchBar = ({ router, closeModal = null, focus = false }) => {
+export const SearchBar = ({ router, closeModal = null, focus = false, searchStrings = ['car', 'home'], setSearchStrings = () => null }) => {
     const [search, setSearch] = useState('')
 
-    const onSearch = () => {
-        if (search.trim() === '') return
+    const auth = useAuth()
+
+    useEffect(() => {
+
+    }, [searchStrings])
+
+
+    var typingTimer;                //timer identifier
+    const doneTypingInterval = 800;
+
+    const onSearch = (s = null) => {
+        const _search = s ? s : search
+        if (_search.trim() === '') return
         // Perform search action here, e.g., redirect to search results page
-        router.replace('/search?q=' + encodeURIComponent(search.trim()))
+        router.replace('/search?q=' + encodeURIComponent(_search.trim()))
         setSearch('')
         if (closeModal) {
             closeModal(false)
+            setSearchStrings([])
         }
     }
 
     const handleKeyDown = (e) => {
+        clearTimeout(typingTimer);
         if (e.key === 'Enter') {
+            if (search == '') return
             onSearch()
+            auth.save_search_strings(search.trim())
         }
+
+    }
+
+    const handleKeyUp = () => {
+        if (search == '') return
+        clearTimeout(typingTimer);
+        typingTimer = setTimeout(() => auth.get_search_strings(search.trim()).then(e => setSearchStrings(e.data)), doneTypingInterval);
     }
 
     return (
-        <div className='w-full h-full bg-background text-foreground flex items-center gap-2 rounded-full px-4 py-2'>
+        <div className='w-full h-full relative bg-background text-foreground flex items-center gap-2 rounded-full px-4 py-2'>
             <MagnifyingGlassIcon className='w-5 h-5' />
             <input
                 className='w-full ring-0 outline-0 placeholder:text-foreground-700 text-foreground'
@@ -72,12 +97,36 @@ export const SearchBar = ({ router, closeModal = null, focus = false }) => {
                 autoFocus={focus}
                 onChange={(e) => setSearch(e.target.value)}
                 onKeyDown={handleKeyDown}
+                onKeyUp={handleKeyUp}
             />
+            <div className={`hidden lg:flex overflow-hidden transition-transform duration-150 ${searchStrings?.length <= 0 ? '-translate-y-full h-0' : `h-auto translate-y-0`} max-w-2xl w-full absolute bg-foreground shadow-2xl z-[99999] top-[55px] -left-0 `}>
+                <div className='w-full h-full flex divide-y divide-secondary/10 flex-col '>
+                    {
+                        searchStrings?.map((s, i) => {
+                            return (
+                                <div onClick={() => onSearch(s)} key={i} className='w-full p-2 py-2 px-6 hover:bg-foreground text-background cursor-pointer'>{s}</div>
+                            )
+                        })
+                    }
+                </div>
+            </div>
         </div>
     )
 }
 
-export const SearchModal = ({ setOpen, open, router }) => {
+export const SearchModal = ({ setOpen, open, router, searchStrings, setSearchStrings }) => {
+
+    useEffect(() => { }, [searchStrings])
+
+    const onSearch = (search) => {
+        if (search.trim() === '') return
+        router.replace('/search?q=' + encodeURIComponent(search.trim()))
+        if (setOpen) {
+            setOpen(false)
+        }
+    }
+
+
     if (!open) return null
     return (
         <div className='w-screen h-screen fixed flex items-start justify-center bg-background left-0 top-0 z-50'>
@@ -92,7 +141,16 @@ export const SearchModal = ({ setOpen, open, router }) => {
                     <span onClick={() => setOpen(!open)} className='cursor-pointer'><XMarkIcon className='w-7 h-7 text-secondary' /></span>
                 </div>
                 <div className='w-full'>
-                    <SearchBar router={router} closeModal={setOpen} focus={true} />
+                    <SearchBar router={router} closeModal={setOpen} focus={true} searchStrings={searchStrings} setSearchStrings={setSearchStrings} />
+                </div>
+                <div className='w-full flex divide-y divide-secondary/10 flex-col '>
+                    {
+                        searchStrings?.map((s, i) => {
+                            return (
+                                <div onClick={() => onSearch(s)} key={i} className='w-full p-2 py-2 px-6 hover:bg-foreground hover:text-background cursor-pointer'>{s}</div>
+                            )
+                        })
+                    }
                 </div>
             </div>
         </div>
