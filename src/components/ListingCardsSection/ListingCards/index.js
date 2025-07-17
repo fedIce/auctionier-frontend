@@ -7,6 +7,7 @@ import { ChevronRightIcon, HeartIcon } from '@heroicons/react/24/outline';
 import * as SolidIcons from '@heroicons/react/24/solid';
 import { use_post } from '@/lib/functions';
 import { useAuth } from '@/contexts/auth';
+import { LoaderSpinnerAnimation } from '../../../components/util/checker'
 
 
 const topBid = (bids) => {
@@ -32,6 +33,7 @@ const ListingCards = ({ data = null, user = null, watches = null, pulse = false,
     const _user = auth.user?.user ?? null
     const [watching, setWatching] = useState([])
     const [count, setCount] = useState(0)
+    const [likeLoading, setLikeLoading] = useState(false)
 
     useEffect(() => {
         if (watches) {
@@ -114,6 +116,7 @@ const ListingCards = ({ data = null, user = null, watches = null, pulse = false,
 
     const onAddToFavourites = async () => {
         if (!auth.userLoggedIn()) return
+        setLikeLoading(true)
         return await use_post({
             url: `${process.env.NEXT_PUBLIC_SERVER_URL}/api/watchers/watch?depth=0`, token: auth?.user?.token, data: {
                 user: _user?.id,
@@ -127,7 +130,7 @@ const ListingCards = ({ data = null, user = null, watches = null, pulse = false,
                 setWatching(w => w.filter(l => l !== res.auction_item))
                 setCount(c => c - 1)
             }
-        })
+        }).finally(() => setLikeLoading(false))
     }
 
 
@@ -155,10 +158,13 @@ const ListingCards = ({ data = null, user = null, watches = null, pulse = false,
             {watches &&
                 <div className='absolute bg-foreground pl-1 pr-2 rounded-full flex items-center space-x-2 top-3 text-background right-3'>
                     {
-                        isWatched ?
-                            <SolidHeart onClick={() => onAddToFavourites()} className='w-7 h-7 cursor-pointer ' />
+                        likeLoading ?
+                            <LoaderSpinnerAnimation width={30} height={30} />
                             :
-                            <HeartIcon onClick={() => onAddToFavourites()} className='w-7 h-7 cursor-pointer ' />
+                            isWatched ?
+                                <SolidHeart onClick={() => onAddToFavourites()} className='w-7 h-7 cursor-pointer ' />
+                                :
+                                <HeartIcon onClick={() => onAddToFavourites()} className='w-7 h-7 cursor-pointer ' />
                     }
                     <p className='font-medium text-background'>{count}</p>
                 </div>}

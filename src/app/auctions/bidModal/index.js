@@ -152,11 +152,11 @@ export const VatBreakDown = ({ amount, close }) => {
                 <h4>€ {numberWithCommas(values.bid_amount)}</h4>
                 <h4>€ {numberWithCommas(values.bid_amount_VAT)}</h4>
             </div>
-            <div className='grid grid-cols-[1fr_120px_120px] py-4 items-center text-end'>
+            {/* <div className='grid grid-cols-[1fr_120px_120px] py-4 items-center text-end'>
                 <p className='text-start'>Internet Fee</p>
                 <h4>€ {numberWithCommas(values.internet_fee)}</h4>
                 <h4>€ {numberWithCommas(values.internet_fee_VAT)}</h4>
-            </div>
+            </div> */}
             <div className='grid grid-cols-[1fr_120px_120px] py-4 items-center text-end'>
                 <p className='text-start'>Buyers Premium</p>
                 <h4>€ {numberWithCommas(values.buyer_premium)}</h4>

@@ -71,9 +71,9 @@ const NotiCard = ({ data, n }) => {
             case 'info':
                 return { read: '#86bbf7', unread: '#4b9bf5' }
             case 'success':
-                return { read: '#c5edea', unread: '#052b28' }
+                return { read: '#3dbf3d', unread: '#2d912d' }
             default:
-
+                return { read: '#3dbf3d', unread: '#2d912d' }
         }
     }
 
@@ -86,7 +86,7 @@ const NotiCard = ({ data, n }) => {
             <div className='h-full w-full p-2 flex flex-col'>
                 <div className='flex items-center justify-between'>
                     <div style={textColor} className={`text-sm ${data.read ? ' font-medium' : 'font-bold'}`}>{data.title}</div>
-                    {data?.createdAt && <div className={`text-[10px] ${data.read?'text-gray-400/50':'text-gray-400'} text-end`}>{moment(data.createdAt).fromNow()}</div>}
+                    {data?.createdAt && <div className={`text-[10px] ${data.read ? 'text-gray-400/50' : 'text-gray-400'} text-end`}>{moment(data.createdAt).fromNow()}</div>}
                 </div>
                 <div style={textColor} className='text-[10px] font-light line-clamp-2'>{data.body}</div>
             </div>
