@@ -205,7 +205,6 @@ const AccountPreferences = () => {
 const ProfileCheckBox = ({ title, legend }) => {
 
   const [checked, setChecked] = useState(false)
-  const [loading, setLoading] = useState(false)
 
   const alert = useAlert()
   const auth = useAuth()
@@ -217,7 +216,7 @@ const ProfileCheckBox = ({ title, legend }) => {
   }, [user])
 
 
-  const onCheck = async (legend, w) => {
+  const onCheck = async (legend, w=null) => {
     const data = {}
     data[legend] = !checked
     await auth.updateUser({ id: user.id, data: { preferences: data }, token: auth.user?.token })
@@ -226,9 +225,7 @@ const ProfileCheckBox = ({ title, legend }) => {
         setChecked(!checked)
         alert.setalert('success', res?.message ?? 'Updated Successfuly!')
       }).catch((e) => {
-        console.warn(e)
-      }).finally(() => {
-        setLoading(false)
+        console.warn(e, w)
       })
   }
 

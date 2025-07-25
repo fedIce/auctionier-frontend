@@ -7,9 +7,9 @@ const { privacy_policy: p } = policy
 
 
 const PrivacyPolicy = () => {
-    const refs = p.sections.map(_ => useRef())
+    const refs = p.sections.map(() => useRef())
     return (
-        <div className='w-full py-4 space-y-8 px-2 lg:px-0'>
+        <div k className='w-full py-4 space-y-8 px-2 lg:px-0'>
             <div>
                 <div className='w-full text-end'>Last updated {p.last_updated}</div>
                 <div className='w-full space-y-4'>
