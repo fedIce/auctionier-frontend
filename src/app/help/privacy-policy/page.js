@@ -1,5 +1,5 @@
 'use client'
-import { forwardRef, useRef, useState } from 'react'
+import { forwardRef, useEffect, useRef, useState } from 'react'
 import policy from './_.json'
 import { ChevronUpIcon } from '@heroicons/react/24/outline'
 
@@ -7,7 +7,13 @@ const { privacy_policy: p } = policy
 
 
 const PrivacyPolicy = () => {
-    const refs = []
+    const refs = useRef([])
+
+    useEffect(() => {
+        refs.current = refs.current.slice(0, p.sections.length);
+      }, [p.sections.length]);
+
+
     return (
         <div k className='w-full py-4 space-y-8 px-2 lg:px-0'>
             <div>
@@ -21,9 +27,8 @@ const PrivacyPolicy = () => {
                 <div className='w-[30%] space-y-8 h-full hidden lg:block'>
                     {
                         p.sections.map((section, i) => {
-                            refs[i] = useRef()
                             return (
-                                <div onClick={() => refs[i].current.scrollIntoView({ behavior: 'smooth', block: 'start' })} key={i} className='w-full hover:underline hover:text-third-200 hover:font-bold cursor-pointer'>
+                                <div onClick={() => refs.current[i].scrollIntoView({ behavior: 'smooth', block: 'start' })} key={i} className='w-full hover:underline hover:text-third-200 hover:font-bold cursor-pointer'>
                                     {section.title}
                                 </div>
                             )
@@ -34,7 +39,7 @@ const PrivacyPolicy = () => {
                     {
                         p.sections.map((section, i) => {
                             return (
-                                <PBlock key={i} ref={refs[i]} section={section} />
+                                <PBlock key={i} ref={el => refs.current[i] = el} section={section} />
                             )
                         })
                     }
@@ -58,7 +63,7 @@ const PBlock = forwardRef(({ section }, ref) => {
 
             <div onClick={() => setShowBlock(!showBlock)} className='w-full flex lg:hidden justify-between items-center'>
                 <div className='w-full capitalize font-extrabold max-w-[80%] text-2xl'>{section.title}</div>
-                <ChevronUpIcon className={`w-5 h-5 stroke-2 transition-transform duration-150 ${!showBlock? 'rotate-180':'rotate-0'}`} />
+                <ChevronUpIcon className={`w-5 h-5 stroke-2 transition-transform duration-150 ${!showBlock ? 'rotate-180' : 'rotate-0'}`} />
             </div>
             <div className={`w-full overflow-y-hidden  ${showBlock ? 'h-auto lg:h-auto' : 'h-0 lg:h-auto'}`}>
 
@@ -117,5 +122,3 @@ const PBlock = forwardRef(({ section }, ref) => {
         </div>
     )
 })
-
-PBlock.displayName = 'PBlock'
