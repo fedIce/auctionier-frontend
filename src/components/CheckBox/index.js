@@ -2,7 +2,7 @@
 import { useSearchParams } from 'next/navigation';
 import React, { useEffect, useState } from 'react'
 
-const CheckBox = ({ title = "Check me", legend, onSelect }) => {
+const CheckBox = ({ title = "Check me", legend, onSelect, checked = null }) => {
 
     const [loading, setLoading] = useState(true);
     const searchParams = useSearchParams();
@@ -18,7 +18,7 @@ const CheckBox = ({ title = "Check me", legend, onSelect }) => {
 
     const t = title
     const q = t.split("(")[0].trim();
-    const isChecked = query.includes(q)
+    const isChecked = checked ? checked : query.includes(q)
 
     return (
         <div className='flex items-center space-x-2'>

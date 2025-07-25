@@ -76,7 +76,7 @@ const AShippinForm = ({ hide, auth }) => {
 
 
     return (
-        <div className='w-full  space-y-4 max-w-md bg-background py-4'>
+        <div className='w-full  space-y-4 max-w-md bg-transparent py-4'>
             <div className='flex items-start space-x-4'>
                 <div className='flex-1'><AInput disabled value={firstname} setvalue={setFirstName} label={"First Name"} /></div>
                 <div className='flex-1'><AInput disabled value={lastname} setvalue={setLastName} label={"Last Name"} /></div>
@@ -95,7 +95,7 @@ const AShippinForm = ({ hide, auth }) => {
                 <div className='flex-1'><AInput value={postal} setvalue={setPostal} label={""} placeholder={`Postal / Zip Code`} /></div>
                 <div className='flex-1'><AInput disabled value={country} setvalue={setCountry} label={""} placeholder={`Country`} /></div>
             </div>
-            <div onClick={() => handleSubmit()} className='flex bg-bright items-center mt-4 justify-center'>
+            <div onClick={() => handleSubmit()} className='flex bg-secondary items-center mt-4 justify-center'>
                 {loading ?
                     <LoaderSpinnerAnimation />
                     :

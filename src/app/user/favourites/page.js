@@ -28,7 +28,7 @@ const SubCategoryPage = () => {
     useEffect(() => { }, [favs, watched, loading])
 
     useEffect(() => {
-        fetchWatches([...favs, ...watched]?.map(i => i.id)).then(res => {
+        fetchWatches([...favs, ...watched]?.map(i => i?.id)).then(res => {
             setWatches(res)
         })
     }, [favs, watched])
@@ -38,9 +38,9 @@ const SubCategoryPage = () => {
 
     const load = async () => {
         setLoading(true)
-        const bids = await use_get({ url: `${process.env.NEXT_PUBLIC_SERVER_URL}/api/bid_item/watch-list/${user.id}`, options: { revalidate: 0 } })
-        const watcs = await use_get({ url: `${process.env.NEXT_PUBLIC_SERVER_URL}/api/watchers?where[user][equals]=${user.id}`, options: { revalidate: 0 } })
-        const watc_docs = await await use_get({ url: `${process.env.NEXT_PUBLIC_SERVER_URL}/api/auction-items?where[id][in]=${watcs.docs.map(i => i.auction_item.id)}`, options: { revalidate: 0 } })
+        const bids = await use_get({ url: `${process.env.NEXT_PUBLIC_SERVER_URL}/api/bid_item/watch-list/${user?.id}`, options: { revalidate: 0 } })
+        const watcs = await use_get({ url: `${process.env.NEXT_PUBLIC_SERVER_URL}/api/watchers?where[user][equals]=${user?.id}`, options: { revalidate: 0 } })
+        const watc_docs = await await use_get({ url: `${process.env.NEXT_PUBLIC_SERVER_URL}/api/auction-items?where[id][in]=${watcs.docs.map(i => i.auction_item?.id)}`, options: { revalidate: 0 } })
         setFavs(bids.docs)
         setWatched(watc_docs.docs)
         return
@@ -57,7 +57,7 @@ const SubCategoryPage = () => {
         }
     ]
 
-    const userWatches = new Set(watches.map(i => user.id == i.user && i.auction_item))
+    const userWatches = new Set(watches.map(i => user?.id == i.user && i.auction_item))
 
     return (
         <div className='w-full py-8 px-2'>

@@ -6,6 +6,7 @@ import { useNotification } from '@/contexts/Notifications/index.js'
 
 
 const Account = ({ auth }) => {
+    const user = auth.user ? auth.user.user : null
     const email = auth.user ? auth.user.user?.email : null
     const name = auth.user ? auth.user.user?.fullname : null
 
@@ -36,24 +37,24 @@ const Account = ({ auth }) => {
                     </div>}
                 {auth.isLoggedIn &&
                     <section className='space-y-2'>
-                        <div className='py-4 hover:bg-background-600 hover:text-foreground cursor-pointer px-4 flex items-center justify-between'>
+                        <Link href={`/user/account/settings`} className='py-4 hover:bg-background-600 hover:text-foreground cursor-pointer px-4 flex items-center justify-between'>
                             <p>Account</p>
                             <span>
                                 <ChevronRightIcon className='w-4 h-4' />
                             </span>
-                        </div>
-                        <div className='py-4 hover:bg-background-600 hover:text-foreground cursor-pointer px-4 flex items-center justify-between'>
+                        </Link>
+                        <Link href={`/user/account/orders/${user.id}`} className='py-4 hover:bg-background-600 hover:text-foreground cursor-pointer px-4 flex items-center justify-between'>
                             <p>Orders</p>
                             <span>
                                 <ChevronRightIcon className='w-4 h-4' />
                             </span>
-                        </div>
-                        <div className='py-4 hover:bg-background-600 hover:text-foreground cursor-pointer px-4 flex items-center justify-between'>
+                        </Link>
+                        {/* <div className='py-4 hover:bg-background-600 hover:text-foreground cursor-pointer px-4 flex items-center justify-between'>
                             <p>Payments</p>
                             <span>
                                 <ChevronRightIcon className='w-4 h-4' />
                             </span>
-                        </div>
+                        </div> */}
                     </section>}
                 {auth.isLoggedIn ?
                     <div onClick={() => auth.signout()} className='py-4 hover:bg-background-600 hover:text-foreground cursor-pointer px-4 flex items-center justify-between'>

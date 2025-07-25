@@ -1,5 +1,6 @@
 import React from 'react'
 import { GlobeEuropeAfricaIcon } from "@heroicons/react/24/outline";
+import Link from 'next/link';
 
 
 const helpfulLinks = [
@@ -40,7 +41,7 @@ const Policy_links = [
     },
     {
         title: 'Privacy Policy',
-        link: '#',
+        link: '/help/privacy-policy',
         slug: 'privacy_policy'
     },
     {
@@ -77,7 +78,7 @@ const Footer = () => {
                 <div className='flex w-full items-center gap-2 mb-8'>
                     <div className='bg-background w-[40px] h-[40px] rounded-lg' />
                     <div className='grid grid-rows-2 gap-0.5'>
-                        <h4 className='text-lg'>Auctioner</h4>
+                        <h4 className='text-lg'>{process.env.NEXT_PUBLIC_SITE_NAME}</h4>
                         <p className='text-xs'>finders keepers</p>
                     </div>
                 </div>
@@ -96,7 +97,7 @@ const Footer = () => {
                     <div className='flex flex-col space-y-1'>
                         {
                             Policy_links.map((link, i) => {
-                                return <span key={i}>{link.title}</span>
+                                return <Link href={link.link == '#'?'/': link.link} key={i}>{link.title}</Link>
                             })
                         }
                     </div>

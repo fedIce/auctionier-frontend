@@ -128,8 +128,8 @@ const ActionArea = ({ data }) => {
                 <p className='uppercase'>#{data?.lotId?.split("-")[1] ?? ''}</p>
             </div>
             {isclosedForBidding ?
-                <div className='pt-8 text-xl text-red-400/60'>
-                    Closed for Bidding
+                <div>
+                    <div className='pt-8 text-xl text-red-400/60'>Closed for Bidding</div>
                 </div>
                 :
 
@@ -195,10 +195,10 @@ const ActionArea = ({ data }) => {
                 </section>
 
                 <section className='border-t space-y-4 text-sm border-foreground/10 py-8'>
-                    {count &&
+                    {count ?
                         <div className='p-2 px-4 text-foreground bg-secondary-800 text-center rounded-lg'>
                             <p className=' text-secondary'>{count} other people are watching this object</p>
-                        </div>}
+                        </div> : null}
                     <div className='py-4 space-y-2'>
                         {
                             (!seeAllBids ? allBids?.slice(0, 5) : allBids)?.map((bid, i) => {

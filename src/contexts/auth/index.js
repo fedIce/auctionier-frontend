@@ -3,7 +3,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { createContext } from 'react'
 import { login_user, refresh_user_token, register_user, signout_user } from '../../lib/functions/auth'
 import { usePathname, useRouter } from 'next/navigation'
-import { use_get, use_post } from '@/lib/functions'
+import { use_get, use_patch, use_post } from '@/lib/functions'
 import { useAlert } from '../Alert'
 import LoginRequired from './loginRequired'
 
@@ -47,6 +47,7 @@ const init = {
     getLoggedInUser: async () => null,
     save_search_strings: async () => null,
     get_search_strings: async () => null,
+    updateUser: async () => null
 }
 
 export const APP_STATES = {
@@ -192,6 +193,14 @@ const AuthContext = ({ children }) => {
         return true
     }
 
+    const updateUser = async ({ id, data, token = user?.token }) => {
+        return await use_patch({ url: `${process.env.NEXT_PUBLIC_SERVER_URL}/api/users/${id}`, data, token: token }).then((res) => {
+            refresh_user()
+            return res
+        })
+
+    }
+
 
     const refresh_user = async () => {
         const _user = await refresh_user_token(user?.token)
@@ -200,7 +209,7 @@ const AuthContext = ({ children }) => {
         return _user
     }
 
-    const value = { login, register, refresh_user, user, isLoggedIn, signout, saveShippingInfo, getShippingData, shippingInfo, setShippingInfo, history, userLoggedIn, getLoggedInUser, save_search_strings, get_search_strings }
+    const value = { login, register, refresh_user, user, isLoggedIn, signout, saveShippingInfo, getShippingData, shippingInfo, setShippingInfo, history, userLoggedIn, getLoggedInUser, save_search_strings, updateUser, get_search_strings }
 
     return (
         <AuthContextProvider.Provider value={value} className='w-full h-full'>

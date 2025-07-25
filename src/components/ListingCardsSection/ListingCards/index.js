@@ -143,7 +143,7 @@ const ListingCards = ({ data = null, user = null, watches = null, pulse = false,
             </Link >
             <div>
                 <Link href={`/auctions/${data.slug}`} className='text-xl font-medium'>{data.title}</Link>
-                <h6 className='flex flex-col text-xs spa uppercase py-2'><p className={` font-light ${['leading', 'won'].includes(statusText?.status) ? 'text-green-400' : statusText?.status == 'outbided' ? 'text-third' : 'text-bright'}`}> {statusText?.msg} </p><p className='text-xl font-semibold'>€ {numberWithCommas(data.bid_id?.current_bid || 0)}</p></h6>
+                <h6 className='flex flex-col text-xs uppercase py-2'><p className={` font-semibold  ${['leading', 'won'].includes(statusText?.status) ? 'text-green-400' : statusText?.status == 'outbided' ? 'text-third-300' : 'text-bright'}`}> {statusText?.msg} </p><p className='text-xl font-semibold'>€ {numberWithCommas(data.bid_id?.current_bid || 0)}</p></h6>
                 {
                     user &&
                         statusText.status == 'won' ?
