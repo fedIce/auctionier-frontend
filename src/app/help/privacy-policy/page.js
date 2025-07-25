@@ -122,3 +122,5 @@ const PBlock = forwardRef(({ section }, ref) => {
         </div>
     )
 })
+
+PBlock.displayName = 'PBlock'
