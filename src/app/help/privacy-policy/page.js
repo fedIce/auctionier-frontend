@@ -7,7 +7,7 @@ const { privacy_policy: p } = policy
 
 
 const PrivacyPolicy = () => {
-    const refs = p.sections.map(() => useRef())
+    const refs = []
     return (
         <div k className='w-full py-4 space-y-8 px-2 lg:px-0'>
             <div>
@@ -21,6 +21,7 @@ const PrivacyPolicy = () => {
                 <div className='w-[30%] space-y-8 h-full hidden lg:block'>
                     {
                         p.sections.map((section, i) => {
+                            refs[i] = useRef()
                             return (
                                 <div onClick={() => refs[i].current.scrollIntoView({ behavior: 'smooth', block: 'start' })} key={i} className='w-full hover:underline hover:text-third-200 hover:font-bold cursor-pointer'>
                                     {section.title}
@@ -116,3 +117,5 @@ const PBlock = forwardRef(({ section }, ref) => {
         </div>
     )
 })
+
+PBlock.displayName = 'PBlock'
