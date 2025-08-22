@@ -17,7 +17,8 @@
     "pouchdb": "^9.0.0",
     "pusher-js": "^8.4.0",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "rss": "^1.2.2"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

@@ -7,20 +7,57 @@ import { use_get } from '../../../lib/functions'
 import { DetailsSection } from '../Details'
 import { generate_crumbs } from '../../../lib/functions/util'
 
-
-
-
-// export const metadata = {
-//     title: `Auctioner | ${auction.title}`,
-//     description: auction.description,
-//     keywords: ['auction', ...auction.tag],
-//     image: auction.image[0]
-// }
-
 async function fetchAuction(slug) {
     const res = await use_get({ url: `${process.env.NEXT_PUBLIC_SERVER_URL}/api/auction-items?where[slug][equals]=${slug}` })
     return res?.docs[0]
 }
+
+export const generateMetadata = async ({ params }) => {
+    const { slug } = await params
+
+    const auction = await fetchAuction(slug)
+    if (!auction) return null
+
+    return {
+        title: auction.title,
+        description: auction.description,
+        openGraph: {
+            title: auction.title,
+            description: auction.description,
+            images: [
+                {
+                    url: `${process.env.NEXT_PUBLIC_SERVER_URL}${auction.image[0]?.sizes?.thumbnail?.url || auction.image[0]?.url || '/default-image.png'}`,
+                    width: auction.image[0]?.sizes?.thumbnail?.width || auction.image[0]?.width || 600,
+                    height: auction.image[0]?.sizes?.thumbnail?.height || auction.image[0]?.height || 600,
+                    alt: auction.image[0]?.sizes?.thumbnail?.alt || auction.image[0]?.alt || 'Auction Image'
+                }
+            ],
+            type: 'website',
+            url: `${process.env.NEXT_PUBLIC_APP_URL}/auctions/${slug}`
+        },
+        twitter: {
+            card: 'summary_large_image',
+            title: auction.title,
+            description: auction.description,
+            images: [
+                `${process.env.NEXT_PUBLIC_SERVER_URL}${auction.image[0]?.sizes?.thumbnail?.url || auction.image[0]?.url || '/default-image.png'}`,
+            ]
+        },
+        robots: {
+            index: true,
+            follow: true
+        },
+        alternates: {
+            canonical: `${process.env.NEXT_PUBLIC_APP_URL}/auctions/${slug}`
+        },
+
+    }
+}
+
+
+
+
+
 
 export default async function AuctionItem({ params }) {
 

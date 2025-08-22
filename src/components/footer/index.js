@@ -36,7 +36,7 @@ const helpfulLinks = [
 const Policy_links = [
     {
         title: 'Terms and conditions',
-        link: '#',
+        link: '/help/terms-and-conditions',
         slug: 'terms'
     },
     {
@@ -46,7 +46,7 @@ const Policy_links = [
     },
     {
         title: 'Cookie Policy',
-        link: '#',
+        link: '/help/cookies',
         slug: 'cookie_policy'
     }
 

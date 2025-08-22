@@ -1,0 +1,84 @@
+{
+  "cookie_policy": {
+    "last_updated": "[Date]",
+    "introduction": "This Cookie Policy explains how GarvelBids (\"we,\" \"us,\" or \"our\") uses cookies and similar technologies on our website, [garvelbids.com], and related services (collectively, the \"Site\"). By continuing to use the Site, you consent to the use of cookies in accordance with this policy.",
+    "sections": [
+      {
+        "title": "1. What Are Cookies?",
+        "content": "Cookies are small text files that are placed on your device when you visit a website. They help us improve your browsing experience by remembering your preferences, enabling certain features, and analyzing how you interact with our Site."
+      },
+      {
+        "title": "2. Types of Cookies We Use",
+        "content": {
+          "essential_cookies": "These cookies are necessary for the operation of our Site and cannot be switched off. They include functions such as enabling secure login and facilitating transactions.",
+          "performance_cookies": "These cookies help us understand how visitors use our Site by collecting information such as pages visited and time spent on the Site. They allow us to improve functionality and user experience.",
+          "functional_cookies": "These cookies enable the Site to provide enhanced features and personalization, such as remembering your preferences and login details.",
+          "advertising_cookies": "These cookies may be set by us or third-party partners to deliver relevant advertisements to you, track ad performance, and measure the effectiveness of campaigns."
+        }
+      },
+      {
+        "title": "3. How We Use Cookies",
+        "content": [
+          "To provide essential functionality, such as user authentication and secure transactions",
+          "To remember your preferences and customize your browsing experience",
+          "To analyze Site performance and user behavior",
+          "To deliver relevant advertisements and measure their effectiveness",
+          "To detect and prevent fraudulent or unauthorized activity"
+        ]
+      },
+      {
+        "title": "4. Sample Cookies and Use Cases",
+        "content": [
+          {
+            "cookie_name": "session_id",
+            "type": "Essential",
+            "purpose": "Maintains your login session across pages",
+            "duration": "Session (deleted when you close your browser)"
+          },
+          {
+            "cookie_name": "remember_user",
+            "type": "Functional",
+            "purpose": "Remembers your login details for easier access on future visits",
+            "duration": "30 days"
+          },
+          {
+            "cookie_name": "ga_tracking",
+            "type": "Performance",
+            "purpose": "Google Analytics cookie used to collect information about how visitors use the Site",
+            "duration": "2 years"
+          },
+          {
+            "cookie_name": "ad_targeting",
+            "type": "Advertising",
+            "purpose": "Used to deliver personalized ads based on browsing behavior",
+            "duration": "90 days"
+          }
+        ]
+      },
+      {
+        "title": "5. Third-Party Cookies",
+        "content": "Some cookies on our Site are placed by third-party service providers, such as analytics providers (e.g., Google Analytics) and advertising networks. These third parties may collect information about your online activities across different websites."
+      },
+      {
+        "title": "6. Managing Cookies",
+        "content": {
+          "browser_settings": "Most web browsers allow you to control cookies through their settings. You can set your browser to block or alert you about cookies, but some parts of the Site may not function properly if you do so.",
+          "opt_out_tools": "You can also opt out of certain cookies using industry tools such as the Network Advertising Initiative (NAI) opt-out page or the Digital Advertising Alliance (DAA) consumer choice page."
+        }
+      },
+      {
+        "title": "7. Changes to This Cookie Policy",
+        "content": "We may update this Cookie Policy from time to time. Any changes will be posted on this page with an updated \"Last updated\" date. We encourage you to review this policy periodically to stay informed about our use of cookies."
+      },
+      {
+        "title": "8. Contact Us",
+        "content": {
+          "company_name": "GarvelBids",
+          "email": "[contact@garvelbids.com]",
+          "phone": "[Your business phone number]",
+          "address": "[Your business address]"
+        }
+      }
+    ]
+  }
+}
