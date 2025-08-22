@@ -115,10 +115,12 @@ const PBlock = forwardRef(({ section }, ref) => {
                                             return (<div key={i}>{text}</div>)
                                         }
 
-                                        Array.isArray(text) && text.map((text, i) => {
-                                            return (<div key={i}>{text}</div>)
-                                        })
-
+                                        if (Array.isArray(text)) {
+                                            text.map((text, i) => {
+                                                return (<div key={i}>{text}</div>)
+                                            })
+                                        }
+                                        
                                         if (typeof text === 'object') {
                                             return (
                                                 <table key={i} className='w-full my-4'>
