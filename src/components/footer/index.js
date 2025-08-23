@@ -7,29 +7,29 @@ const helpfulLinks = [
 
     {
         title: 'About us',
-        link: '#',
+        link: '/help/about',
         slug: 'about_us'
     },
     {
         title: 'Contact us',
-        link: '#',
+        link: '/help/contact',
         slug: 'contact_us'
     },
     {
         title: 'Help/FQAs',
-        link: '#',
+        link: '/help/faq',
         slug: 'help'
     },
     {
         title: 'Newest lots',
-        link: '#',
+        link: '/search?q=all&sort=newest-first',
         slug: 'newest_lots'
     },
-    {
-        title: 'Popular Lots',
-        link: '#',
-        slug: 'popular_lots'
-    }
+    // {
+    //     title: 'Popular Lots',
+    //     link: '#',
+    //     slug: 'popular_lots'
+    // }
 
 ]
 
@@ -87,7 +87,7 @@ const Footer = () => {
                     <div className='flex flex-col space-y-1'>
                         {
                             helpfulLinks.map((link, i) => {
-                                return <span key={i}>{link.title}</span>
+                                return <Link href={link.link == '#'?'/': link.link} key={i}>{link.title}</Link>
                             })
                         }
                     </div>

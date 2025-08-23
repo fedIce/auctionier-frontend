@@ -1,0 +1,129 @@
+{
+  "cookie_policy": {
+    "last_updated": "[Date]",
+    "introduction": "Here you will find Frequently Asked Questions (FAQ) about GarvelBids (\"we,\" \"us,\" or \"our\") website, [garvelbids.com], and related services (collectively, the \"Site\"). If you have any questions that are not addressed here, please feel free to contact us.",
+    "categories": [
+      {
+        "id": 1,
+        "title": "1. What is GarvelBids?",
+        "content": "GarvelBids is an online auction platform where users can buy and sell a wide variety of items, from electronics to collectibles."
+      },
+      {
+        "id": 2,
+        "title": "2. How do I create an account?",
+        "content": "To create an account, click on the 'Sign Up' button on the top right corner of the homepage and fill in the required information."
+      },
+      {
+        "id": 3,
+        "title": "3. How do I place a bid?",
+        "content": "To place a bid, navigate to the auction page of the item you are interested in, enter your bid amount, and click 'Place Bid'."
+      },
+      {
+        "id": 4,
+        "title": "4. What payment methods are accepted?",
+        "content": "We accept various payment methods including credit/debit cards, PayPal, and bank transfers. Please refer to our Payments section for more details."
+      },
+      {
+        "id": 5,
+        "title": "5. How do I know if I have won an auction?",
+        "content": "If you are the highest bidder at the close of the auction, you will receive a notification email confirming that you have won the auction."
+      },
+      {
+        "id": 6,
+        "title": "6. What should I do if I have issues with my account?",
+        "content": "If you encounter any issues with your account, please contact our support team at"
+      },
+      {
+        "id": 7,
+        "title": "7. How can I contact customer support?",
+        "content": "You can contact our customer support team via the 'Contact Us' page on our website or by emailing"
+      }
+    ],
+    "questions": [
+      {
+        "id": 1,
+        "category_id": 1,
+        "question": "What types of items can I auction on GarvelBids?",
+        "answer": "You can auction a wide variety of items including electronics, collectibles, fashion, home goods, and more. Please ensure that your items comply with our prohibited items policy."
+      },
+      {
+        "id": 2,
+        "category_id": 1,
+        "question": "Is there a fee to create an account?",
+        "answer": "No, creating an account on GarvelBids is free of charge."
+      },
+      {
+        "id": 3,
+        "category_id": 2,
+        "question": "Can I use my social media account to sign up?",
+        "answer": "Yes, you can sign up using your Google or Facebook account for a quicker registration process."
+      },
+      {
+        "id": 4,
+        "category_id": 2,
+        "question": "What should I do if I forget my password?",
+        "answer": "If you forget your password, click on the 'Forgot Password' link on the login page and follow the instructions to reset your password."
+      },
+      {
+        "id": 5,
+        "category_id": 3,
+        "question": "Is there a minimum bid amount?",
+        "answer": "Yes, each auction will have a specified minimum bid amount which will be displayed on the auction page."
+      },
+      {
+        "id": 6,
+        "category_id": 3,
+        "question": "Can I retract my bid after placing it?",
+        "answer": "No, once a bid is placed it cannot be retracted. Please ensure that you are certain before placing a bid."
+      },
+      {
+        "id": 7,
+        "category_id": 4,
+        "question": "Are there any additional fees besides the winning bid amount?",
+        "answer": "Yes, there may be additional fees such as shipping costs and buyer's premiums. These will be clearly outlined in the auction details."
+      },
+      {
+        "id": 8,
+        "category_id": 4,
+        "question": "When is payment due after winning an auction?",
+        "answer": "Payment is typically due within 48 hours of winning an auction. Please refer to the payment instructions provided in your winning notification email."
+      },
+      {
+        "id": 9,
+        "category_id": 5,
+        "question": "What happens if I do not complete the payment after winning an auction?",
+        "answer": "Failure to complete payment may result in account suspension and legal action. Please contact our support team if you encounter any issues with payment."
+      },
+      {
+        "id": 10,
+        "category_id": 5,
+        "question": "Can I return an item if I am not satisfied with it?",
+        "answer": "Return policies vary by seller. Please review the return policy outlined in the auction details before placing a bid."
+      },
+      {
+        "id": 11,
+        "category_id": 6,
+        "question": "How do I update my account information?",
+        "answer": "You can update your account information by logging into your account and navigating to the 'Account Settings' section."
+      },
+      {
+        "id": 12,
+        "category_id": 6,
+        "question": "What should I do if I suspect unauthorized activity on my account?",
+        "answer": "If you suspect any unauthorized activity, please change your password immediately and contact our support team for assistance."
+      },
+      {
+        "id": 13,
+        "category_id": 7,
+        "question": "What are your customer support hours?",
+        "answer": "Our customer support team is available Monday to Friday from 9 AM to 5 PM (Your Time Zone)."
+      },
+      {
+        "id": 14,
+        "category_id": 7,
+        "question": "How long does it take to receive a response from customer support?",
+        "answer": "We strive to respond to all inquiries within 24-48 hours during business days."
+      }
+    ]
+  }
+}

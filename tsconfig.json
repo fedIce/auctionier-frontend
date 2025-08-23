@@ -22,6 +22,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/components/Counter/index.js", "src/app/sitemap.js", "src/app/sitemap.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/components/Counter/index.js", "src/app/sitemap.js", "src/app/sitemap.js", "src/app/help/about/page.js", "src/components/Label/index.js", "src/components/TextArea/index.js", "src/components/card/index.js", "src/components/Button/index.js", "src/components/Input/index.js"],
   "exclude": ["node_modules"]
 }
