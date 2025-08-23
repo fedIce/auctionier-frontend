@@ -1,7 +1,7 @@
 'use client'
 import { forwardRef, useEffect, useRef, useState } from 'react'
 import policy from './_.json'
-import { ChevronUpIcon, PlusIcon } from '@heroicons/react/24/outline'
+import { PlusIcon } from '@heroicons/react/24/outline'
 
 const { cookie_policy: p } = policy
 

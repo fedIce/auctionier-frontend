@@ -139,7 +139,7 @@ export default function About() {
             {teamMembers.map((member, index) => (
               <div key={index} className=" rounded-lg overflow-hidden shadow-sm border border-foreground-200">
                 <div className="bg-bright/10 h-48 flex items-center justify-center">
-                  <span className="text-bright-400 text-lg">{member.name}'s photo</span>
+                  <span className="text-bright-400 text-lg">{member.name}&apos;s photo</span>
                 </div>
                 <div className="p-6">
                   <h3 className="text-xl font-semibold text-licorice">{member.name}</h3>
