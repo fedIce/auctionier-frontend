@@ -2,7 +2,6 @@
 import RevolutCheckout from '@revolut/checkout'
 import { useEffect, useState } from 'react'
 import { use_get, use_post } from '../../../../lib/functions'
-import { useAuth } from '../../../../contexts/auth'
 
 export const confirmOrder = async (ref) => {
     return await use_get({ url: `${process.env.NEXT_PUBLIC_SERVER_URL}/api/users/revolut/comfirm/${ref}` })
@@ -91,8 +90,6 @@ export const CheckoutWithPi = ({ amount = 1 }) => {
 
     const [piLoaded, setPiLoaded] = useState(false);
 
-
-    const auth = useAuth()
 
     useEffect(() => {
 
