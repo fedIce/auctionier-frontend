@@ -7,6 +7,7 @@ import AuthContext from '../contexts/auth'
 import BiddingContext from '../contexts/bid_context'
 import AlertContext from '../contexts/Alert'
 import NotificationContext from '../contexts/Notifications'
+import Script from "next/script";
 // import prisma from '../lib'
 
 const JuraSans = Jura({
@@ -42,6 +43,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${JuraSans.variable} ${PoppinsSans.variable}  min-h-screen min-w-screen overflow-x-hidden antialiased`}>
+        <Script src="https://sdk.minepi.com/pi-sdk.js" strategy="afterInteractive" />
         <AlertContext>
           <AuthContext>
             <NotificationContext>

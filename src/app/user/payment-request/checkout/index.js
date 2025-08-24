@@ -1,7 +1,8 @@
 'use client'
 import RevolutCheckout from '@revolut/checkout'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { use_get, use_post } from '../../../../lib/functions'
+import { useAuth } from '../../../../contexts/auth'
 
 export const confirmOrder = async (ref) => {
     return await use_get({ url: `${process.env.NEXT_PUBLIC_SERVER_URL}/api/users/revolut/comfirm/${ref}` })
@@ -84,4 +85,95 @@ export const MountRevolut = ({ data }) => {
 
         return (<div className='w-full h-32 bg-amber-950'></div>)
     }
+}
+
+export const CheckoutWithPi = ({ amount = 1 }) => {
+
+    const [piLoaded, setPiLoaded] = useState(false);
+
+
+    const auth = useAuth()
+
+    useEffect(() => {
+
+        let intervalId;
+
+        const checkPi = async () => {
+            if (typeof window !== "undefined" && window.Pi && !piLoaded) {
+                window.Pi.init({ version: "2.0", sandbox: true });
+
+                const scopes = ["payments", "username"];
+
+                function onIncompletePaymentFound(payment) {
+
+                    console.log("Found incomplete payment:", payment);
+                    // if (payment?.transaction?.txid) {
+                    //     return use_get({ url: `${process.env.NEXT_PUBLIC_SERVER_URL}/api/pipayments/complete/${payment.identifier}/${payment.transaction.txid}`, token: auth.user?.token }).then(res => {
+                    //         console.log("Server complete response:", res);
+                    //         return res
+                    //     });
+
+                    // }
+
+                }
+
+
+
+                const piAuth = await window.Pi.authenticate(scopes, onIncompletePaymentFound);
+                console.log('Polling PI', window.Pi)
+                if (piAuth?.scopes?.includes("payments")) {
+                    setPiLoaded(true);
+                    clearInterval(intervalId); // 👈 stop polling once loaded
+                }
+                console.log('llllllllllllllllllllllllllllllllllllllll', piAuth)
+            }
+
+        }
+
+        intervalId = setInterval(checkPi, 10000);
+
+        return () => clearInterval(checkPi);
+
+    }, [])
+
+
+
+    const handlePay = async (e) => {
+        e.preventDefault();
+        if (typeof window === "undefined" || !window.Pi) return;
+
+        const paymentData = {
+            amount: amount, // Amount in USD
+            memo: "Test purchase",
+            metadata: { orderId: "ORDER-123" },
+        };
+
+        const paymentCallbacks = {
+            onReadyForServerApproval: async (paymentId) => {
+                return await use_get({ url: `${process.env.NEXT_PUBLIC_SERVER_URL}/api/pipayments/approve/${paymentId}` }).then(res => {
+                    console.log("Server approval response:", res);
+                    return res
+                });
+            },
+            onReadyForServerCompletion: async (paymentId, txid) => {
+                return await use_get({ url: `${process.env.NEXT_PUBLIC_SERVER_URL}/api/pipayments/complete/${paymentId}/${txid}` }).then(res => {
+                    console.log("Server complete response:", res);
+                    return res
+                });
+            },
+            onCancel: (reason) => console.warn("Payment cancelled:", reason),
+            onError: (err) => console.error("Payment error:", err),
+        };
+
+        try {
+            const payment = await window.Pi.createPayment(paymentData, paymentCallbacks);
+            console.log("createPayment ->", payment);
+        } catch (e) {
+            console.error("Payment failed:", e);
+        }
+    }
+
+    return (<div>
+        <button onClick={handlePay} className="px-4 py-2 bg-blue-600 text-white rounded">{piLoaded ? "Pay 1π" : "Loading Pi SDK..."}</button>
+    </div>)
 }

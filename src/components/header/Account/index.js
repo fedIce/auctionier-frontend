@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { EyeIcon, BellIcon, ChevronRightIcon } from '@heroicons/react/24/outline'
+import { EyeIcon, BellIcon, ChevronRightIcon, UserIcon } from '@heroicons/react/24/outline'
 import Link from 'next/link'
 import NotificationComponent from './NotificationComponent/index.js'
 import { useNotification } from '@/contexts/Notifications/index.js'
@@ -25,7 +25,7 @@ const Account = ({ auth }) => {
                 <BellIcon className='w-5 h-5 text-bright' />
                 {notification.notificationsCount > 0 && <p className='w-4 h-4 aspect-square border border-white text-[9px] flex items-center justify-center bg-red-500 text-white rounded-full absolute top-1 right-1'>{notification.notificationsCount}</p>}
             </span>
-            <div onClick={() => setHidden(!hidden)} className='bg-background text-foreground aspect-square cursor-pointer w-[40px] h-[40px] rounded-full flex justify-center items-center text-center font-mono text-2xl uppercase' >{name ? name[0] : email ? email[0] : ''}</div>
+            <div onClick={() => setHidden(!hidden)} className='bg-background text-foreground aspect-square cursor-pointer w-[35px] h-[35px] rounded-full flex justify-center items-center text-center font-mono text-2xl uppercase' >{!user? <UserIcon className='w-5 h-5' /> :name ? name[0] : email ? email[0] : ''}</div>
             <div onClick={() => setHidden(!hidden)} className={`w-screen lg:w-[350px] z-40 overflow-hidden transition-transform duration-150 ${hidden ? '-translate-y-full h-0' : `h-auto translate-y-0`} bg-secondary absolute divide-y divide-bright/10 top-14 -right-2 `}>
                 {auth.isLoggedIn &&
                     <div className='flex items-center space-x-2 p-4'>

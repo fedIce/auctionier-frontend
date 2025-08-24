@@ -85,7 +85,7 @@ export default function Contact() {
   ];
 
   return (
-    <>
+    <div className='w-full px-2'>
       {/* Hero Section */}
       <section className="bg-beige py-12 md:py-16">
         <div className="container">
@@ -252,6 +252,6 @@ export default function Contact() {
           </div>
         </div>
       </section>
-    </>
+    </div>
   );
 }

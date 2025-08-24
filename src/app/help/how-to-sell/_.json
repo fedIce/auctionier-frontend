@@ -1,0 +1,298 @@
+
+{
+  "seller_tips": {
+    "last_updated": "2025-08-24",
+    "introduction": "Here you will find Frequently Asked Questions (FAQ) about selling on GarvelBids (\"we,\" \"us,\" or \"our\") website, [garvelbids.com], and related services (collectively, the \"Site\"). If you have any questions that are not addressed here, please feel free to contact us.",
+    "categories": [
+      {
+        "id": 1,
+        "title": "1. Permitted & Prohibited Items",
+        "content": "We only accept items that are legal, safe, and valuable to collectors. Items should be authentic, high-quality, and collectible. Prohibited items include counterfeit goods, sexually explicit material, drugs, tobacco, hate-related objects, human remains, items from endangered species (such as ivory), weapons, explosives, or hazardous materials. Damaged or incomplete items are also not accepted."
+      },
+      {
+        "id": 2,
+        "title": "2. Art & Antiques",
+        "content": "Accepted: Authentic artworks, paintings, sculptures, and antiques with provenance. Items must be in good condition and verifiable. Prohibited: Copies, reproductions, mass-produced prints without collectible value, or items made of restricted materials like ivory."
+      },
+      {
+        "id": 3,
+        "title": "3. Jewellery & Watches",
+        "content": "Accepted: Precious metals, gemstones, designer jewellery, and luxury watches. Certificates of authenticity or brand documentation strongly improve value. Prohibited: Fake or imitation jewellery, watches with counterfeit parts, or broken/incomplete pieces."
+      },
+      {
+        "id": 4,
+        "title": "4. Fashion & Accessories",
+        "content": "Accepted: Designer clothing, handbags, shoes, and accessories from recognized luxury brands. Items should be authentic, in good condition, and preferably with original tags, receipts, or packaging. Prohibited: Fast-fashion items, counterfeit designer goods, or heavily worn/damaged pieces."
+      },
+      {
+        "id": 5,
+        "title": "5. Books, Comics & Collectibles",
+        "content": "Accepted: Rare first editions, signed books, collectible comics, trading cards, and memorabilia. Items with certificates of authenticity or grading are highly valued. Prohibited: Mass-market modern books, poor-condition comics, or items with missing pages."
+      },
+      {
+        "id": 6,
+        "title": "6. Interiors & Decorations",
+        "content": "Accepted: High-quality designer furniture, mid-century modern pieces, decorative objects, and lighting. Prohibited: Cheap mass-produced furniture, damaged décor items, resin or ivory-based objects, or items with poor-quality images."
+      },
+      {
+        "id": 7,
+        "title": "7. Classic Cars & Motorcycles",
+        "content": "Accepted: Classic cars, vintage motorcycles, and authentic automobilia with clear ownership and maintenance history. Prohibited: Incomplete vehicles, non-functional replicas, or cars without proper documentation."
+      },
+      {
+        "id": 8,
+        "title": "8. Wine, Whisky & Spirits",
+        "content": "Accepted: Collectible bottles of wine, whisky, and other premium spirits in unopened condition, ideally with original packaging and clear provenance. Prohibited: Open bottles, homemade alcoholic beverages, or items with damaged seals."
+      }
+    ],
+    "questions": [
+      {
+        "id": 1,
+        "category_id": 1,
+        "question": "Why are some items prohibited?",
+        "answer": "Items are prohibited for legal, ethical, or safety reasons. Counterfeit products mislead buyers, endangered species products (like ivory) violate international laws, and hazardous goods pose risks. Maintaining these standards ensures trust and safety."
+      },
+      {
+        "id": 2,
+        "category_id": 1,
+        "question": "Can I sell damaged items?",
+        "answer": "No, damaged or incomplete items are not allowed. All items must be in good condition, unless age-related wear is natural for antiques and described accurately."
+      },
+      {
+        "id": 3,
+        "category_id": 1,
+        "question": "Are mass-produced items allowed?",
+        "answer": "No, everyday mass-market products are not suitable. Only collectible, unique, or rare items are accepted."
+      },
+      {
+        "id": 4,
+        "category_id": 1,
+        "question": "Can I sell restricted cultural items?",
+        "answer": "Only if they comply with international trade laws. Items like certain fossils, antiquities, or tribal artifacts may require proof of legal ownership."
+      },
+      {
+        "id": 5,
+        "category_id": 1,
+        "question": "What happens if I submit prohibited items?",
+        "answer": "Your listing will be rejected, and repeated attempts may lead to account suspension. Always review the prohibited list before submission."
+      },
+
+      {
+        "id": 6,
+        "category_id": 2,
+        "question": "What documentation helps sell art & antiques?",
+        "answer": "Provenance records, certificates of authenticity, and appraisals from recognized experts increase credibility and auction success."
+      },
+      {
+        "id": 7,
+        "category_id": 2,
+        "question": "Can I sell reproductions or prints?",
+        "answer": "Reproductions are not allowed. Limited-edition, signed prints may be accepted if they have collectible value."
+      },
+      {
+        "id": 8,
+        "category_id": 2,
+        "question": "Do antiques need to be restored?",
+        "answer": "No, restoration is not required, but condition must be clearly described. Authentic patina or signs of age are acceptable."
+      },
+      {
+        "id": 9,
+        "category_id": 2,
+        "question": "Are items with ivory parts accepted?",
+        "answer": "No, ivory-based items are strictly prohibited regardless of age."
+      },
+      {
+        "id": 10,
+        "category_id": 2,
+        "question": "What photographs should I include?",
+        "answer": "Use high-resolution photos showing full views, close-ups of signatures, maker marks, and condition details."
+      },
+
+      {
+        "id": 11,
+        "category_id": 3,
+        "question": "Are brand certificates required for jewellery & watches?",
+        "answer": "Certificates or receipts are not mandatory but strongly recommended. They significantly improve bidder confidence and final price."
+      },
+      {
+        "id": 12,
+        "category_id": 3,
+        "question": "Can I sell broken watches?",
+        "answer": "No, broken or incomplete watches are not accepted. All items must be functional or clearly described as vintage but complete."
+      },
+      {
+        "id": 13,
+        "category_id": 3,
+        "question": "Are gemstones without certification accepted?",
+        "answer": "Yes, but certified gemstones are valued more. Certification increases trust and higher bidding."
+      },
+      {
+        "id": 14,
+        "category_id": 3,
+        "question": "What metals are accepted?",
+        "answer": "Gold, silver, platinum, and other precious metals are accepted. Costume jewellery of low value is generally rejected."
+      },
+      {
+        "id": 15,
+        "category_id": 3,
+        "question": "Can replicas of luxury watches be sold?",
+        "answer": "No, replicas, counterfeits, or modified watches are strictly prohibited."
+      },
+
+      {
+        "id": 16,
+        "category_id": 4,
+        "question": "What brands are suitable in fashion & accessories?",
+        "answer": "Recognized luxury brands such as Chanel, Hermès, Gucci, Prada, and Louis Vuitton are accepted."
+      },
+      {
+        "id": 17,
+        "category_id": 4,
+        "question": "Are vintage fashion items accepted?",
+        "answer": "Yes, if they are collectible, authentic, and in good condition."
+      },
+      {
+        "id": 18,
+        "category_id": 4,
+        "question": "Do items need original packaging?",
+        "answer": "Not required but highly recommended. Packaging improves presentation and buyer confidence."
+      },
+      {
+        "id": 19,
+        "category_id": 4,
+        "question": "Can I sell fast-fashion items?",
+        "answer": "No, fast-fashion or low-value mass-produced items are not accepted."
+      },
+      {
+        "id": 20,
+        "category_id": 4,
+        "question": "How important is condition?",
+        "answer": "Condition is critical. Only well-preserved, authentic items are accepted. Worn or heavily damaged items are rejected."
+      },
+
+      {
+        "id": 21,
+        "category_id": 5,
+        "question": "Are modern books accepted?",
+        "answer": "No, unless they are rare editions, signed by the author, or limited collectibles."
+      },
+      {
+        "id": 22,
+        "category_id": 5,
+        "question": "Do comics need to be graded?",
+        "answer": "Not required, but grading increases value and trust."
+      },
+      {
+        "id": 23,
+        "category_id": 5,
+        "question": "Can I sell incomplete comic series?",
+        "answer": "Yes, but complete series or key issues are more valuable. Incomplete sets must be described clearly."
+      },
+      {
+        "id": 24,
+        "category_id": 5,
+        "question": "What trading cards are accepted?",
+        "answer": "Rare, collectible cards such as Pokémon, Magic: The Gathering, and graded sports cards are accepted."
+      },
+      {
+        "id": 25,
+        "category_id": 5,
+        "question": "Are damaged or missing pages allowed?",
+        "answer": "No, books and comics with missing pages or severe damage are rejected."
+      },
+
+      {
+        "id": 26,
+        "category_id": 6,
+        "question": "What types of interiors are accepted?",
+        "answer": "Designer furniture, mid-century modern pieces, collectible décor, and unique lighting are accepted."
+      },
+      {
+        "id": 27,
+        "category_id": 6,
+        "question": "Are mass-produced IKEA-style items accepted?",
+        "answer": "No, mass-produced everyday furniture is not accepted."
+      },
+      {
+        "id": 28,
+        "category_id": 6,
+        "question": "Are seasonal decorations accepted?",
+        "answer": "Yes, if they are collectible and of high quality (e.g., antique Christmas ornaments)."
+      },
+      {
+        "id": 29,
+        "category_id": 6,
+        "question": "Can I sell broken lamps?",
+        "answer": "No, only working and intact items are accepted."
+      },
+      {
+        "id": 30,
+        "category_id": 6,
+        "question": "What images should I provide?",
+        "answer": "Provide photos from multiple angles, showing design, maker’s mark (if any), and condition details."
+      },
+
+      {
+        "id": 31,
+        "category_id": 7,
+        "question": "What cars are accepted?",
+        "answer": "Classic cars and motorcycles with collectible value, complete documentation, and in good condition are accepted."
+      },
+      {
+        "id": 32,
+        "category_id": 7,
+        "question": "Can I sell modern vehicles?",
+        "answer": "Only if they are rare, collectible, or vintage-limited editions."
+      },
+      {
+        "id": 33,
+        "category_id": 7,
+        "question": "Are incomplete restoration projects accepted?",
+        "answer": "No, only complete and functional vehicles are allowed."
+      },
+      {
+        "id": 34,
+        "category_id": 7,
+        "question": "Is documentation required?",
+        "answer": "Yes, clear ownership documents and maintenance history are required."
+      },
+      {
+        "id": 35,
+        "category_id": 7,
+        "question": "Can I list replica cars?",
+        "answer": "No, replicas or non-functional copies are prohibited."
+      },
+
+      {
+        "id": 36,
+        "category_id": 8,
+        "question": "What types of bottles are accepted?",
+        "answer": "Collectible bottles of wine, whisky, cognac, and other premium spirits with sealed packaging and provenance."
+      },
+      {
+        "id": 37,
+        "category_id": 8,
+        "question": "Can I sell opened bottles?",
+        "answer": "No, only unopened bottles are accepted."
+      },
+      {
+        "id": 38,
+        "category_id": 8,
+        "question": "Are homemade spirits accepted?",
+        "answer": "No, only commercially bottled and recognized brands are allowed."
+      },
+      {
+        "id": 39,
+        "category_id": 8,
+        "question": "Does vintage packaging add value?",
+        "answer": "Yes, original packaging, labels, and provenance documents increase desirability and value."
+      },
+      {
+        "id": 40,
+        "category_id": 8,
+        "question": "What about damaged labels?",
+        "answer": "Severe damage reduces value and may lead to rejection, but minor wear is acceptable if shown clearly in photos."
+      }
+    ]
+  }
+}

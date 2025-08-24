@@ -55,7 +55,7 @@ const Policy_links = [
 const sell_links = [
     {
         title: 'How to Sell on Auctionier',
-        link: '#',
+        link: '/help/how-to-sell',
         slug: 'how_to_sell'
     },
     {
@@ -65,7 +65,7 @@ const sell_links = [
     },
     {
         title: 'Submission Guidelines',
-        link: '#',
+        link: '/help/submittion-guidelines',
         slug: 'submition_guidelines'
     }
 
@@ -107,7 +107,7 @@ const Footer = () => {
                     <div className='flex flex-col space-y-1'>
                         {
                             sell_links.map((link, i) => {
-                                return <span key={i}>{link.title}</span>
+                                return <Link href={link.link == '#'?'/': link.link} key={i}>{link.title}</Link>
                             })
                         }
                     </div>
