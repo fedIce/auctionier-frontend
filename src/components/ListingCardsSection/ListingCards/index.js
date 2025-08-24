@@ -171,7 +171,7 @@ const ListingCards = ({ data = null, user = null, watches = null, pulse = false,
         </div>
     )
         : (
-            <div className={`w-full lg:min-w-64 min-h-80 bg-foreground rounded-lg ${pulse && 'animate-pulse'}`} >
+            <div className={`w-full lg:min-w-64 min-h-80 bg-foreground-800 rounded-lg ${pulse && 'animate-pulse'}`} >
                 {/* Section Card */}
             </div >
         )
