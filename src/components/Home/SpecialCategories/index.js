@@ -4,21 +4,24 @@ import Link from 'next/link'
 import { use_get } from '@/lib/functions'
 
 async function fetchAuctions() {
-    const res = await use_get({ url: `${process.env.NEXT_PUBLIC_SERVER_URL}/api/auctions` })
+    const res = await use_get({ url: `${process.env.NEXT_PUBLIC_SERVER_URL}/api/auctions?limit=4` })
     return res
 }
 
 const Specialcategories = async () => {
 
-    let auctions = await fetchAuctions()
-    auctions = auctions?.docs
-    if (!auctions) return null
+    let auction = await fetchAuctions()
+    const auctions = auction?.docs
+    if (!auction) return null
     if (auctions?.docs?.length <= 0) return null
 
     return (
 
         <div className="mt-12 lg:mt-18 space-y-4 w-full px-2 lg:px-0">
-            <div className="font-bold text-2xl text-foreground">Auctions</div>
+            <div className='my-2 flex items-center justify-between'>
+                <div className="font-bold text-2xl text-foreground">Auctions</div>
+                <Link href={'/auctions'} className='text-sm underline font-light'>view all ({auction.totalDocs})</Link>
+            </div>
             <div className=" flex space-x-2 overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:'none'] [scrollbar-width:'none'] lg:overflow-y-hidden items-center lg:grid lg:grid-cols-4 lg:gap-4">
                 {
                     auctions?.length > 0 ?

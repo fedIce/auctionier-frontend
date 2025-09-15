@@ -54,7 +54,7 @@ const Policy_links = [
 
 const sell_links = [
     {
-        title: 'How to Sell on Auctionier',
+        title: 'How to Sell on GarvelBids',
         link: '/help/how-to-sell',
         slug: 'how_to_sell'
     },

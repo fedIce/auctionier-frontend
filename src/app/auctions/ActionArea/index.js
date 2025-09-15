@@ -152,7 +152,7 @@ const ActionArea = ({ data }) => {
                         </div>
                     </section>
                     <section className='lg:flex hidden flex-col space-y-1 py-4 mb-8'>
-                        <div><AInput error={bidAmountError} value={bidAmount} setvalue={setBidAmount} className={`bg-secondary placeholder:text-foreground-600 text-foreground-900 border-gray-300 ring-0  focus:ring-0 rounded-b-none`} label={null} placeholder={`€ ${numberWithCommas(nextBid)} and above`} /></div>
+                        <div><AInput error={bidAmountError} value={bidAmount} setvalue={setBidAmount} className={`bg-secondary-900 placeholder:text-foreground-400 text-foreground-600 border-gray-300 ring-0  focus:ring-0 rounded-b-none`} label={null} placeholder={`€ ${numberWithCommas(nextBid)} and above`} /></div>
                         <div className='flex items-center space-x-1'>
                             <AButton btn_action={handlePlaceBid} text="Place Bid" className="focus:ring-third-200/50 bg-bright-200 text-background-600 hover:bg-third-200/90 rounded-tl-none rounded-tr-none rounded-br-none"></AButton>
                             <AButton text="Set Max Bid" className="focus:ring-secondary/50 bg-secondary hover:bg-secondary/90 text-background-600 rounded-tr-none rounded-tl-none rounded-bl-none"></AButton>
